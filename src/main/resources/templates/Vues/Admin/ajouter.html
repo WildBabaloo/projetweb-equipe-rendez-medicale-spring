@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>Projet Medical</title>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+  <link rel="stylesheet" href="/css/style.css" />
+</head>
+<body class="bgcolorA">
+<nav class="nav navbar navbar-expand-lg bg-dark navbar-dark">
+  <div class="container">
+    <a href="admin_index.html" style="text-indent: 10px;" class="navbar-brand">MediMeets</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navmenu"><span class="navbar-toggler-icon"></span></button>
+    <div class="collapse navbar-collapse" id="navmenu">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item">
+          <a href="admin_index.html" class="nav-link">Home</a>
+        </li>
+        <li class="nav-item">
+          <a href="ajouter.html" class="nav-link">Ajouter</a>
+        </li>
+        <li class="nav-item">
+          <a href="modifier.html" class="nav-link">Modifier</a>
+        </li>
+        <li class="nav-item">
+          <a href="supprimer.html" class="nav-link">Supprimer</a>
+        </li>
+        <li class="nav-item">
+          <a href="../deconnexion.html" class="nav-link">Déconnexion</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <br> <br> <br>
+</nav>
+<br> <br>
+<div class="maincontainerA">
+  <p> <label for="ajouter"> Qui voulez vous ajouter?</label>
+    <select name="ajouter" required id="ajouter" onchange="optionSelectedForm(this)">
+      <option value="invalidRaison">Choisir une option...</option>
+      <option value="patient">Patient</option>
+      <option value="medecin">Medecin</option>
+      <option value="clinique">Clinique</option>
+    </select></p>
+  <br>
+  Quand on choisi une option, un script va activer et puis on peut mettre les informations du select mis en haut. (À completer quand on utilise Spring Boot)
+</div>
+<script>
+  function optionSelectedForm(option){
+    document.getElementById("test").innerHTML = "Test"
+  }
+</script>
+<p id="test"></p>
+<br> <br>
+<h3>Ajouter un Patient</h3>
+<form action="../../adminAddControlleur" method="get" class="form-horizontal">
+  <div class="form-group">
+    <input type="hidden" class="form-control" id="OptionPatient" name="OptionPatient" value="active">
+  </div>
+  <div class="form-group">
+    <label for="prenomPatient">Prenom :</label> <br>
+    <input type="text" class="form-control" id="prenomPatient" name="prenomPatient">
+  </div>
+  <div class="form-group">
+    <label for="nomPatient">Nom :</label> <br>
+    <input type="text" class="form-control" id="nomPatient" name="nomPatient">
+  </div>
+  <div class="form-group">
+    <label for="numAssPatient">Numéro d'assurance sociale :</label> <br>
+    <input type="text" class="form-control" id="numAssPatient" name="numAssPatient">
+  </div>
+  <div class="form-group">
+    <label for="motPassePatient">Mot de passe :</label> <br>
+    <input type="password" class="form-control" id="motPassePatient" name="motPassePatient">
+  </div>
+  <div class="form-group">
+    <input type="submit" class="btn btn-primary" value="Ajouter" id="submitAjouterPatient">
+  </div>
+</form>
+<br> <br>
+
+<h3>Ajouter un medecin</h3>
+<div class="formMedecin">
+  <form id="formAjouterMedecin" method="get" class="form-horizontal" action="../../adminAddControlleur">
+    <div class="form-group">
+      <input type="hidden" class="form-control" id="OptionMedecin" name="OptionMedecin" value="active">
+    </div>
+    <div class="form-group">
+      <label for="nomMedecin">Nom :</label> <br>
+      <input type="text" class="form-control" id="nomMedecin" name="nomMedecin">
+    </div>
+    <div class="form-group">
+      <label for="prenomMedecin">Prenom :</label> <br>
+      <input type="text" class="form-control" id="prenomMedecin" name="prenomMedecin">
+    </div>
+    <div class="form-group">
+      <label for="numProfMedecin">Numéro professionel :</label> <br>
+      <input type="text" class="form-control" id="numProfMedecin" name="numProfMedecin">
+    </div>
+    <div class="form-group">
+      <label for="motPasseMedecin">Mot de passe :</label> <br>
+      <input type="password" class="form-control" id="motPasseMedecin" name="motPasseMedecin">
+    </div>
+    <div class="form-group">
+      <label for="emailMedecin">Email :</label> <br>
+      <input type="text" class="form-control" id="emailMedecin" name="emailMedecin">
+    </div>
+    <div class="form-group">
+      <label for="numTeleMedecin">Numéro de téléphone :</label> <br>
+      <input type="text" class="form-control" id="numTeleMedecin" name="numTeleMedecin">
+    </div>
+    <div class="form-group">
+      <label for="specialiteMedecin">Specialité :</label> <br>
+      <input type="text" class="form-control" id="specialiteMedecin" name="specialiteMedecin">
+    </div>
+    <div class="form-group">
+      <label for="tarifconsultationMedecin">Tarif de consultation :</label> <br>
+      <input type="number" class="form-control" id="tarifconsultationMedecin" name="tarifconsultationMedecin">
+    </div>
+    <div class="form-group">
+      <label for="clinique_id_cliniqueMedecin">Clinique du Medecin (ID) :</label> <br>
+      <input type="number" class="form-control" id="clinique_id_cliniqueMedecin" name="clinique_id_cliniqueMedecin">
+    </div>
+
+    <div class="form-group">
+      <input type="submit" class="btn btn-primary" value="Ajouter" id="submitAjouterMedecin">
+    </div>
+  </form>
+</div>
+<div class="formClinique">
+  <form id="formAddClinique" method="get" class="form-horizontal" action="../../adminAddControlleur">
+    <div class="form-group">
+      <input type="hidden" class="form-control" id="OptionClinique" name="OptionClinique" value="active">
+    </div>
+    <div class="form-group">
+      <label for="nomClinique">Nom :</label> <br>
+      <input type="text" class="form-control" id="nomClinique" name="nomClinique">
+    </div>
+    <div class="form-group">
+      <label for="coordonneesClinique">Coordonnées :</label> <br>
+      <input type="text" class="form-control" id="coordonneesClinique" name="coordonneesClinique">
+    </div>
+    <div class="form-group">
+      <label for="services_offertsClinique">Services Offerts :</label> <br>
+      <input type="text" class="form-control" id="services_offertsClinique" name="services_offertsClinique">
+    </div>
+    <div class="form-group">
+      <label for="emailClinique">Email :</label> <br>
+      <input type="text" class="form-control" id="emailClinique" name="emailClinique">
+    </div>
+    <div class="form-group">
+      <label for="numTeleClinique">Numéro de téléphone :</label> <br>
+      <input type="text" class="form-control" id="numTeleClinique" name="numTeleClinique">
+    </div>
+    <div class="form-group">
+      <input type="submit" class="btn btn-primary" value="Ajouter" id="submitAjouterClinique">
+    </div>
+  </form>
+</div>
+<div class="footer">
+  <div class="d-flex flex-column flex-md-row text-center text-md-start justify-content-between py-4 px-4 px-xl-5 bg-dark">
+    <!-- Copyright -->
+    <div class="text-white mb-3 mb-md-0">
+      Copyright © 2023. Tous droits réservés. (À mettre directement en bas de la page)
+    </div>
+  </div>
+</div>
+</body>
+</html>

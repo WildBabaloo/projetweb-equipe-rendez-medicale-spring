@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>Projet Medical</title>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+  <link rel="stylesheet" href="/css/style.css" />
+</head>
+<body class="bgcolorA">
+<nav class="nav navbar navbar-expand-lg bg-dark navbar-dark">
+  <div class="container">
+    <a href="admin_index.html" style="text-indent: 10px;" class="navbar-brand">MediMeets</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navmenu"><span class="navbar-toggler-icon"></span></button>
+    <div class="collapse navbar-collapse" id="navmenu">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item">
+          <a href="admin_index.html" class="nav-link">Home</a>
+        </li>
+        <li class="nav-item">
+          <a href="ajouter.html" class="nav-link">Ajouter</a>
+        </li>
+        <li class="nav-item">
+          <a href="modifier.html" class="nav-link">Modifier</a>
+        </li>
+        <li class="nav-item">
+          <a href="supprimer.html" class="nav-link">Supprimer</a>
+        </li>
+        <li class="nav-item">
+          <a href="../deconnexion.html" class="nav-link">Déconnexion</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <br> <br> <br>
+</nav>
+<br> <br>
+<div class="maincontainerA">
+  <% if(patient != null){%>
+  <div class="formPatient">
+    <form id="formModifierPatient" method="get" class="form-horizontal" action="adminModifierControlleur">
+      <div class="form-group">
+        <input type="hidden" class="form-control" id="modifierPatient" name="modifierPatient" value="active">
+        <input type="hidden" class="form-control" id="idPatient" name="idPatient" value="<%=patient.getId()%>">
+      </div>
+      <div class="form-group">
+        <input type="text" class="form-control" id="prenomPatient" name="prenomPatient" value="<%=patient.getPrenom()%>">
+      </div>
+      <div class="form-group">
+        <input type="text" class="form-control" id="nomPatient" name="nomPatient" value="<%=patient.getNom()%>">
+      </div>
+      <div class="form-group">
+        <input type="text" class="form-control" id="numAssPatient" name="numAssPatient" value="<%=patient.getNumAss()%>">
+      </div>
+      <div class="form-group">
+        <input type="password" class="form-control" id="motPassePatient" name="motPassePatient" value="<%=patient.getMotPasse()%>">
+      </div>
+      <div class="form-group">
+        <input type="number" class="form-control" id="cliniquePatient" name="cliniquePatient" value="<%=String.valueOf(patient.getId_clinique())%>">
+      </div>
+      <div class="form-group">
+        <input type="submit" class="btn btn-primary" value="Modifier" id="submitModifierPatient">
+      </div>
+    </form>
+  </div>
+  <%}%>
+
+  <% if(medecin != null){%>
+  <div class="formMedecin">
+    <form id="formModifierMedecin" method="get" class="form-horizontal" action="adminModifierControlleur">
+      <div class="form-group">
+        <input type="hidden" class="form-control" id="modifierMedecin" name="modifierMedecin" value="active">
+        <input type="hidden" class="form-control" id="idMedecin" name="idMedecin" value="<%=medecin.getId()%>">
+      </div>
+      <div class="form-group">
+        <input type="text" class="form-control" id="nomMedecin" name="nomMedecin" value="<%=medecin.getPrenom()%>">
+      </div>
+      <div class="form-group">
+        <input type="text" class="form-control" id="prenomMedecin" name="prenomMedecin" value="<%=medecin.getNom()%>">
+      </div>
+      <div class="form-group">
+        <input type="text" class="form-control" id="numProfMedecin" name="numProfMedecin" value="<%=medecin.getNumProf()%>">
+      </div>
+      <div class="form-group">
+        <input type="password" class="form-control" id="motPasseMedecin" name="motPasseMedecin" value="<%=medecin.getMotPasse()%>">
+      </div>
+      <div class="form-group">
+        <input type="text" class="form-control" id="emailMedecin" name="emailMedecin" value="<%=medecin.getEmail()%>">
+      </div>
+      <div class="form-group">
+        <input type="text" class="form-control" id="numTeleMedecin" name="numTeleMedecin" value="<%=medecin.getNumtele()%>">
+      </div>
+      <div class="form-group">
+        <input type="text" class="form-control" id="specialiteMedecin" name="specialiteMedecin" value="<%=medecin.getSpecialite()%>">
+      </div>
+      <div class="form-group">
+        <input type="number" class="form-control" id="tarifconsultationMedecin" name="tarifconsultationMedecin" value="<%=String.valueOf(medecin.getTarifconsultation())%>">
+      </div>
+      <div class="form-group">
+        <input type="number" class="form-control" id="cliniqueMedecin" name="cliniqueMedecin" value="<%=String.valueOf(medecin.getId_clinique())%>">
+      </div>
+
+      <div class="form-group">
+        <input type="submit" class="btn btn-primary" value="Modifier" id="submitModifierMedecin">
+      </div>
+    </form>
+  </div>
+  <%}%>
+
+  <% if(clinique != null){%>
+  <div class="formPatient">
+    <form id="formModifierClinique" method="get" class="form-horizontal" action="adminModifierControlleur">
+      <div class="form-group">
+        <input type="hidden" class="form-control" id="modifierClinique" name="modifierClinique" value="active">
+        <input type="hidden" class="form-control" id="idClinique" name="idClinique" value="<%=clinique.getId()%>">
+      </div>
+      <div class="form-group">
+        <input type="text" class="form-control" id="nomClinique" name="nomClinique" value="<%=clinique.getNom()%>">
+      </div>
+      <div class="form-group">
+        <input type="text" class="form-control" id="coordonneesClinique" name="coordonneesClinique" value="<%=clinique.getCoordonnees()%>">
+      </div>
+      <div class="form-group">
+        <input type="text" class="form-control" id="services_offertsClinique" name="services_offertsClinique" value="<%=clinique.getServices_offerts()%>">
+      </div>
+      <div class="form-group">
+        <input type="text" class="form-control" id="emailClinique" name="emailClinique" value="<%=clinique.getEmail()%>">
+      </div>
+      <div class="form-group">
+        <input type="text" class="form-control" id="numTeleClinique" name="numTeleClinique" value="<%=clinique.getNumtele()%>">
+      </div>
+      <div class="form-group">
+        <input type="submit" class="btn btn-primary" value="Modifier" id="submitModifierClinique">
+      </div>
+    </form>
+  </div>
+  <%}%>
+</div>
+<br> <br>
+<div class="footer">
+  <div class="d-flex flex-column flex-md-row text-center text-md-start justify-content-between py-4 px-4 px-xl-5 bg-dark">
+    <!-- Copyright -->
+    <div class="text-white mb-3 mb-md-0">
+      Copyright © 2023. Tous droits réservés. (À mettre directement en bas de la page)
+    </div>
+  </div>
+</div>
+</body>
+</html>
