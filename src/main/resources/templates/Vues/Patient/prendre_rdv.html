@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Projet Medical</title>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="/css/style.css"/>
+    <link rel="stylesheet" href="/css/patientRDV.css"/>
+</head>
+<body class="bgcolorP">
+<nav class="nav navbar navbar-expand-lg bg-dark navbar-dark">
+    <div class="container">
+        <a href="patient_index.html" style="text-indent: 10px;" class="navbar-brand">MediMeets</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navmenu"><span class="navbar-toggler-icon"></span></button>
+        <div class="collapse navbar-collapse" id="navmenu">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item">
+                    <a href="patient_index.html" class="nav-link">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a href="prendre_rdv.html" class="nav-link">Prendre un rendez-vous</a>
+                </li>
+                <li class="nav-item">
+                    <a href="modifier_rdv.html" class="nav-link">Modifier un rendez-vous</a>
+                </li>
+                <li class="nav-item">
+                    <a href="annuler_rdv.html" class="nav-link">Annuler un rendez-vous</a>
+                </li>
+                <li class="nav-item">
+                    <a href="patient_compte.html" class="nav-link">Mon compte</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <br> <br> <br>
+</nav>
+<br> <br>
+<div class="main container">
+    <h1>Prendre un rendez-vous</h1>
+    <br> <br>
+    <div class="inscription">
+        <form action="#" method="post">
+            <form method="get">
+                <h3> Rechercher une clinique près de chez vous :</h3> <br>
+                <p><label for="dateRDV"> Saisir la date du rendez-vous :</label>
+                    <input type="date" name="dateRDV" required id="dateRDV"> </p>
+                <p><label for="preferanceJournee">Vos préférance dans le moment de la journée :</label></p>
+                <p><input type="checkbox" id="moment1" name="moment1" value="Avant-Midi">
+                    <label for="moment1">Avant-Midi</label>
+                    <input type="checkbox" id="moment2" name="moment2" value="Après-Midi">
+                    <label for="moment2">Après-Midi</label>
+                    <input type="checkbox" id="moment3" name="moment3" value="Soiree">
+                    <label for="moment3">Soirée</label></p>
+                <p> <label for="codePostal"> Votre code postal : </label>
+                    <input type="text" name="codePostal" required id="codePostal"/> </p>
+                <p> <label for="perimetreRecherche"> Votre Périmètre de recherche (en KM) :</label>
+                    <select name="perimetreRecherche" required id="perimetreRecherche">
+                        <option value="10km">10 km</option>
+                        <option value="20km">20 km</option>
+                        <option value="30km">30 km</option>
+                        <option value="40km">40 km</option>
+                        <option value="50km">50 km</option>
+                    </select></p>
+                <p>
+                    <label for="raison">La raison de votre rendez-vous</label>
+                    <select name="raison" required id="raison" value="Choisir une raison...">
+                        <option value="invalidRaison">Choisir une raison...</option>
+                        <option value="raison1">Covid-19</option>
+                        <option value="raison2">Prise de sang et prélèvements</option>
+                        <option value="raison1">Vaccination</option>
+                        <option value="raison1">Clinique Jeunesse</option>
+                        <option value="raison1">Dépistage ITSS et santé sexuelle</option>
+                        <option value="raison1">Consultation avec un professionnel</option>
+                        <option value="raison1">Grossesse et Pédiatrie</option>
+                        <option value="raison1">Imagerie médiacle</option>
+                        <option value="raison1">Maladies chroniques</option>
+                        <option value="raison1">Médicaments et ordonnace</option>
+                        <option value="raison1">Soins de santé</option>
+                        <option value="raison1">Santé voyage</option>
+                    </select></p>
+                <input type="submit" value="Rechercher"/>
+            </form>
+            <br> <br>
+            <form method="post">
+                <h3>Sinon rechercher une clinique spécifique :</h3>
+                <p><label for="rechercherClinique">Le nom de la clinique :</label>
+                    <input type="text" id="rechercherClinique" name="rechercherClinique" required placeholder="Rechercher la clinique..."/></p>
+                <p><label for="dateRDV"> Saisir la date du rendez-vous :</label>
+                    <input type="date" name="dateRDV" required id="dateRDV"> </p>
+                <p><label for="preferanceJournee">Vos préférance dans le moment de la journée :</label></p>
+                <p><input type="checkbox" id="moment1" name="moment1" value="Avant-Midi">
+                    <label for="moment1">Avant-Midi</label>
+                    <input type="checkbox" id="moment2" name="moment2" value="Après-Midi">
+                    <label for="moment2">Après-Midi</label>
+                    <input type="checkbox" id="moment3" name="moment3" value="Soiree">
+                    <label for="moment3">Soirée</label></p>
+                <p> <label for="codePostal"> Votre code postal : </label>
+                    <input type="text" name="codePostal" required id="codePostal"/> </p>
+                <p>
+                    <label for="raison">La raison de votre rendez-vous</label>
+                    <select name="raison" required id="raison">
+                        <option value="invalidRaison">Choisir une raison...</option>
+                        <option value="raison1">Les options offert par la clinique (À completer quand BD fini)</option>
+                    </select></p>
+                <input type="submit" value="Envoyer"/>
+            </form>
+        </form>
+    </div>
+</div>
+<br> <br>
+<div class="footer">
+    <div class="d-flex flex-column flex-md-row text-center text-md-start justify-content-between py-4 px-4 px-xl-5 bg-dark">
+        <!-- Copyright -->
+        <div class="text-white mb-3 mb-md-0">
+            Copyright © 2023. Tous droits réservés. (À mettre directement en bas de la page)
+        </div>
+    </div>
+</div>
+</body>
+</html>

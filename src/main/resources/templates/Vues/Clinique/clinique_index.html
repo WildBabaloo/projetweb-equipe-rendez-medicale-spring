@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>MediMeets</title>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+  <link rel="stylesheet" href="/css/style.css" />
+</head>
+<body class="bgcolorH">
+<nav class="nav navbar navbar-expand-lg bg-dark navbar-dark">
+  <div class="container">
+    <a href="clinique_index.html" style="text-indent: 10px;" class="navbar-brand">MediMeets</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navmenu"><span class="navbar-toggler-icon"></span></button>
+    <div class="collapse navbar-collapse" id="navmenu">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item">
+          <a href="clinique_index.html" class="nav-link">Home</a>
+        </li>
+        <li class="nav-item">
+          <a href="../../cliniqueListePatient" class="nav-link">Liste patients</a>
+        </li>
+        <li class="nav-item">
+          <a href="../../cliniqueListeMedecin" class="nav-link">Liste medecins</a>
+        </li>
+        <li class="nav-item">
+          <a href="../../cliniqueListeRendezVous" class="nav-link">Historique</a>
+        </li>
+        <li class="nav-item">
+          <a href="../../cliniqueCompteControlleur?goToClinique=optionClinique" class="nav-link">Ma clinique</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <br> <br> <br>
+</nav>
+<br> <br>
+<div class="main container">
+  <h2>Bienvenue Nom du clinique</h2>
+  <br> <br>
+  <div class="options_Medecins">
+    <h3>Ici sont vos options :</h3> <br> <br>
+    <ul class="LesOptions" style="list-style-type: none;">
+      <li>
+        <a href="../../cliniqueListePatient">
+          <button>Cliquer ici pour voir la liste de vos patients</button>
+        </a>
+      </li>
+      <li>
+        <a href="../../cliniqueListeMedecin">
+          <button>Cliquer ici pour voir la liste de vos patients</button>
+        </a>
+      </li>
+      <li>
+        <a href="../../cliniqueListeRendezVous">
+          <button>Cliquer ici pour voir l'historique des rendez-vous</button>
+        </a>
+      </li>
+      <li>
+        <a href="../../cliniqueCompteControlleur?goToClinique=optionClinique">
+          <button>Cliquer ici pour voir modifier les informations de la clinique</button>
+        </a>
+      </li>
+    </ul>
+
+  </div>
+</div>
+<br> <br>
+<div class="footer">
+  <div class="d-flex flex-column flex-md-row text-center text-md-start justify-content-between py-4 px-4 px-xl-5 bg-dark">
+    <!-- Copyright -->
+    <div class="text-white mb-3 mb-md-0">
+      Copyright © 2023. Tous droits réservés. (À mettre directement en bas de la page)
+    </div>
+  </div>
+</div>
+</body>
+</html>

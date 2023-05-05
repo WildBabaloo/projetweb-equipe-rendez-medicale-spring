@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+    <html lang="fr">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width">
+        <title>MediMeets</title>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+        <link rel="stylesheet" href="/css/style.css" />
+    </head>
+    <body class="bgcolorH">
+    <nav class="nav navbar navbar-expand-lg bg-dark navbar-dark">
+        <div class="container">
+            <a href="clinique_index.html" style="text-indent: 10px;" class="navbar-brand">MediMeets</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navmenu"><span class="navbar-toggler-icon"></span></button>
+            <div class="collapse navbar-collapse" id="navmenu">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a href="clinique_index.html" class="nav-link">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="../../cliniqueListePatient" class="nav-link">Liste patients</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="../../cliniqueListeMedecin" class="nav-link">Liste medecins</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="historique_rdv.html" class="nav-link">Historique</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="modifier_clinique.html" class="nav-link">Ma clinique</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <br> <br> <br>
+    </nav>
+    <br> <br>
+    <div class="main container">
+        <h1 class="m_liste">La liste des medecins :</h1>
+        <table>
+            <tr>
+                <th>Prenom </th>
+                <th>Nom </th>
+                <th>Numero Profesionnel </th>
+                <th>Email </th>
+                <th>Numero Telephone </th>
+                <th>Specialite </th>
+                <th>Tarif Consultation </th>
+                <th>Disponibilite </th>
+                <th>Clinique ID </th>
+            </tr>
+
+            <tr>
+                <% if (listeMedecins != null){
+                for (Medecin unMedecin : listeMedecins){%>
+                <td><%=unMedecin.getPrenom()%></td>
+                <td><%=unMedecin.getNom()%></td>
+                <td><%=unMedecin.getNumProf()%></td>
+                <td><%=unMedecin.getEmail()%></td>
+                <td><%=unMedecin.getSpecialite()%></td>
+                <td><%=unMedecin.getTarifconsultation()%></td>
+                <td><%=unMedecin.getDisponibilite()%></td>
+                <td><%=unMedecin.getId_clinique()%></td>
+                <%}
+                }%>
+            </tr>
+        </table>
+    </div>
+    <br> <br>
+    <div class="footer">
+        <div class="d-flex flex-column flex-md-row text-center text-md-start justify-content-between py-4 px-4 px-xl-5 bg-dark">
+            <!-- Copyright -->
+            <div class="text-white mb-3 mb-md-0">
+                Copyright © 2023. Tous droits réservés. (À mettre directement en bas de la page)
+            </div>
+        </div>
+    </div>
+    </body>
+    </html>
