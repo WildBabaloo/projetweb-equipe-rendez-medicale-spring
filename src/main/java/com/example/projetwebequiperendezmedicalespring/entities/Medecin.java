@@ -1,35 +1,50 @@
 package com.example.projetwebequiperendezmedicalespring.entities;
 
-import java.util.Date;
+import jakarta.persistence.*;
 
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
+@Entity
+@Table(name = "medecins")
 public class Medecin{
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+    @Column(length = 64, nullable = false)
     private String prenom;
+    @Column(length = 64, nullable = false)
     private String nom;
+    @Column(length = 12, nullable = false, unique = true)
     private int numProf;
+    @Column(length = 64, nullable = false)
     private String motPasse;
+    @Column(length = 128, nullable = false, unique = true)
     private String email;
+    @Column(length = 12, nullable = false, unique = true)
     private String numtele;
-    private String specialite;
+    @Column(length = 5, nullable = false)
     private int tarifconsultation;
+    @Temporal(TemporalType.DATE)
     private Date disponibilite;
-    private int id_clinique;
+    @ManyToMany
+    @JoinTable(
+            name = "medecins_services",
+            joinColumns = @JoinColumn(name = "medecin_id"),
+            inverseJoinColumns = @JoinColumn(name = "service_id")
+    )
+    private List<Service> services_offerts = new ArrayList<>();
+
+    @ManyToOne
+    @JoinColumn(name = "clinique_id", nullable = false)
+    private Clinique clinique;
+
 
     public Medecin() {
     }
 
-    public Medecin(String prenom, String nom, int numProf, String motPasse, String email, String numtele, String specialite, int tarifconsultation, Date disponibilite) {
-        this.prenom = prenom;
-        this.nom = nom;
-        this.numProf = numProf;
-        this.motPasse = motPasse;
-        this.email = email;
-        this.numtele = numtele;
-        this.specialite = specialite;
-        this.tarifconsultation = tarifconsultation;
-        this.disponibilite = disponibilite;
-    }
-    public Medecin(String prenom, String nom, int numProf, String motPasse, String email, String numtele, String specialite, int tarifconsultation, Date disponibilite, int id_clinique) {
+    public Medecin(int id, String prenom, String nom, int numProf, String motPasse, String email, String numtele, int tarifconsultation, Date disponibilite, Clinique clinique) {
         this.id = id;
         this.prenom = prenom;
         this.nom = nom;
@@ -37,25 +52,12 @@ public class Medecin{
         this.motPasse = motPasse;
         this.email = email;
         this.numtele = numtele;
-        this.specialite = specialite;
         this.tarifconsultation = tarifconsultation;
         this.disponibilite = disponibilite;
-        this.id_clinique = id_clinique;
-    }
-    public Medecin(int id, String prenom, String nom, int numProf, String motPasse, String email, String numtele, String specialite, int tarifconsultation, Date disponibilite) {
-        this.id = id;
-        this.prenom = prenom;
-        this.nom = nom;
-        this.numProf = numProf;
-        this.motPasse = motPasse;
-        this.email = email;
-        this.numtele = numtele;
-        this.specialite = specialite;
-        this.tarifconsultation = tarifconsultation;
-        this.disponibilite = disponibilite;
+        this.clinique = clinique;
     }
 
-    public Medecin(int id, String prenom, String nom, int numProf, String motPasse, String email, String numtele, String specialite, int tarifconsultation, Date disponibilite, int id_clinique) {
+    public Medecin(int id, String prenom, String nom, int numProf, String motPasse, String email, String numtele, int tarifconsultation, Date disponibilite, List<Service> services_offerts, Clinique clinique) {
         this.id = id;
         this.prenom = prenom;
         this.nom = nom;
@@ -63,111 +65,102 @@ public class Medecin{
         this.motPasse = motPasse;
         this.email = email;
         this.numtele = numtele;
-        this.specialite = specialite;
         this.tarifconsultation = tarifconsultation;
         this.disponibilite = disponibilite;
-        this.id_clinique = id_clinique;
-    }
-
-    public Medecin(String prenom, String nom, int numProf, String motPasse, String email, String numtele, String specialite, int tarifconsultation, int id_clinique) {
-        this.prenom = prenom;
-        this.nom = nom;
-        this.numProf = numProf;
-        this.motPasse = motPasse;
-        this.email = email;
-        this.numtele = numtele;
-        this.specialite = specialite;
-        this.tarifconsultation = tarifconsultation;
-        //this.disponibilite = disponibilite;
-        this.id_clinique = id_clinique;
+        this.services_offerts = services_offerts;
+        this.clinique = clinique;
     }
 
     public int getId() {
         return id;
     }
 
-    public String getPrenom() {
-        return prenom;
-    }
-
-    public String getNom() {
-        return nom;
-    }
-
-    public int getNumProf() {
-        return numProf;
-    }
-
-    public String getMotPasse() {
-        return motPasse;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public String getNumtele() {
-        return numtele;
-    }
-
-    public String getSpecialite() {
-        return specialite;
-    }
-
-    public int getTarifconsultation() {
-        return tarifconsultation;
-    }
-
-    public Date getDisponibilite() {
-        return disponibilite;
-    }
-
-    public int getId_clinique() {
-        return id_clinique;
-    }
-
     public void setId(int id) {
         this.id = id;
+    }
+
+    public String getPrenom() {
+        return prenom;
     }
 
     public void setPrenom(String prenom) {
         this.prenom = prenom;
     }
 
+    public String getNom() {
+        return nom;
+    }
+
     public void setNom(String nom) {
         this.nom = nom;
+    }
+
+    public int getNumProf() {
+        return numProf;
     }
 
     public void setNumProf(int numProf) {
         this.numProf = numProf;
     }
 
+    public String getMotPasse() {
+        return motPasse;
+    }
+
     public void setMotPasse(String motPasse) {
         this.motPasse = motPasse;
+    }
+
+    public String getEmail() {
+        return email;
     }
 
     public void setEmail(String email) {
         this.email = email;
     }
 
+    public String getNumtele() {
+        return numtele;
+    }
+
     public void setNumtele(String numtele) {
         this.numtele = numtele;
     }
 
-    public void setSpecialite(String specialite) {
-        this.specialite = specialite;
+    public int getTarifconsultation() {
+        return tarifconsultation;
     }
 
     public void setTarifconsultation(int tarifconsultation) {
         this.tarifconsultation = tarifconsultation;
     }
 
+    public Date getDisponibilite() {
+        return disponibilite;
+    }
+
     public void setDisponibilite(Date disponibilite) {
         this.disponibilite = disponibilite;
     }
 
-    public void setId_clinique(int id_clinique) {
-        this.id_clinique = id_clinique;
+    public List<Service> getServices_offerts() {
+        return services_offerts;
+    }
+
+    public void setServices_offerts(List<Service> services_offerts) {
+        this.services_offerts = services_offerts;
+    }
+
+    public void ajouter(Service service){
+        this.services_offerts.add(service);
+    }
+
+    public Clinique getClinique() {
+        return clinique;
+    }
+
+    public void setClinique(Clinique clinique) {
+        this.clinique = clinique;
     }
 
     @Override
@@ -180,10 +173,10 @@ public class Medecin{
                 ", motPasse='" + motPasse + '\'' +
                 ", email='" + email + '\'' +
                 ", numtele='" + numtele + '\'' +
-                ", specialite='" + specialite + '\'' +
                 ", tarifconsultation=" + tarifconsultation +
                 ", disponibilite=" + disponibilite +
-                ", id_clinique=" + id_clinique +
+                ", services_offerts=" + services_offerts +
+                ", clinique=" + clinique +
                 '}';
     }
 }
