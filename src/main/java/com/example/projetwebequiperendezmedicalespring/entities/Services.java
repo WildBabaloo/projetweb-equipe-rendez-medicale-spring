@@ -1,13 +1,13 @@
 package com.example.projetwebequiperendezmedicalespring.entities;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 
 @Entity
 @Table(name = "services")
-public class Service {
+public class Services {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id_services;
+    private Integer id;
 
     @Column(length = 64, nullable = false, unique = true)
     private String nom;
@@ -15,30 +15,30 @@ public class Service {
     @Column(nullable = false)
     private String description;
 
-    public Service(){
+    public Services(){
     }
 
-    public Service(Integer id_service) {
-        this.id_services = id_services;
+    public Services(Integer id) {
+        this.id = id;
     }
 
-    public Service(Integer id_services, String nom) {
-        this.id_services = id_services;
+    public Services(Integer id, String nom) {
+        this.id = id;
         this.nom = nom;
     }
 
-    public Service(Integer id_services, String nom, String description) {
-        this.id_services = id_services;
+    public Services(Integer id, String nom, String description) {
+        this.id = id;
         this.nom = nom;
         this.description = description;
     }
 
     public Integer getId() {
-        return id_services;
+        return id;
     }
 
-    public void setId(Integer id_services) {
-        this.id_services = id_services;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public String getNom() {
@@ -60,7 +60,7 @@ public class Service {
     @Override
     public String toString() {
         return "Service{" +
-                "id_services=" + id_services +
+                "id=" + id +
                 ", nom='" + nom + '\'' +
                 ", description='" + description + '\'' +
                 '}';

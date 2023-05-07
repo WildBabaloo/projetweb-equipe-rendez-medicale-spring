@@ -22,7 +22,9 @@ public class CliniqueService {
     public List<Clinique> afficherCliniqueById(int id_clinique){
         return (List<Clinique>) repo.getCliniquesById(id_clinique);
     }
-
+    public List<Clinique> findAllCliniques(){
+        return repo.findAll();
+    }
     public List<Clinique> afficherCliniqueByNom(String nom){
         return (List<Clinique>) repo.getCliniquesByNom(nom);
     }
@@ -44,5 +46,14 @@ public class CliniqueService {
         } catch (NoSuchElementException exception){
             throw new CliniqueNotFoundException("On ne peut pas trouver un clinique avec l'id: "+id);
         }
+    }
+    public Clinique ajouterClinique(Clinique clinique){
+        return repo.save(clinique);
+    }
+    public Clinique getClinique(Integer id){
+        return repo.findById(id).get();
+    }
+    public void deleteClinique(Integer id){
+        repo.deleteById(id);
     }
 }

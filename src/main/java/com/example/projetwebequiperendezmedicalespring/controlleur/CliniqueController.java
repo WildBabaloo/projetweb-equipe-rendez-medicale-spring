@@ -18,6 +18,10 @@ public class CliniqueController {
 
     @Autowired
     CliniqueService cliservice;
+
+    @Autowired
+    ServicesService serviceServices;
+
     @GetMapping("/cliniques")
     public String cliPage(){
         return "Vues/Clinique/clinique_index";
@@ -44,6 +48,13 @@ public class CliniqueController {
         return "Vues/Clinique/compte_clinique";
     }
 
+    @GetMapping("/cliniques/save")
+    public String saveClinique(Clinique clinique, RedirectAttributes redirectAttributes){
+        redirectAttributes.addFlashAttribute("message", "Le clinique à été ajouté!");
+        service.ajouterClinique(clinique);
+        return "redirect:/cliniques";
+    }
+
     @GetMapping("/histrdv/{id}")
     public String histrdvPage(@PathVariable("id")int id, Model model){
         Iterable<RendezVous> listeRendezVous = cliservice.afficherRendezVousByClinique(id);
@@ -64,6 +75,15 @@ public class CliniqueController {
         }
         return "Vues/Clinique/compte_clinique";
     }
-
+// TO DO
+    // Delete foreign key constraints
+    @GetMapping("cliniques/delete/{id}")
+    public String deleteClinique(@PathVariable(name = "id") Integer id, RedirectAttributes redirectAttributes){
+        service.deleteClinique(id);
+        redirectAttributes.addFlashAttribute("message", "Le clinique dont l'id est " +id+ " à été supprimé");
+        // TO DO
+        // Put all clinique_id of Medecins to 0 meaning they have no clinique that they are in
+        return "redirect:/cliniques";
+    }
 
 }

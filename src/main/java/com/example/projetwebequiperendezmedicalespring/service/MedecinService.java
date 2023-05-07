@@ -28,5 +28,17 @@ public class MedecinService {
     public List<RendezVous> afficherRendezVousByMed(int medecin){
         return (List<RendezVous>) repo.getRendezVousByMedId(medecin);
     }
+    public List<Medecin> findAllMedecins(){
+        return repo.findAll();
+    }
 
+    public Medecin ajouterMedecin(Medecin medecin){
+        return repo.save(medecin);
+    }
+    public Medecin getMedecin(Integer id){
+        return repo.findById(id).get();
+    }
+    public void deleteMedecin(Integer id){
+        repo.deleteById(id);
+    }
 }
