@@ -27,7 +27,7 @@ public class Clinique{
             joinColumns = @JoinColumn(name = "clinique_id"),
             inverseJoinColumns = @JoinColumn(name = "service_id")
     )
-    private List<Service> services_offerts = new ArrayList<>();
+    private List<Services> services_offerts = new ArrayList<>();
 
     public Clinique() {
     }
@@ -40,7 +40,7 @@ public class Clinique{
         this.numtele = numtele;
     }
 
-    public Clinique(int id, String nom, String coordonnees, String email, String numtele, List<Service> services_offerts) {
+    public Clinique(int id, String nom, String coordonnees, String email, String numtele, List<Services> services_offerts) {
         this.id = id;
         this.nom = nom;
         this.coordonnees = coordonnees;
@@ -89,16 +89,16 @@ public class Clinique{
         this.numtele = numtele;
     }
 
-    public List<Service> getServices_offerts() {
+    public List<Services> getServices_offerts() {
         return services_offerts;
     }
 
-    public void setServices_offerts(List<Service> services_offerts) {
+    public void setServices_offerts(List<Services> services_offerts) {
         this.services_offerts = services_offerts;
     }
 
-    public void ajouter(Service service){
-        this.services_offerts.add(service);
+    public void ajouter(Services services){
+        this.services_offerts.add(services);
     }
 
     @Override

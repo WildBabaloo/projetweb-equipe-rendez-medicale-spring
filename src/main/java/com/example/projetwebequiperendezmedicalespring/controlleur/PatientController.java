@@ -47,10 +47,12 @@ public class PatientController {
         return "ajouter";
     }
 
+    // TO DO
+    // Delete foreign key constraints
     @GetMapping("patients/delete/{id}")
     public String deletePatient(@PathVariable(name = "id") Integer id, Model model, RedirectAttributes redirectAttributes){
         service.deletePatient(id);
-        redirectAttributes.addFlashAttribute("message", "L'utilisateur dont l'id est " +id+ " à été supprimé");
+        redirectAttributes.addFlashAttribute("message", "Le patient dont l'id est " +id+ " à été supprimé");
         return "redirect:/patients";
     }
 
