@@ -33,6 +33,11 @@ public class Services {
         this.description = description;
     }
 
+    public Services(String nom, String description) {
+        this.nom = nom;
+        this.description = description;
+    }
+
     public Integer getId() {
         return id;
     }
