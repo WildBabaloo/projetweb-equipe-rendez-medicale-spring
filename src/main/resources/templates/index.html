@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html  xmlns:th="http://www.thymeleaf.org" lang="fr">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width">
@@ -11,21 +11,21 @@
 <body class="">
 <nav class="nav navbar navbar-expand-lg bg-dark navbar-dark">
   <div class="container">
-    <a href="./index.html" style="text-indent: 10px;" class="navbar-brand">MediMeets</a>
+    <a th:href="@{/}" style="text-indent: 10px;" class="navbar-brand">MediMeets</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navmenu"><span class="navbar-toggler-icon"></span></button>
     <div class="collapse navbar-collapse" id="navmenu">
       <ul class="navbar-nav ms-auto">
         <li class="nav-item">
-          <a href="./index.html" class="nav-link">Home</a>
+          <a class="nav-link" th:href="@{/}" >Home</a>
         </li>
         <li class="nav-item">
-          <a href="Vues/presentation.html" class="nav-link">À propos de nous</a>
+          <a th:href="@{/presentation}" class="nav-link">À propos de nous</a>
         </li>
         <li class="nav-item">
-          <a href="Vues/creer_compte.html" class="nav-link">Créer un compte</a>
+          <a  th:href="@{/creer}" class="nav-link">Créer un compte</a>
         </li>
         <li class="nav-item">
-          <a href="Vues/login.html" class="nav-link">Login</a>
+          <a th:href="@{/login}" class="nav-link">Login</a>
         </li>
       </ul>
     </div>

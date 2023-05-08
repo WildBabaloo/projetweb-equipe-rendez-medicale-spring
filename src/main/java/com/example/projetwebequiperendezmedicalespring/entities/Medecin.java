@@ -1,6 +1,6 @@
 package com.example.projetwebequiperendezmedicalespring.entities;
 
-import jakarta.persistence.*;
+import javax.persistence.*;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -11,7 +11,7 @@ import java.util.List;
 public class Medecin{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private int id_medecin;
     @Column(length = 64, nullable = false)
     private String prenom;
     @Column(length = 64, nullable = false)
@@ -44,8 +44,8 @@ public class Medecin{
     public Medecin() {
     }
 
-    public Medecin(int id, String prenom, String nom, int numProf, String motPasse, String email, String numtele, int tarifconsultation, Date disponibilite, Clinique clinique) {
-        this.id = id;
+    public Medecin(int id_medecin, String prenom, String nom, int numProf, String motPasse, String email, String numtele, int tarifconsultation, Date disponibilite, Clinique clinique) {
+        this.id_medecin = id_medecin;
         this.prenom = prenom;
         this.nom = nom;
         this.numProf = numProf;
@@ -57,8 +57,8 @@ public class Medecin{
         this.clinique = clinique;
     }
 
-    public Medecin(int id, String prenom, String nom, int numProf, String motPasse, String email, String numtele, int tarifconsultation, Date disponibilite, List<Service> services_offerts, Clinique clinique) {
-        this.id = id;
+    public Medecin(int id_medecin, String prenom, String nom, int numProf, String motPasse, String email, String numtele, int tarifconsultation, Date disponibilite, List<Service> services_offerts, Clinique clinique) {
+        this.id_medecin = id_medecin;
         this.prenom = prenom;
         this.nom = nom;
         this.numProf = numProf;
@@ -72,11 +72,11 @@ public class Medecin{
     }
 
     public int getId() {
-        return id;
+        return id_medecin;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setId(int id_medecin) {
+        this.id_medecin = id_medecin;
     }
 
     public String getPrenom() {
@@ -166,7 +166,7 @@ public class Medecin{
     @Override
     public String toString() {
         return "Medecin{" +
-                "id=" + id +
+                "id_medecin=" + id_medecin +
                 ", prenom='" + prenom + '\'' +
                 ", nom='" + nom + '\'' +
                 ", numProf=" + numProf +

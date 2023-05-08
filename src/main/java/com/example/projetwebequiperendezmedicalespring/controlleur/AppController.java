@@ -2,12 +2,21 @@ package com.example.projetwebequiperendezmedicalespring.controlleur;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-
 @Controller
 public class AppController {
-    @GetMapping("")
+    @GetMapping("/")
     public String homePage(){return "index";}
+
+    @GetMapping("/login")
+    public String logPage(){
+        return "Vues/login";
+    }
+
+    @GetMapping("/creer")
+    public String creerCompte(){return "Vues/creer_compte";}
+
+    @GetMapping("/presentation")
+    public String presentation(){
+        return "Vues/presentation";
+    }
 }

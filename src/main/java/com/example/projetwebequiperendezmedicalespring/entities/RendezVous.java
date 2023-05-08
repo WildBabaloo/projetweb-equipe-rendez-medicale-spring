@@ -1,15 +1,14 @@
 package com.example.projetwebequiperendezmedicalespring.entities;
 
-import jakarta.persistence.*;
-
+import javax.persistence.*;
 import java.util.Date;
 
 @Entity
-@Table(name = "rendez_vous")
+@Table(name = "rendezvous")
 public class RendezVous{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private int id_rendezvous;
     @OneToOne(optional = false)
     @JoinColumn(name = "id_patient", nullable = false)
     private Patient patient;
@@ -30,8 +29,8 @@ public class RendezVous{
     public RendezVous() {
     }
 
-    public RendezVous(int id, Patient patient, Medecin medecin, Clinique clinique, Date date, String raison, String description) {
-        this.id = id;
+    public RendezVous(int id_rendezvous, Patient patient, Medecin medecin, Clinique clinique, Date date, String raison, String description) {
+        this.id_rendezvous = id_rendezvous;
         this.patient = patient;
         this.medecin = medecin;
         this.clinique = clinique;
@@ -41,11 +40,11 @@ public class RendezVous{
     }
 
     public int getId() {
-        return id;
+        return id_rendezvous;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setId(int id_rendezvous) {
+        this.id_rendezvous = id_rendezvous;
     }
 
     public Patient getPatient() {
@@ -99,7 +98,7 @@ public class RendezVous{
     @Override
     public String toString() {
         return "RendezVous{" +
-                "id=" + id +
+                "id_rendezvous" + id_rendezvous +
                 ", patient=" + patient +
                 ", medecin=" + medecin +
                 ", clinique=" + clinique +

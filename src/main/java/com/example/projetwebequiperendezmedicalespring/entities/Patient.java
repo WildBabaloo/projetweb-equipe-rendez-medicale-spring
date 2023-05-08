@@ -1,13 +1,13 @@
 package com.example.projetwebequiperendezmedicalespring.entities;
 
-import jakarta.persistence.*;
+import javax.persistence.*;
 
 @Entity
-@Table(name = "patient")
+@Table(name = "patients")
 public class Patient {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private int id_patient;
     @Column(length = 64, nullable = false)
     private String prenom;
     @Column(length = 64, nullable = false)
@@ -25,8 +25,8 @@ public class Patient {
     public Patient() {
     }
 
-    public Patient(int id, String prenom, String nom, String numAss, String motPasse, String email) {
-        this.id = id;
+    public Patient(int id_patient, String prenom, String nom, String numAss, String motPasse, String email) {
+        this.id_patient = id_patient;
         this.prenom = prenom;
         this.nom = nom;
         this.numAss = numAss;
@@ -34,8 +34,8 @@ public class Patient {
         this.email = email;
     }
 
-    public Patient(int id, String prenom, String nom, String numAss, String motPasse, String email, Medecin medecin) {
-        this.id = id;
+    public Patient(int id_patient, String prenom, String nom, String numAss, String motPasse, String email, Medecin medecin) {
+        this.id_patient = id_patient;
         this.prenom = prenom;
         this.nom = nom;
         this.numAss = numAss;
@@ -45,11 +45,11 @@ public class Patient {
     }
 
     public int getId() {
-        return id;
+        return id_patient;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setId(int id_patient) {
+        this.id_patient = id_patient;
     }
 
     public String getPrenom() {
@@ -103,7 +103,7 @@ public class Patient {
     @Override
     public String toString() {
         return "Patient{" +
-                "id=" + id +
+                "id_patient=" + id_patient +
                 ", prenom='" + prenom + '\'' +
                 ", nom='" + nom + '\'' +
                 ", numAss='" + numAss + '\'' +

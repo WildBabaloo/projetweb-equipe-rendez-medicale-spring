@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html  xmlns:th="http://www.thymeleaf.org" lang="fr">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width">
@@ -16,7 +16,7 @@
     <div class="collapse navbar-collapse" id="navmenu">
       <ul class="navbar-nav ms-auto">
         <li class="nav-item">
-          <a href="medecin_index.html" class="nav-link">Home</a>
+          <a th:href="@{/medecins}" class="nav-link">Home</a>
         </li>
         <li class="nav-item">
           <a href="/Vues/Medecin/liste_patients.html" class="nav-link">Liste de mes patients</a>

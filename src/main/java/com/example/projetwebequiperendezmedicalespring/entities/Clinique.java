@@ -1,7 +1,8 @@
 package com.example.projetwebequiperendezmedicalespring.entities;
 
-import jakarta.persistence.*;
+import javax.persistence.*;
 
+import javax.persistence.Entity;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,7 +12,7 @@ public class Clinique{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private int id_clinique;
     @Column(nullable = false, length = 64)
     private String nom;
     @Column(nullable = false)
@@ -32,16 +33,16 @@ public class Clinique{
     public Clinique() {
     }
 
-    public Clinique(int id, String nom, String coordonnees, String email, String numtele) {
-        this.id = id;
+    public Clinique(int id_clinique, String nom, String coordonnees, String email, String numtele) {
+        this.id_clinique = id_clinique;
         this.nom = nom;
         this.coordonnees = coordonnees;
         this.email = email;
         this.numtele = numtele;
     }
 
-    public Clinique(int id, String nom, String coordonnees, String email, String numtele, List<Service> services_offerts) {
-        this.id = id;
+    public Clinique(int id_clinique, String nom, String coordonnees, String email, String numtele, List<Service> services_offerts) {
+        this.id_clinique = id_clinique;
         this.nom = nom;
         this.coordonnees = coordonnees;
         this.email = email;
@@ -50,11 +51,11 @@ public class Clinique{
     }
 
     public int getId() {
-        return id;
+        return id_clinique;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setId(int id_clinique) {
+        this.id_clinique = id_clinique;
     }
 
     public String getNom() {
@@ -104,7 +105,7 @@ public class Clinique{
     @Override
     public String toString() {
         return "Clinique{" +
-                "id=" + id +
+                "id_clinique=" + id_clinique +
                 ", nom='" + nom + '\'' +
                 ", coordonnees='" + coordonnees + '\'' +
                 ", email='" + email + '\'' +
