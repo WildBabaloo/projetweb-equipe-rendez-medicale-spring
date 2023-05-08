@@ -40,6 +40,15 @@ public class RendezVous{
         this.description = description;
     }
 
+    public RendezVous(Patient patient, Medecin medecin, Clinique clinique, Date date, String raison, String description) {
+        this.patient = patient;
+        this.medecin = medecin;
+        this.clinique = clinique;
+        this.date = date;
+        this.raison = raison;
+        this.description = description;
+    }
+
     public int getId() {
         return id;
     }
