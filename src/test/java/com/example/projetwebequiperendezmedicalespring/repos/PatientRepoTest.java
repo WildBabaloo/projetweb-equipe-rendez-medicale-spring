@@ -1,9 +1,6 @@
 package com.example.projetwebequiperendezmedicalespring.repos;
 
-import com.example.projetwebequiperendezmedicalespring.entities.Clinique;
-import com.example.projetwebequiperendezmedicalespring.entities.Medecin;
-import com.example.projetwebequiperendezmedicalespring.entities.Patient;
-import com.example.projetwebequiperendezmedicalespring.entities.Services;
+import com.example.projetwebequiperendezmedicalespring.entities.*;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
@@ -24,25 +21,56 @@ public class PatientRepoTest {
 
     @Autowired
     private PatientRepository repo;
+
+    @Autowired
+    private MedecinRepository repoMedecin;
+
+    @Autowired
+    private CliniqueRepository repoClinique;
+
+    @Autowired
+    private  ServicesRepository repoService;
+
+    @Autowired
+    private RendezVousRepository repoRendezVous;
+
     @Autowired
     private TestEntityManager entityManager;
 
 
     @Test
     public void testCreatePatient(){
-        /*
-        Services service = new Services("Covid", "The pandemic");
-        List<Services> listServices = new ArrayList<>();
-        listServices.add(service);
-        Clinique clinique = new Clinique("Test", "32424 yes", "yes@no.com", "514-342-2355");
-        Medecin medecin = new Medecin("Healer", "Heal", 1234, "healer@heal.com", "1234", 321, new Date(),listServices,clinique);
-        Patient patient = new Patient("John", "Doe", "123456", "password", "john.doe@example.com", medecin);
+        Patient patient = new Patient("John", "Doe", "12343", "password", "joh.does@example.com", repoMedecin.findById(1).get());
 
         Patient savedPatient = repo.save(patient);
         assertThat(savedPatient).isNotNull();
         assertThat(savedPatient.getId()).isGreaterThan(0);
 
-         */
+
+    }
+
+    @Test
+    public void testCreatePatientNoMedecin(){
+        Patient patient = new Patient("John", "Doe", "12345678", "password", "john.doer@example.com", null);
+        Patient savedPatient = repo.save(patient);
+        assertThat(savedPatient).isNotNull();
+        assertThat(savedPatient.getId()).isGreaterThan(0);
+    }
+
+    @Test
+    public void testUpdatePatient(){
+        Patient patient = repo.findById(1).get();
+        patient.setNom("YEP");
+        repo.save(patient);
+    }
+
+    @Test
+    public void testDeletePatient(){
+        List<RendezVous> rendezVousPatient = repoRendezVous.findAllByPatientId(1);
+        for(RendezVous rendezVous : rendezVousPatient){
+            repoRendezVous.deleteById(rendezVous.getId());
+        }
+        repo.deleteById(8);
     }
 
 }

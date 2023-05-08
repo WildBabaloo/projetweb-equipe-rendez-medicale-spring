@@ -1,8 +1,7 @@
 package com.example.projetwebequiperendezmedicalespring.repos;
 
+import com.example.projetwebequiperendezmedicalespring.entities.*;
 import com.example.projetwebequiperendezmedicalespring.entities.Medecin;
-import com.example.projetwebequiperendezmedicalespring.entities.Medecin;
-import com.example.projetwebequiperendezmedicalespring.entities.Services;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
@@ -29,6 +28,12 @@ public class MedecinRepoTest {
 
     @Autowired
     private  ServicesRepository repoService;
+
+    @Autowired
+    private RendezVousRepository repoRendezVous;
+
+    @Autowired
+    private PatientRepository repoPatient;
     @Autowired
     private TestEntityManager entityManager;
 
@@ -44,6 +49,18 @@ public class MedecinRepoTest {
     }
 
     @Test
+    public void testCreateMedecinNoClinique(){
+        List<Services> listeServices = new ArrayList<>();
+        Services service = new Services("Covid", "Oh no");
+        repoService.save(service);
+        listeServices.add(service);
+        Medecin medecin = new Medecin("Heal", "Healer", 132, "wqeoqwe", "yes@np.com", "514-432-3213", 10, new Date(), listeServices , null);
+        Medecin savedMedecin = repo.save(medecin);
+        assertThat(savedMedecin).isNotNull();
+        assertThat(savedMedecin.getId()).isGreaterThan(0);
+    }
+
+    @Test
     public void testUpdateMedecin(){
         Medecin Medecin = repo.findById(1).get();
         Medecin.setNom("YEP");
@@ -53,6 +70,17 @@ public class MedecinRepoTest {
     // TO DO
     @Test
     public void testDeleteMedecin(){
+        List<RendezVous> rendezVousMedecin = repoRendezVous.findAllByMedecinId(1);
+        for(RendezVous rendezVous : rendezVousMedecin){
+            repoRendezVous.deleteById(rendezVous.getId());
+        }
+
+        List<Patient> listePatient = repoPatient.findAllByPatientByMedecinId(1);
+        for (Patient patient : listePatient){
+            patient.setMedecin(null);
+            repoPatient.save(patient);
+        }
+
         repo.deleteById(1);
     }
 }

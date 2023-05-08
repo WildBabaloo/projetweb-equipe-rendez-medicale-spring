@@ -1,7 +1,6 @@
 package com.example.projetwebequiperendezmedicalespring.repos;
 
-import com.example.projetwebequiperendezmedicalespring.entities.Clinique;
-import com.example.projetwebequiperendezmedicalespring.entities.Services;
+import com.example.projetwebequiperendezmedicalespring.entities.*;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
@@ -24,6 +23,15 @@ public class CliniqueRepoTest {
 
     @Autowired
     private  ServicesRepository repoService;
+
+    @Autowired
+    private RendezVousRepository repoRendezVous;
+
+    @Autowired
+    private PatientRepository repoPatient;
+
+    @Autowired
+    private MedecinRepository repoMedecin;
     @Autowired
     private TestEntityManager entityManager;
 
@@ -39,9 +47,11 @@ public class CliniqueRepoTest {
     @Test
     public void testCreateCliniqueWithService(){
         List<Services> listeService = new ArrayList<>();
+         /*
         Services service = new Services("Covid", "Oh no");
         repoService.save(service);
-        listeService.add(service);
+         */
+        listeService.add(repoService.findById(1).get());
         Clinique clinique = new Clinique("ew", "324 yes street", "yes@yes.com", "413-432-2344", listeService);
         Clinique savedClinique = repo.save(clinique);
         assertThat(savedClinique).isNotNull();
@@ -58,6 +68,18 @@ public class CliniqueRepoTest {
     // TO DO
     @Test
     public void testDeleteClinique(){
+        List<RendezVous> rendezVousClinique = repoRendezVous.findAllByCliniqueId(1);
+        for(RendezVous rendezVous : rendezVousClinique){
+            repoRendezVous.deleteById(rendezVous.getId());
+        }
+
+        List<Medecin> listeMedecin = repoMedecin.findAllByCliniqueId(1);
+        for (Medecin medecin: listeMedecin){
+            medecin.setClinique(null);
+            repoMedecin.save(medecin);
+        }
+
+
         repo.deleteById(1);
     }
 

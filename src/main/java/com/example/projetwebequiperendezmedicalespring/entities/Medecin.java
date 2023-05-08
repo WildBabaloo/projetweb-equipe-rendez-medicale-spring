@@ -37,7 +37,7 @@ public class Medecin{
     private List<Services> services_offerts = new ArrayList<>();
 
     @ManyToOne
-    @JoinColumn(name = "clinique_id", nullable = false)
+    @JoinColumn(name = "clinique_id")
     private Clinique clinique;
 
 
