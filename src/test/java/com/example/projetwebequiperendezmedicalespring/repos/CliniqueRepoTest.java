@@ -79,7 +79,6 @@ public class CliniqueRepoTest {
             repoMedecin.save(medecin);
         }
 
-
         repo.deleteById(1);
     }
 
