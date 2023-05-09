@@ -1,6 +1,5 @@
-
-    <!DOCTYPE html>
-    <html lang="fr">
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="fr">
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width">
@@ -12,24 +11,24 @@
     <body class="bgcolorH">
     <nav class="nav navbar navbar-expand-lg bg-dark navbar-dark">
         <div class="container">
-            <a href="clinique_index.html" style="text-indent: 10px;" class="navbar-brand">MediMeets</a>
+            <a th:href="@{/cliniques}" style="text-indent: 10px;" class="navbar-brand">MediMeets</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navmenu"><span class="navbar-toggler-icon"></span></button>
             <div class="collapse navbar-collapse" id="navmenu">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
-                        <a href="clinique_index.html" class="nav-link">Home</a>
+                        <a th:href="@{/cliniques}" class="nav-link">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a href="../../cliniqueListePatient" class="nav-link">Liste patients</a>
+                        <a th:href="@{/clilistpat}" class="nav-link">Liste patients</a>
                     </li>
                     <li class="nav-item">
-                        <a href="../../cliniqueListeMedecin" class="nav-link">Liste medecins</a>
+                        <a th:href="@{/clilistmed}" class="nav-link">Liste medecins</a>
                     </li>
                     <li class="nav-item">
-                        <a href="../../cliniqueListeRendezVous" class="nav-link">Historique</a>
+                        <a th:href="@{/histrdv}" class="nav-link">Historique</a>
                     </li>
                     <li class="nav-item">
-                        <a href="../../cliniqueCompteControlleur?goToClinique=optionClinique" class="nav-link">Ma clinique</a>
+                        <a th:href="@{/clicompte}" class="nav-link">Ma clinique</a>
                     </li>
                 </ul>
             </div>

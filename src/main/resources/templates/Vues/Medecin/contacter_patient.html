@@ -11,7 +11,7 @@
 <body class="bgcolorM">
 <nav class="nav navbar navbar-expand-lg bg-dark navbar-dark">
   <div class="container">
-    <a href="medecin_index.html" style="text-indent: 10px;" class="navbar-brand">MediMeets</a>
+    <a th:href="@{/medecins}" style="text-indent: 10px;" class="navbar-brand">MediMeets</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navmenu"><span class="navbar-toggler-icon"></span></button>
     <div class="collapse navbar-collapse" id="navmenu">
       <ul class="navbar-nav ms-auto">
@@ -19,13 +19,13 @@
           <a th:href="@{/medecins}" class="nav-link">Home</a>
         </li>
         <li class="nav-item">
-          <a href="/Vues/Medecin/liste_patients.html" class="nav-link">Liste de mes patients</a>
+          <a th:href="@{/medlistpat}" class="nav-link">Liste de mes patients</a>
         </li>
         <li class="nav-item">
-          <a href="mes_rdv.html" class="nav-link">Mes rendez-vous</a>
+          <a th:href="@{/mesrdv}" class="nav-link">Mes rendez-vous</a>
         </li>
         <li class="nav-item">
-          <a href="compte_medecin.html" class="nav-link">Mon compte</a>
+          <a th:href="@{/medcompte}" class="nav-link">Mon compte</a>
         </li>
       </ul>
     </div>

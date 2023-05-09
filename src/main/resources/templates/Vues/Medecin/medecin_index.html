@@ -12,7 +12,7 @@
 <body class="bgcolorM">
 <nav class="nav navbar navbar-expand-lg bg-dark navbar-dark">
     <div class="container">
-        <a href="medecin_index.html" style="text-indent: 10px;" class="navbar-brand">MediMeets</a>
+        <a th:href="@{/medecins}" style="text-indent: 10px;" class="navbar-brand">MediMeets</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navmenu"><span class="navbar-toggler-icon"></span></button>
         <div class="collapse navbar-collapse" id="navmenu">
             <ul class="navbar-nav ms-auto">
@@ -20,10 +20,13 @@
                     <a th:href="@{/medecins}" class="nav-link">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a href="../../medecinListePatient" class="nav-link">Liste de mes patients</a>
+                    <a th:href="@{/medlistpat}" class="nav-link">Liste de mes patients</a>
                 </li>
                 <li class="nav-item">
-                    <a href="../../medecinCompte" class="nav-link">Mon compte</a>
+                    <a th:href="@{/mesrdv}" class="nav-link">Mes rendez-vous</a>
+                </li>
+                <li class="nav-item">
+                    <a th:href="@{/medcompte}" class="nav-link">Mon compte</a>
                 </li>
             </ul>
         </div>
@@ -39,22 +42,22 @@
         <ul class="LesOptions" style="list-style-type: none;">
             <div class="LesOptions">
                 <li>
-                    <a href="../../medecinListePatient">
+                    <a th:href="@{/medlistpat}">
                         <button>Cliquer ici pour voir la liste de vos patients</button>
                     </a>
                 </li>
                 <li>
-                    <a href="mes_rdv.html">
+                    <a th:href="@{/mesrdv/modifier}">
                         <button>Cliquer ici pour voir et modifier vos rendez-vous</button>
                     </a>
                 </li>
                 <li>
-                    <a href="contacter_patient.html">
+                    <a th:href="@{/conpat}">
                         <button>Cliquer ici pour contacter un patient</button>
                     </a>
                 </li>
                 <li>
-                    <a href="../../medecinCompte">
+                    <a th:href="@{/medcompte/modifier}">
                         <button>Cliquer ici pour modifier les informations de votre compte</button>
                     </a>
                 </li>
