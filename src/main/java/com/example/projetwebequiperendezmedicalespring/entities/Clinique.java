@@ -117,6 +117,10 @@ public class Clinique{
         this.services_offerts.add(services);
     }
 
+    public void remove(Services services){
+        this.services_offerts.remove(services);
+    }
+
     @Override
     public String toString() {
         return "Clinique{" +
