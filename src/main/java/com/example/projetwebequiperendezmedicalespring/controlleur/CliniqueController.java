@@ -52,14 +52,10 @@ public class CliniqueController {
     }
 
 
-    // TO DO
-    // Delete foreign key constraints
     @GetMapping("cliniques/delete/{id}")
     public String deleteClinique(@PathVariable(name = "id") Integer id, RedirectAttributes redirectAttributes){
         service.deleteClinique(id);
         redirectAttributes.addFlashAttribute("message", "Le clinique dont l'id est " +id+ " à été supprimé");
-        // TO DO
-        // Put all clinique_id of Medecins to 0 meaning they have no clinique that they are in
         return "redirect:/cliniques";
     }
 }
