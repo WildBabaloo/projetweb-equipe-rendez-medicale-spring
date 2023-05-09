@@ -62,12 +62,12 @@ public class MedecinController {
     }
 
 
-    // TO DO
-    // Delete foreign key constraints
+
     @GetMapping("medecins/delete/{id}")
     public String deleteMedecin(@PathVariable(name = "id") Integer id, RedirectAttributes redirectAttributes){
         service.deleteMedecin(id);
         redirectAttributes.addFlashAttribute("message", "Le medecin dont l'id est " +id+ " à été supprimé");
+        // TO DO
         //Find clinique of that medecin and remove his service to the liste of services offered by the clinique
         // And check if that service is not already in the list.
         // If no other person has this service then remove Else keep
