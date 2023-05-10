@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 @Service
 @Transactional
@@ -35,5 +36,13 @@ public class CliniqueService {
 
     public List<RendezVous> afficherRendezVousByClinique(int clinique){
         return (List<RendezVous>) repo.getRendezVousByClinique(clinique);
+    }
+
+    public Clinique get(int id) throws CliniqueNotFoundException{
+        try{
+            return repo.findById(id).get();
+        } catch (NoSuchElementException exception){
+            throw new CliniqueNotFoundException("On ne peut pas trouver un clinique avec l'id: "+id);
+        }
     }
 }
