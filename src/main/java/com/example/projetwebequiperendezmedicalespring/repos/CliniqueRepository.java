@@ -5,10 +5,10 @@ import com.example.projetwebequiperendezmedicalespring.entities.Medecin;
 import com.example.projetwebequiperendezmedicalespring.entities.Patient;
 import com.example.projetwebequiperendezmedicalespring.entities.RendezVous;
 import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
+import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface CliniqueRepository extends CrudRepository<Clinique,Integer> {
+public interface CliniqueRepository extends JpaRepository<Clinique,Integer> {
 
     @Query("SELECT u FROM Clinique u WHERE u.id_clinique=:id_clinique")
     public Clinique getCliniquesById(@Param("id_clinique")int id_clinique);
@@ -24,4 +24,5 @@ public interface CliniqueRepository extends CrudRepository<Clinique,Integer> {
 
     @Query("SELECT u FROM RendezVous u WHERE u.clinique=:clinique")
     public RendezVous getRendezVousByClinique(@Param("clinique")int clinique);
+
 }

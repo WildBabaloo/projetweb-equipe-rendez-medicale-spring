@@ -1,11 +1,12 @@
 package com.example.projetwebequiperendezmedicalespring.controlleur;
-
 import com.example.projetwebequiperendezmedicalespring.entities.Medecin;
 import com.example.projetwebequiperendezmedicalespring.entities.Patient;
 import com.example.projetwebequiperendezmedicalespring.entities.RendezVous;
 import com.example.projetwebequiperendezmedicalespring.service.MedecinService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.repository.query.Param;
+import com.example.projetwebequiperendezmedicalespring.entities.Services;
+import com.example.projetwebequiperendezmedicalespring.service.ServicesService;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,33 +19,59 @@ import java.util.List;
 public class MedecinController {
 
     @Autowired
-    MedecinService medservice;
+    MedecinService service;
+
+    @Autowired
+    ServicesService serviceServices;
+
     @GetMapping("/medecins")
-    public String medPage(){
-        return "Vues/Medecin/medecin_index";
+    public String afficherMedecins(Model model){
+        List<Medecin> listeMedecins = service.findAllMedecins();
+        model.addAttribute("listeMedecins", listeMedecins);
+        return "listeMedecinModifierSupprimer";
     }
 
-    @GetMapping("/medlistpat/{id}")
-    public String medlistPatPage(@PathVariable("id")int id, Model model, RedirectAttributes redirectAttributes){
-        Iterable<Patient> listePatients = medservice.afficherPatientByMedecin(id);
-        model.addAttribute("listePatients",listePatients);
-        return "Vues/Medecin/liste_patients";
+    @GetMapping("/medecins/new")
+    public String showNewMedecinForm(Model model){
+        model.addAttribute("medecin", new Medecin());
+        List<Services> listeServices = serviceServices.findAllServices();
+        model.addAttribute("listeServices", listeServices);
+        return "ajouter";
     }
 
-    @GetMapping("/medcompte/{id}")
-    public String compteMedPage(@PathVariable("id")int id,Model model){
-        Medecin medecin = medservice.afficherMedecinById(id);
-        model.addAttribute("medecin",medecin);
-        return "Vues/Medecin/compte_medecin";
+    @GetMapping("/medecins/save")
+    public String saveMedecin(Medecin medecin, RedirectAttributes redirectAttributes){
+        redirectAttributes.addFlashAttribute("message", "Le medecin à été ajouté!");
+        service.ajouterMedecin(medecin);
+        // TO DO
+        //Find clinique of that medecin and add his service to the liste of services offered by the clinique
+        // And check if that service is not already in the list.
+        // If in list add Else dont
+        return "redirect:/medecins";
     }
 
-    @GetMapping("/mesrdv/{id}")
-    public String rdvPage(@PathVariable("id")int id,Model model){
-        Iterable<RendezVous> listeRendezVous = medservice.afficherRendezVousByMed(id);
-        model.addAttribute("listeRendezVous",listeRendezVous);
-        return "Vues/Medecin/mes_rdv";
+    @GetMapping("/medecins/edit/{id}")
+    public String updateMedecin(@PathVariable(name = "id") Integer id, Model model){
+        Medecin medecin = service.getMedecin(id);
+        model.addAttribute("pageTitle", "Editer le medecin dont l'id est " +id);
+        model.addAttribute("medecin", medecin);
+        List<Services> listeServices = serviceServices.findAllServices();
+        model.addAttribute("listeServices", listeServices);
+        // Have to add optionMedecin if not possible then make a seperate page for add a medecin only
+        return "ajouter";
     }
 
-    @GetMapping("/conpat")
-    public String conPage(){return "Vues/Medecin/contacter_patient";}
+
+
+    @GetMapping("medecins/delete/{id}")
+    public String deleteMedecin(@PathVariable(name = "id") Integer id, RedirectAttributes redirectAttributes){
+        service.deleteMedecin(id);
+        redirectAttributes.addFlashAttribute("message", "Le medecin dont l'id est " +id+ " à été supprimé");
+        // TO DO
+        //Find clinique of that medecin and remove his service to the liste of services offered by the clinique
+        // And check if that service is not already in the list.
+        // If no other person has this service then remove Else keep
+        return "redirect:/medecins";
+    }
+
 }
