@@ -2,6 +2,8 @@ package com.example.projetwebequiperendezmedicalespring.service;
 
 import com.example.projetwebequiperendezmedicalespring.entities.*;
 import com.example.projetwebequiperendezmedicalespring.entities.Medecin;
+import com.example.projetwebequiperendezmedicalespring.entities.Patient;
+import com.example.projetwebequiperendezmedicalespring.entities.RendezVous;
 import com.example.projetwebequiperendezmedicalespring.repos.CliniqueRepository;
 import com.example.projetwebequiperendezmedicalespring.repos.MedecinRepository;
 import com.example.projetwebequiperendezmedicalespring.repos.PatientRepository;
