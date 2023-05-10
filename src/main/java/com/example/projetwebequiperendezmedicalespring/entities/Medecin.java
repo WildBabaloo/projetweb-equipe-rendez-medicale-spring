@@ -71,19 +71,6 @@ public class Medecin{
         this.clinique = clinique;
     }
 
-    public Medecin(String prenom, String nom, int numProf, String motPasse, String email, String numtele, int tarifconsultation, Date disponibilite, List<Services> services_offerts, Clinique clinique) {
-        this.prenom = prenom;
-        this.nom = nom;
-        this.numProf = numProf;
-        this.motPasse = motPasse;
-        this.email = email;
-        this.numtele = numtele;
-        this.tarifconsultation = tarifconsultation;
-        this.disponibilite = disponibilite;
-        this.services_offerts = services_offerts;
-        this.clinique = clinique;
-    }
-
 
 
     public int getId() {

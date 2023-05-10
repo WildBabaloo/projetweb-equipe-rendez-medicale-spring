@@ -50,21 +50,6 @@ public class Clinique{
         this.services_offerts = services_offerts;
     }
 
-    public Clinique(String nom, String coordonnees, String email, String numtele, List<Services> services_offerts) {
-        this.nom = nom;
-        this.coordonnees = coordonnees;
-        this.email = email;
-        this.numtele = numtele;
-        this.services_offerts = services_offerts;
-    }
-
-    public Clinique(String nom, String coordonnees, String email, String numtele) {
-        this.nom = nom;
-        this.coordonnees = coordonnees;
-        this.email = email;
-        this.numtele = numtele;
-    }
-
     public int getId() {
         return id_clinique;
     }
