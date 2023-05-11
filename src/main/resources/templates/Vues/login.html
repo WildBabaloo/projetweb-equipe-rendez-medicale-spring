@@ -41,27 +41,41 @@
 
 
 <div class="container">
-  <form action="../connexionControlleur" method="get">
-    <p><label for="numAss">Nom d'utilisateur :</label> <br>
-      <input type="text" id="numAss" name="numAss" required placeholder="Entrez votre nom d'utilisateur:"/> </p>
-    <p><label for="password">Mot de passe :</label> <br>
-      <input type="password" id="password" name="password" required placeholder="Entrez votre mot de passe:"/> </p>
+  <div class="patientLogin">
+  <form th:action="@{/patientLogin}" method="post">
+    <p><label for="numAss">Numéro d'assurance sociale :</label> <br>
+      <input type="text" id="numAss" name="numAss" required placeholder="Entrez votre numéro d'assurance sociale:"/> </p>
+    <p><label for="passwordPatient">Mot de passe :</label> <br>
+      <input type="password" id="passwordPatient" name="passwordPatient" required placeholder="Entrez votre mot de passe:"/> </p>
     <input type="submit" value="Soumettre"/>
     <p><a href="creer_compte.html">Pas de compte? Créer un ici!</a></p>
   </form>
+</div>
   <img class="img-login" src="../images/RencontreMedecin.jpg" alt="Card image" style="width: 40%">
   <br> <br>
+
+
+<div class="medecinLogin">
+  <form th:action="@{/medecinLogin}" method="post">
+    <p><label for="numAss">Numéro professionel de santé :</label> <br>
+      <input type="text" id="numProf" name="numProf" required placeholder="Entrez votre numéro professionel de santé:"/> </p>
+    <p><label for="passwordMedecin">Mot de passe :</label> <br>
+      <input type="password" id="passwordMedecin" name="passwordMedecin" required placeholder="Entrez votre mot de passe:"/> </p>
+    <input type="submit" value="Soumettre"/>
+    <p><a href="creer_compte.html">Pas de compte? Créer un ici!</a></p>
+  </form>
+</div>
 </div>
 
 <div class="containerB">
   <br> <br>
-  <a href="Patient/patient_index.html">GO TO PATIENT INDEX</a>
+  <a th:href="@{/patient_index}">GO TO PATIENT INDEX</a>
   <br>
-  <a th:href="@{/medecins}">GO TO MEDECIN INDEX</a>
+  <a th:href="@{/medecin_index}">GO TO MEDECIN INDEX</a>
   <br>
-  <a th:href="@{/cliniques}">GO TO CLINIQUE INDEX</a>
+  <a th:href="@{/clinique_index}">GO TO CLINIQUE INDEX</a>
   <br>
-  <a href="Admin/admin_index.html">GO TO ADMIN INDEX</a>
+  <a th:href="@{/admin_index}">GO TO ADMIN INDEX</a>
 
 </div>
 <br> <br>

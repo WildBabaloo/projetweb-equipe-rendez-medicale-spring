@@ -7,10 +7,13 @@ import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabas
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import org.springframework.test.annotation.Rollback;
+import org.springframework.test.context.jdbc.Sql;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.logging.Logger;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
@@ -71,6 +74,16 @@ public class PatientRepoTest {
             repoRendezVous.deleteById(rendezVous.getId());
         }
         repo.deleteById(8);
+    }
+
+    @Test
+    public void testVerifyLoginPatient(){
+        String numAss = "12343";
+        String password = "password";
+        Patient patient = repo.verifyNumAssAndPassword(numAss, password);
+        System.out.println(patient.toString());
+        assertThat(patient).isNotNull();
+
     }
 
 }

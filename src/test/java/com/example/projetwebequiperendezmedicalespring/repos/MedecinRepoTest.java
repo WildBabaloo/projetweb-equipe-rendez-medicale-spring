@@ -123,4 +123,13 @@ public class MedecinRepoTest {
         }
         repo.deleteById(id);
     }
+
+    @Test
+    public void testVerifyLoginMedecin(){
+        int numProf = 132;
+        String password = "wqeoqwe";
+        Medecin medecin = repo.verifyNumProfAndPasswordMedecin(numProf, password);
+        System.out.println(medecin.toString());
+        assertThat(medecin).isNotNull();
+    }
 }

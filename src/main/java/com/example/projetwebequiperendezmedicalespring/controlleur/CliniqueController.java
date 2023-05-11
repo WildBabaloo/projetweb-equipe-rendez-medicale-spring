@@ -6,6 +6,7 @@ import com.example.projetwebequiperendezmedicalespring.entities.Patient;
 import com.example.projetwebequiperendezmedicalespring.entities.RendezVous;
 import com.example.projetwebequiperendezmedicalespring.service.CliniqueNotFoundException;
 import com.example.projetwebequiperendezmedicalespring.service.CliniqueService;
+import com.example.projetwebequiperendezmedicalespring.service.ServicesService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -51,7 +52,7 @@ public class CliniqueController {
     @GetMapping("/cliniques/save")
     public String saveClinique(Clinique clinique, RedirectAttributes redirectAttributes){
         redirectAttributes.addFlashAttribute("message", "Le clinique à été ajouté!");
-        service.ajouterClinique(clinique);
+        cliservice.ajouterClinique(clinique);
         return "redirect:/cliniques";
     }
 
@@ -75,11 +76,11 @@ public class CliniqueController {
         }
         return "Vues/Clinique/compte_clinique";
     }
-// TO DO
-    // Delete foreign key constraints
+
+
     @GetMapping("cliniques/delete/{id}")
     public String deleteClinique(@PathVariable(name = "id") Integer id, RedirectAttributes redirectAttributes){
-        service.deleteClinique(id);
+        cliservice.deleteClinique(id);
         redirectAttributes.addFlashAttribute("message", "Le clinique dont l'id est " +id+ " à été supprimé");
         return "redirect:/cliniques";
     }

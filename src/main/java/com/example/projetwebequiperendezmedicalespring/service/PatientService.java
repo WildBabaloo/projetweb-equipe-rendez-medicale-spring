@@ -4,10 +4,11 @@ import com.example.projetwebequiperendezmedicalespring.entities.Patient;
 import com.example.projetwebequiperendezmedicalespring.entities.RendezVous;
 import com.example.projetwebequiperendezmedicalespring.repos.PatientRepository;
 import com.example.projetwebequiperendezmedicalespring.repos.RendezVousRepository;
-import jakarta.transaction.Transactional;
+//import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.List;
 
 @Service
@@ -35,5 +36,8 @@ public class PatientService {
             repoRendezVous.deleteById(rendezVous.getId());
         }
         repo.deleteById(id);
+    }
+    public Patient verifyPatientLogin(String numAss, String password){
+        return repo.verifyNumAssAndPassword(numAss, password);
     }
 }
