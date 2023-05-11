@@ -11,13 +11,13 @@ import java.util.List;
 
 @Repository
 public interface RendezVousRepository extends JpaRepository<RendezVous, Integer> {
-    @Query("SELECT r from RendezVous r JOIN r.patient p where p.id = ?1")
+    @Query("SELECT r from RendezVous r JOIN r.patient p where p.id_patient = ?1")
     public List<RendezVous> findAllByPatientId(int id);
 
-    @Query("SELECT r from RendezVous r JOIN r.medecin m where m.id = ?1")
+    @Query("SELECT r from RendezVous r JOIN r.medecin m where m.id_medecin = ?1")
     public List<RendezVous> findAllByMedecinId(int id);
 
-    @Query("SELECT r from RendezVous r JOIN r.clinique c where c.id = ?1")
+    @Query("SELECT r from RendezVous r JOIN r.clinique c where c.id_clinique = ?1")
     public List<RendezVous> findAllByCliniqueId(int id);
 
 }

@@ -25,4 +25,6 @@ public interface CliniqueRepository extends JpaRepository<Clinique,Integer> {
     @Query("SELECT u FROM RendezVous u WHERE u.clinique=:clinique")
     public RendezVous getRendezVousByClinique(@Param("clinique")int clinique);
 
+
+
 }

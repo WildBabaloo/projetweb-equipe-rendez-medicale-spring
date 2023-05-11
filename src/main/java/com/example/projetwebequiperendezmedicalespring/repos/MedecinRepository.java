@@ -23,6 +23,9 @@ public interface MedecinRepository extends JpaRepository<Medecin,Integer> {
     @Query("SELECT u FROM RendezVous u WHERE u.medecin= :medecin")
     public RendezVous getRendezVousByMedId(@Param("medecin")int medecin);
 
-    @Query("SELECT m from Medecin m JOIN m.clinique c where c.id = ?1")
+    @Query("SELECT m from Medecin m JOIN m.clinique c where c.id_clinique = ?1")
     public List<Medecin> findAllByCliniqueId(int id);
+
+    @Query("SELECT m from Medecin m WHERE m.numProf=:numProf and m.motPasse=:motPasse")
+    public Medecin verifyNumProfAndPasswordMedecin(@Param("numProf") int numProf, @Param("motPasse") String motPasse);
 }

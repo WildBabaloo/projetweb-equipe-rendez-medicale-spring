@@ -8,7 +8,7 @@ import com.example.projetwebequiperendezmedicalespring.repos.CliniqueRepository;
 import com.example.projetwebequiperendezmedicalespring.repos.MedecinRepository;
 import com.example.projetwebequiperendezmedicalespring.repos.PatientRepository;
 import com.example.projetwebequiperendezmedicalespring.repos.RendezVousRepository;
-import jakarta.transaction.Transactional;
+//import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -111,5 +111,9 @@ public class MedecinService {
         }
 
         repo.deleteById(id);
+    }
+
+    public Medecin verifyMedecinLogin(int numProf, String password){
+        return repo.verifyNumProfAndPasswordMedecin(numProf, password);
     }
 }

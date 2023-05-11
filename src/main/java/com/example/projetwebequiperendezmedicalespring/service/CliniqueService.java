@@ -7,7 +7,7 @@ import com.example.projetwebequiperendezmedicalespring.entities.RendezVous;
 import com.example.projetwebequiperendezmedicalespring.repos.CliniqueRepository;
 import com.example.projetwebequiperendezmedicalespring.repos.MedecinRepository;
 import com.example.projetwebequiperendezmedicalespring.repos.RendezVousRepository;
-import jakarta.transaction.Transactional;
+//import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

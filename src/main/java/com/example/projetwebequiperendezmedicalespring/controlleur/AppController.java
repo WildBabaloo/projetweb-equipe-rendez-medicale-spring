@@ -19,4 +19,7 @@ public class AppController {
     public String presentation(){
         return "Vues/presentation";
     }
+
+    @GetMapping("admin_index")
+    public String admin_index(){return "Vues/Admin/admin_index";}
 }

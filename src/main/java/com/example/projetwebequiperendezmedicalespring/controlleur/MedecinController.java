@@ -11,6 +11,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
@@ -24,14 +26,41 @@ public class MedecinController {
     @Autowired
     ServicesService serviceServices;
 
-    @GetMapping("/medecins")
+    @PostMapping("/medecinLogin")
+    public String medecinLogin(Model model, @RequestParam("numProf") int numProf, @RequestParam("passwordMedecin") String password){
+        // Check if numProf is int (FOR FUTURE ME TO DO BECAUSE I WAS SLEEPY)
+        if(service.verifyMedecinLogin(numProf, password) != null){
+            // Add cookies
+            model.addAttribute("message", "Correct (To edit)");
+            return "/Vues/Medecin/medecin_index";
+        }
+        model.addAttribute("message", "Wrong (To edit)");
+        return "/Vues/login";
+    }
+
+    @GetMapping("/medecin_index")
+    public String medecin_index(){return "/Vues/Medecin/medecin_index";}
+
+    @GetMapping("/compte_medecin")
+    public String compte_medecin(){return "/Vues/Medecin/compte_medecin";}
+
+    @GetMapping("/contacter_patient")
+    public String contacter_patient(){return "/Vues/Medecin/contacter_patient";}
+
+    @GetMapping("/liste_patients")
+    public String liste_patients(){return "/Vues/Medecin/liste_patients";}
+
+    @GetMapping("/mes_rdv")
+    public String mes_rdv(){return "/Vues/Medecin/mes_rdv";}
+
+    @GetMapping("/adminMedecins")
     public String afficherMedecins(Model model){
         List<Medecin> listeMedecins = service.findAllMedecins();
         model.addAttribute("listeMedecins", listeMedecins);
         return "listeMedecinModifierSupprimer";
     }
 
-    @GetMapping("/medecins/new")
+    @GetMapping("/adminMedecins/new")
     public String showNewMedecinForm(Model model){
         model.addAttribute("medecin", new Medecin());
         List<Services> listeServices = serviceServices.findAllServices();
@@ -39,7 +68,7 @@ public class MedecinController {
         return "ajouter";
     }
 
-    @GetMapping("/medecins/save")
+    @GetMapping("/adminMedecins/save")
     public String saveMedecin(Medecin medecin, RedirectAttributes redirectAttributes){
         redirectAttributes.addFlashAttribute("message", "Le medecin à été ajouté!");
         service.ajouterMedecin(medecin);
@@ -50,7 +79,7 @@ public class MedecinController {
         return "redirect:/medecins";
     }
 
-    @GetMapping("/medecins/edit/{id}")
+    @GetMapping("/adminMedecins/edit/{id}")
     public String updateMedecin(@PathVariable(name = "id") Integer id, Model model){
         Medecin medecin = service.getMedecin(id);
         model.addAttribute("pageTitle", "Editer le medecin dont l'id est " +id);
@@ -73,5 +102,6 @@ public class MedecinController {
         // If no other person has this service then remove Else keep
         return "redirect:/medecins";
     }
+
 
 }
