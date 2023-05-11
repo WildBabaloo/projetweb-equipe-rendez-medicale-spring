@@ -19,7 +19,7 @@ public class Patient {
     @Column(length = 128, nullable = false, unique = true)
     private String email;
     @ManyToOne
-    @JoinColumn(name = "medecin_id")
+    @JoinColumn(name = "medecin_id", nullable = false)
     private Medecin medecin;
 
     public Patient() {
@@ -36,15 +36,6 @@ public class Patient {
 
     public Patient(int id_patient, String prenom, String nom, String numAss, String motPasse, String email, Medecin medecin) {
         this.id_patient = id_patient;
-        this.prenom = prenom;
-        this.nom = nom;
-        this.numAss = numAss;
-        this.motPasse = motPasse;
-        this.email = email;
-        this.medecin = medecin;
-    }
-
-    public Patient(String prenom, String nom, String numAss, String motPasse, String email, Medecin medecin) {
         this.prenom = prenom;
         this.nom = nom;
         this.numAss = numAss;

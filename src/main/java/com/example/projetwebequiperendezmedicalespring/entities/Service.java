@@ -1,13 +1,13 @@
 package com.example.projetwebequiperendezmedicalespring.entities;
 
-import jakarta.persistence.*;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "services")
-public class Services {
+public class Service {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Integer id_services;
 
     @Column(length = 64, nullable = false, unique = true)
     private String nom;
@@ -15,35 +15,30 @@ public class Services {
     @Column(nullable = false)
     private String description;
 
-    public Services(){
+    public Service(){
     }
 
-    public Services(Integer id) {
-        this.id = id;
+    public Service(Integer id_service) {
+        this.id_services = id_services;
     }
 
-    public Services(Integer id, String nom) {
-        this.id = id;
+    public Service(Integer id_services, String nom) {
+        this.id_services = id_services;
         this.nom = nom;
     }
 
-    public Services(Integer id, String nom, String description) {
-        this.id = id;
-        this.nom = nom;
-        this.description = description;
-    }
-
-    public Services(String nom, String description) {
+    public Service(Integer id_services, String nom, String description) {
+        this.id_services = id_services;
         this.nom = nom;
         this.description = description;
     }
 
     public Integer getId() {
-        return id;
+        return id_services;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setId(Integer id_services) {
+        this.id_services = id_services;
     }
 
     public String getNom() {
@@ -65,7 +60,7 @@ public class Services {
     @Override
     public String toString() {
         return "Service{" +
-                "id=" + id +
+                "id_services=" + id_services +
                 ", nom='" + nom + '\'' +
                 ", description='" + description + '\'' +
                 '}';

@@ -9,7 +9,7 @@ public class RendezVous{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id_rendezvous;
-    @OneToOne(optional = false, cascade = CascadeType.REMOVE)
+    @OneToOne(optional = false)
     @JoinColumn(name = "id_patient", nullable = false)
     private Patient patient;
 

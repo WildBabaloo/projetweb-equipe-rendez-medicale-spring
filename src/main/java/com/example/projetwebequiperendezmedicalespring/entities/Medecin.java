@@ -34,10 +34,10 @@ public class Medecin{
             joinColumns = @JoinColumn(name = "medecin_id"),
             inverseJoinColumns = @JoinColumn(name = "service_id")
     )
-    private List<Services> services_offerts = new ArrayList<>();
+    private List<Service> services_offerts = new ArrayList<>();
 
     @ManyToOne
-    @JoinColumn(name = "clinique_id")
+    @JoinColumn(name = "clinique_id", nullable = false)
     private Clinique clinique;
 
 
@@ -57,7 +57,7 @@ public class Medecin{
         this.clinique = clinique;
     }
 
-    public Medecin(int id_medecin, String prenom, String nom, int numProf, String motPasse, String email, String numtele, int tarifconsultation, Date disponibilite, List<Services> services_offerts, Clinique clinique) {
+    public Medecin(int id_medecin, String prenom, String nom, int numProf, String motPasse, String email, String numtele, int tarifconsultation, Date disponibilite, List<Service> services_offerts, Clinique clinique) {
         this.id_medecin = id_medecin;
         this.prenom = prenom;
         this.nom = nom;
@@ -70,8 +70,6 @@ public class Medecin{
         this.services_offerts = services_offerts;
         this.clinique = clinique;
     }
-
-
 
     public int getId() {
         return id_medecin;
@@ -145,16 +143,16 @@ public class Medecin{
         this.disponibilite = disponibilite;
     }
 
-    public List<Services> getServices_offerts() {
+    public List<Service> getServices_offerts() {
         return services_offerts;
     }
 
-    public void setServices_offerts(List<Services> services_offerts) {
+    public void setServices_offerts(List<Service> services_offerts) {
         this.services_offerts = services_offerts;
     }
 
-    public void ajouter(Services services){
-        this.services_offerts.add(services);
+    public void ajouter(Service service){
+        this.services_offerts.add(service);
     }
 
     public Clinique getClinique() {

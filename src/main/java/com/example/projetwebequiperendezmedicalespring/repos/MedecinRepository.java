@@ -4,12 +4,10 @@ import com.example.projetwebequiperendezmedicalespring.entities.Medecin;
 import com.example.projetwebequiperendezmedicalespring.entities.Patient;
 import com.example.projetwebequiperendezmedicalespring.entities.RendezVous;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
-import org.springframework.data.jpa.repository.JpaRepository;
-import java.util.List;
 
-
-public interface MedecinRepository extends JpaRepository<Medecin,Integer> {
+public interface MedecinRepository extends CrudRepository<Medecin,Integer> {
 
     @Query("SELECT u FROM Patient u WHERE u.medecin= :medecin")
     public Patient getPatientByMedecin(@Param("medecin")int medecin);
@@ -22,7 +20,4 @@ public interface MedecinRepository extends JpaRepository<Medecin,Integer> {
 
     @Query("SELECT u FROM RendezVous u WHERE u.medecin= :medecin")
     public RendezVous getRendezVousByMedId(@Param("medecin")int medecin);
-
-    @Query("SELECT m from Medecin m JOIN m.clinique c where c.id = ?1")
-    public List<Medecin> findAllByCliniqueId(int id);
 }
