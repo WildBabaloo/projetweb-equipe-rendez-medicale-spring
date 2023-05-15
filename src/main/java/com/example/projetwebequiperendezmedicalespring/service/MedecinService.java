@@ -33,8 +33,8 @@ public class MedecinService {
     @Autowired
     CliniqueRepository repoClinique;
 
-    public List<Patient> afficherPatientByMedecin(int medecin){
-        return (List<Patient>) repo.getPatientByMedecin(medecin);
+    public List<Patient> afficherPatientByMedecin(int id){
+        return (List<Patient>) repoPatient.findAllByPatientByMedecinId(id);
     }
 
     public Medecin afficherMedecinById(int id){
@@ -44,6 +44,11 @@ public class MedecinService {
     public List<RendezVous> afficherRendezVousByMed(int medecin){
         return (List<RendezVous>) repo.getRendezVousByMedId(medecin);
     }
+
+    public Medecin findMedecinNumProf(int numProf){
+        return repo.getMedecinByNumProf(numProf);
+    }
+
     public List<Medecin> findAllMedecins(){
         return repo.findAll();
     }

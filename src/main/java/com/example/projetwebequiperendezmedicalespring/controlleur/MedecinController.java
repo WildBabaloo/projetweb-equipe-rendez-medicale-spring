@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
 @Controller
@@ -27,10 +29,17 @@ public class MedecinController {
     ServicesService serviceServices;
 
     @PostMapping("/medecinLogin")
-    public String medecinLogin(Model model, @RequestParam("numProf") int numProf, @RequestParam("passwordMedecin") String password){
+    public String medecinLogin(Model model, @RequestParam("numProf") int numProf, @RequestParam("passwordMedecin") String password, HttpServletResponse response){
         // Check if numProf is int (FOR FUTURE ME TO DO BECAUSE I WAS SLEEPY)
         if(service.verifyMedecinLogin(numProf, password) != null){
             // Add cookies
+            Medecin medecin = service.findMedecinNumProf(numProf);
+            Cookie c = new Cookie("id",String.valueOf(medecin.getId()));
+            c.setMaxAge(60*60);
+            c.setSecure(true);
+            c.setPath("/");
+            response.addCookie(c);
+            model.addAttribute("medecin",medecin);
             model.addAttribute("message", "Correct (To edit)");
             return "/Vues/Medecin/medecin_index";
         }
@@ -38,20 +47,44 @@ public class MedecinController {
         return "/Vues/login";
     }
 
-    @GetMapping("/medecin_index")
-    public String medecin_index(){return "/Vues/Medecin/medecin_index";}
+    @GetMapping("/medecin_index/{id}")
+    public String medecin_index(@PathVariable(name="id")Integer id, Model model){
+        Medecin medecin = service.getMedecin(id);
+        model.addAttribute("medecin",medecin);
+        return "/Vues/Medecin/medecin_index";
+    }
 
-    @GetMapping("/compte_medecin")
-    public String compte_medecin(){return "/Vues/Medecin/compte_medecin";}
+    @GetMapping("/compte_medecin/{id}")
+    public String compte_medecin(@PathVariable(name="id")Integer id, Model model){
+        Medecin medecin = service.getMedecin(id);
+        model.addAttribute("medecin",medecin);
+        return "/Vues/Medecin/compte_medecin";
+    }
 
-    @GetMapping("/contacter_patient")
-    public String contacter_patient(){return "/Vues/Medecin/contacter_patient";}
+    @GetMapping("/contacter_patient/{id}")
+    public String contacter_patient(@PathVariable(name="id")Integer id, Model model){
+        Medecin medecin = service.getMedecin(id);
+        model.addAttribute("medecin",medecin);
+        return "/Vues/Medecin/contacter_patient";
+    }
 
-    @GetMapping("/liste_patients")
-    public String liste_patients(){return "/Vues/Medecin/liste_patients";}
+    @GetMapping("/liste_patients/{id}")
+    public String liste_patients(@PathVariable(name="id")Integer id, Model model){
+        Medecin medecin = service.getMedecin(id);
+        List<Patient> listePatients = service.afficherPatientByMedecin(id);
+        model.addAttribute("listePatients",listePatients);
+        model.addAttribute("medecin",medecin);
+        return "/Vues/Medecin/liste_patients";
+    }
 
-    @GetMapping("/mes_rdv")
-    public String mes_rdv(){return "/Vues/Medecin/mes_rdv";}
+    @GetMapping("/mes_rdv/{id}")
+    public String mes_rdv(@PathVariable(name="id")Integer id, Model model){
+        Medecin medecin = service.getMedecin(id);
+        Iterable<RendezVous> listeRendezVous = service.afficherRendezVousByMed(id);
+        model.addAttribute("listeRendezVous",listeRendezVous);
+        model.addAttribute("medecin",medecin);
+        return "/Vues/Medecin/mes_rdv";
+    }
 
     @GetMapping("/adminMedecins")
     public String afficherMedecins(Model model){
