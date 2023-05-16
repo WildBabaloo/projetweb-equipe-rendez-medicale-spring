@@ -22,7 +22,7 @@ public interface CliniqueRepository extends JpaRepository<Clinique,Integer> {
     public List<Patient> getPatientsByClinique(int id_clinique);
 
     @Query("SELECT u FROM Clinique u WHERE u.email = :email")
-    public Clinique getCliniquesByEmail(@Param("email")String email);
+    public Clinique getCliniquesByEmail(@Param("email")String emailClinique);
     @Query("SELECT u FROM Medecin u WHERE u.clinique.id_clinique=:clinique")
     public List<Medecin> getMedecinByClinique(@Param("clinique")int clinique);
 

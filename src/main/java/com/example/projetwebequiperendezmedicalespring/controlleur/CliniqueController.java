@@ -70,7 +70,7 @@ public class CliniqueController {
     public String saveClinique(Clinique clinique, RedirectAttributes redirectAttributes){
         redirectAttributes.addFlashAttribute("message", "Le clinique à été ajouté!");
         cliservice.ajouterClinique(clinique);
-        return "redirect:/cliniques/{id}";
+        return "redirect:/clinique_index/"+clinique.getId();
     }
 
     @GetMapping("/histrdv/{id_clinique}")

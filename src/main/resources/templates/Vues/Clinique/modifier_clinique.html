@@ -86,13 +86,22 @@
         </div>
     </div>
 </div>
-<script>
+
+<br> <br>
+<div class="footer">
+    <div class="d-flex flex-column flex-md-row text-center text-md-start justify-content-between py-4 px-4 px-xl-5 bg-dark">
+        <!-- Copyright -->
+        <div class="text-white mb-3 mb-md-0">
+            Copyright © 2023. Tous droits réservés. (À mettre directement en bas de la page)
+        </div>
+    </div><script>
     function  checkEmailUnique(form){
         $.ajax({
             type:"POST",
             url:'[[@{/cliniques/check_email}]]',
-            data:{email:$("#emailClinique").val()},
-            success:function (data){
+            data:{emailClinique:$("#emailClinique").val()},
+
+            success: function (data){
                 if(data=='OK'){
                     form.submit();
                 }else{
@@ -110,18 +119,10 @@
     }
     $("#buttonCancel").on("click", function (){
 
-        window.location ="[[@{/cliniques}]]";
+        window.location ="[[@{/clinique_index}]]";
         //rediriger vers le page utilisateurs dans le meme location de windows.
     });
 </script>
-<br> <br>
-<div class="footer">
-    <div class="d-flex flex-column flex-md-row text-center text-md-start justify-content-between py-4 px-4 px-xl-5 bg-dark">
-        <!-- Copyright -->
-        <div class="text-white mb-3 mb-md-0">
-            Copyright © 2023. Tous droits réservés. (À mettre directement en bas de la page)
-        </div>
-    </div>
 </div>
 </body>
 </html>

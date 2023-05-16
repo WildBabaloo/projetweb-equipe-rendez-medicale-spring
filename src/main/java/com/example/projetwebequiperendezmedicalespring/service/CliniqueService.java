@@ -41,8 +41,8 @@ public class CliniqueService {
         return (List<Patient>) repo.getPatientsByClinique(id);
     }
 
-    public boolean isEmailUnique(String email){
-        Clinique clinique = repo.getCliniquesByEmail(email);
+    public boolean isEmailUnique(String emailClinique){
+        Clinique clinique = repo.getCliniquesByEmail(emailClinique);
         if(clinique == null)return true;
         return false;
     }

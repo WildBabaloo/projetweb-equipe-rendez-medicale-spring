@@ -13,7 +13,7 @@ public class CliniqueRestController {
     CliniqueService service;
 
     @PostMapping("/cliniques/check_email")
-    public String verifierDoublonEmail(@Param("email")String email){
-        return service.isEmailUnique(email)?"OK":"Doublon";
+    public String verifierDoublonEmail(@Param("emailClinique")String emailClinique){
+        return service.isEmailUnique(emailClinique)?"OK":"Doublon";
     }
 }
