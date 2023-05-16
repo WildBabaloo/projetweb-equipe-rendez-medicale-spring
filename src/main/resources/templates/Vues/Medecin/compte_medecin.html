@@ -41,7 +41,7 @@
       <th>Nom </th>
       <th>Courriel </th>
       <th>Num Tele </th>
-      <th>Specialite </th>
+<!--      <th>Specialite </th>-->
       <th>Tarif Consult </th>
       <th>Disponibilite </th>
     </tr>
@@ -50,12 +50,12 @@
       <td>[[${med.nom}]] |</td>
       <td>[[${med.email}]] |</td>
       <td>[[${med.numtele}]] |</td>
-      <td>[[${med.services_offerts}]] |</td>
+<!--      <td>[[${med.services_offerts}]] |</td>-->
       <td>[[${med.tarifconsultation}]]$ |</td>
       <td>[[${med.disponibilite}]] |</td>
     </tr>
   </table>
-  <h1><a href="../../deconnexion.html">Deconnexion...</a></h1>
+  <h1><a th:href="@{'/deconnexion/' + ${medecin.id}}">Deconnexion...</a></h1>
 </div>
 <br> <br>
 <div class="footer">

@@ -11,24 +11,24 @@
     <body class="bgcolorH">
     <nav class="nav navbar navbar-expand-lg bg-dark navbar-dark">
         <div class="container">
-            <a th:href="@{/cliniques}" style="text-indent: 10px;" class="navbar-brand">MediMeets</a>
+            <a th:href="@{/}" style="text-indent: 10px;" class="navbar-brand">MediMeets</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navmenu"><span class="navbar-toggler-icon"></span></button>
             <div class="collapse navbar-collapse" id="navmenu">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
-                        <a th:href="@{/cliniques}" class="nav-link">Home</a>
+                        <a th:href="@{'/clinique_index/' + ${clinique.id}}" class="nav-link">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a th:href="@{/clilistpat}" class="nav-link">Liste patients</a>
+                        <a th:href="@{'/clilistpat/' + ${clinique.id}}" class="nav-link">Liste patients</a>
                     </li>
                     <li class="nav-item">
-                        <a th:href="@{/clilistmed}" class="nav-link">Liste medecins</a>
+                        <a th:href="@{'/clilistmed/' + ${clinique.id}}" class="nav-link">Liste medecins</a>
                     </li>
                     <li class="nav-item">
-                        <a th:href="@{/histrdv}" class="nav-link">Historique</a>
+                        <a th:href="@{'/histrdv/' + ${clinique.id}}" class="nav-link">Historique</a>
                     </li>
                     <li class="nav-item">
-                        <a th:href="@{/clicompte}" class="nav-link">Ma clinique</a>
+                        <a th:href="@{'/clicompte/' + ${clinique.id}}" class="nav-link">Ma clinique</a>
                     </li>
                 </ul>
             </div>
@@ -40,29 +40,23 @@
         <h1 class="m_liste">Ma clinique :</h1>
         <table id="tableClinique">
             <tr>
-                <th>ID</th>
                 <th>Nom</th>
                 <th>Coordonnees</th>
                 <th>Services Offers</th>
                 <th>Email</th>
                 <th>Num Tele</th>
             </tr>
-            <% if ( clinique != null){
-            %>
-            <tr>
-                <td><%=clinique.getId()%></td>
-                <td><%=clinique.getNom()%></td>
-                <td><%=clinique.getCoordonnees()%></td>
-                <td><%=clinique.getServices_offerts()%></td>
-                <td><%=clinique.getEmail()%></td>
-                <td><%=clinique.getNumtele()%></td>
-                <td><a href="cliniqueModifierControlleur?fillInputModifierClinique=<%=clinique.getId()%>" class="btn btn-primary">Modifier</a></td>
+            <tr th:each="c : ${clinique}" >
+                <td>[[${c.nom}]]</td>
+                <td>[[${c.coordonnees}]]</td>
+                <td></td>
+                <td>[[${c.email}]]</td>
+                <td>[[${c.numtele}]]</td>
+                <td><a th:href="@{'/clicompte/modifier/' + ${clinique.id}}" class="btn btn-primary">Modifier</a></td>
             </tr>
-            <%
-            }%>
         </table>
     </div>
-    <h1 class="p_deconnexion" ><a href="../../deconnexion.html" style="font-size: 0.8rem">Deconnexion...</a></h1>
+<!--    <h1 class="p_deconnexion" ><a href="../../deconnexion.html" style="font-size: 0.8rem">Deconnexion...</a></h1>-->
 
     <div class="footer">
         <div class="d-flex flex-column flex-md-row text-center text-md-start justify-content-between py-4 px-4 px-xl-5 bg-dark">

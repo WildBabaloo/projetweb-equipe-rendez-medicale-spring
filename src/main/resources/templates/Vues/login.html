@@ -74,6 +74,14 @@
   <a th:href="@{/medecin_index}">GO TO MEDECIN INDEX</a>
   <br>
   <a th:href="@{/clinique_index}">GO TO CLINIQUE INDEX</a>
+  <table>
+    <tr>
+      <th>Cliniques</th>
+    </tr>
+    <tr th:each="clinique : ${listeCliniques}">
+      <td><a th:href="@{'/clinique_index/' + ${clinique.id}}">[[${clinique.nom}]]</a></td>
+    </tr>
+  </table>
   <br>
   <a th:href="@{/admin_index}">GO TO ADMIN INDEX</a>
 

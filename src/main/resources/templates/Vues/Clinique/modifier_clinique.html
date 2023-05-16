@@ -11,24 +11,24 @@
 <body class="bgcolorA">
 <nav class="nav navbar navbar-expand-lg bg-dark navbar-dark">
     <div class="container">
-        <a th:href="@{/cliniques}" style="text-indent: 10px;" class="navbar-brand">MediMeets</a>
+        <a th:href="@{/}" style="text-indent: 10px;" class="navbar-brand">MediMeets</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navmenu"><span class="navbar-toggler-icon"></span></button>
         <div class="collapse navbar-collapse" id="navmenu">
             <ul class="navbar-nav ms-auto">
                 <li class="nav-item">
-                    <a th:href="@{/cliniques}" class="nav-link">Home</a>
+                    <a th:href="@{'/clinique_index/' + ${clinique.id}}" class="nav-link">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a th:href="@{/clilistpat}" class="nav-link">Liste patients</a>
+                    <a th:href="@{'/clilistpat/' + ${clinique.id}}" class="nav-link">Liste patients</a>
                 </li>
                 <li class="nav-item">
-                    <a th:href="@{/clilistmed}" class="nav-link">Liste medecins</a>
+                    <a th:href="@{'/clilistmed/' + ${clinique.id}}" class="nav-link">Liste medecins</a>
                 </li>
                 <li class="nav-item">
-                    <a th:href="@{/histrdv}" class="nav-link">Historique</a>
+                    <a th:href="@{'/histrdv/' + ${clinique.id}}" class="nav-link">Historique</a>
                 </li>
                 <li class="nav-item">
-                    <a th:href="@{/clicompte}" class="nav-link">Ma clinique</a>
+                    <a th:href="@{'/clicompte/' + ${clinique.id}}" class="nav-link">Ma clinique</a>
                 </li>
             </ul>
         </div>
@@ -37,35 +37,83 @@
 </nav>
 <br> <br>
 <div class="maincontainerA">
-    <% if(clinique != null){%>
     <div class="formPatient">
-        <form id="formModifierClinique" method="get" class="form-horizontal" action="cliniqueModifierControlleur">
+        <form id="formModifierClinique" th:action="@{/cliniques/save}" method="post" th:object="${clinique}"
+              class="form-horizontal"  onsubmit="return checkEmailUnique(this);" >
             <div class="form-group">
-                <input type="hidden" class="form-control" id="modifierClinique" name="modifierClinique" value="active">
-                <input type="hidden" class="form-control" id="idClinique" name="idClinique" value="<%=clinique.getId()%>">
+                <input type="hidden" th:field="*{id}"/>
             </div>
             <div class="form-group">
-                <input type="text" class="form-control" id="nomClinique" name="nomClinique" value="<%=clinique.getNom()%>">
+                <label class="col-sm-4 col-form-label">Nom:</label>
+                <input type="text" class="form-control" id="nomClinique" name="nomClinique" th:field="*{nom}">
             </div>
             <div class="form-group">
-                <input type="text" class="form-control" id="coordonneesClinique" name="coordonneesClinique" value="<%=clinique.getCoordonnees()%>">
+                <label class="col-sm-4 col-form-label">Coordonnees:</label>
+                <input type="text" class="form-control" id="coordonneesClinique" name="coordonneesClinique" th:field="*{coordonnees}">
+            </div>
+            <!--            <div class="form-group">-->
+            <!--                <input type="text" class="form-control" id="services_offertsClinique" name="services_offertsClinique" value="<%=clinique.getServices_offerts()%>">-->
+            <!--            </div>-->
+            <div class="form-group">
+                <label class="col-sm-4 col-form-label">Email:</label>
+                <input type="text" class="form-control" id="emailClinique" name="emailClinique" th:field="*{email}">
             </div>
             <div class="form-group">
-                <input type="text" class="form-control" id="services_offertsClinique" name="services_offertsClinique" value="<%=clinique.getServices_offerts()%>">
-            </div>
-            <div class="form-group">
-                <input type="text" class="form-control" id="emailClinique" name="emailClinique" value="<%=clinique.getEmail()%>">
-            </div>
-            <div class="form-group">
-                <input type="text" class="form-control" id="numTeleClinique" name="numTeleClinique" value="<%=clinique.getNumtele()%>">
+                <label class="col-sm-4 col-form-label">Numero telephone:</label>
+                <input type="text" class="form-control" id="numTeleClinique" name="numTeleClinique" th:field="*{numtele}">
             </div>
             <div class="form-group">
                 <input type="submit" class="btn btn-primary" value="Modifier" id="submitModifierClinique">
             </div>
         </form>
     </div>
-    <%}%>
 </div>
+<div class="modal fade text-center" id="modalDialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="modalTitle">Avertissement</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+
+            <div class="modal-body">
+                <span id="modalBody"></span>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Fermer</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    function  checkEmailUnique(form){
+        $.ajax({
+            type:"POST",
+            url:'[[@{/cliniques/check_email}]]',
+            data:{email:$("#emailClinique").val()},
+            success:function (data){
+                if(data=='OK'){
+                    form.submit();
+                }else{
+                    showModalDialog("Avertissement","Il y a deja une clinique avec l'email : " + $("#emailClinique").val());
+                }
+            }
+        })
+        return false;
+    }
+
+    function showModalDialog(title,message){
+        $("#modalTitle").text(title);
+        $("#modalBody").text(message);
+        $('#modalDialog').modal();
+    }
+    $("#buttonCancel").on("click", function (){
+
+        window.location ="[[@{/cliniques}]]";
+        //rediriger vers le page utilisateurs dans le meme location de windows.
+    });
+</script>
 <br> <br>
 <div class="footer">
     <div class="d-flex flex-column flex-md-row text-center text-md-start justify-content-between py-4 px-4 px-xl-5 bg-dark">

@@ -9,7 +9,7 @@ import javax.persistence.*;
 public class Services {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Integer id_services;
 
     @Column(length = 64, nullable = false, unique = true)
     private String nom;
@@ -20,17 +20,17 @@ public class Services {
     public Services(){
     }
 
-    public Services(Integer id) {
-        this.id = id;
+    public Services(Integer id_services) {
+        this.id_services = id_services;
     }
 
-    public Services(Integer id, String nom) {
-        this.id = id;
+    public Services(Integer id_services, String nom) {
+        this.id_services = id_services;
         this.nom = nom;
     }
 
-    public Services(Integer id, String nom, String description) {
-        this.id = id;
+    public Services(Integer id_services, String nom, String description) {
+        this.id_services = id_services;
         this.nom = nom;
         this.description = description;
     }
@@ -41,11 +41,11 @@ public class Services {
     }
 
     public Integer getId() {
-        return id;
+        return id_services;
     }
 
     public void setId(Integer id) {
-        this.id = id;
+        this.id_services = id_services;
     }
 
     public String getNom() {
@@ -67,7 +67,7 @@ public class Services {
     @Override
     public String toString() {
         return "Service{" +
-                "id=" + id +
+                "id_services=" + id_services +
                 ", nom='" + nom + '\'' +
                 ", description='" + description + '\'' +
                 '}';

@@ -11,24 +11,24 @@
 <body class="bgcolorH">
 <nav class="nav navbar navbar-expand-lg bg-dark navbar-dark">
   <div class="container">
-    <a th:href="@{/cliniques}" style="text-indent: 10px;" class="navbar-brand">MediMeets</a>
+    <a th:href="@{/}" style="text-indent: 10px;" class="navbar-brand">MediMeets</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navmenu"><span class="navbar-toggler-icon"></span></button>
     <div class="collapse navbar-collapse" id="navmenu">
       <ul class="navbar-nav ms-auto">
         <li class="nav-item">
-          <a th:href="@{/cliniques}" class="nav-link">Home</a>
+          <a th:href="@{'/clinique_index/' + ${clinique.id}}" class="nav-link">Home</a>
         </li>
         <li class="nav-item">
-          <a th:href="@{/clilistpat}" class="nav-link">Liste patients</a>
+          <a th:href="@{'/clilistpat/' + ${clinique.id}}" class="nav-link">Liste patients</a>
         </li>
         <li class="nav-item">
-          <a th:href="@{/clilistmed}" class="nav-link">Liste medecins</a>
+          <a th:href="@{'/clilistmed/' + ${clinique.id}}" class="nav-link">Liste medecins</a>
         </li>
         <li class="nav-item">
-          <a th:href="@{/histrdv}" class="nav-link">Historique</a>
+          <a th:href="@{'/histrdv/' + ${clinique.id}}" class="nav-link">Historique</a>
         </li>
         <li class="nav-item">
-          <a th:href="@{/clicompte}" class="nav-link">Ma clinique</a>
+          <a th:href="@{'/clicompte/' + ${clinique.id}}" class="nav-link">Ma clinique</a>
         </li>
       </ul>
     </div>
@@ -37,28 +37,28 @@
 </nav>
 <br> <br>
 <div class="main container">
-  <h2>Bienvenue Nom du clinique</h2>
+  <h2>Bienvenue Nom du clinique [[${clinique.nom}]]</h2>
   <br> <br>
   <div class="options_Medecins">
     <h3>Ici sont vos options :</h3> <br> <br>
     <ul class="LesOptions" style="list-style-type: none;">
       <li>
-        <a th:href="@{/clilistpat}">
+        <a th:href="@{'/clilistpat/' + ${clinique.id}}">
           <button>Cliquer ici pour voir la liste de vos patients</button>
         </a>
       </li>
       <li>
-        <a th:href="@{/clilistmed}">
+        <a th:href="@{'/clilistmed/' + ${clinique.id}}">
           <button>Cliquer ici pour voir la liste de vos medecins</button>
         </a>
       </li>
       <li>
-        <a th:href="@{/histrdv}">
+        <a th:href="@{'/histrdv/' + ${clinique.id}}">
           <button>Cliquer ici pour voir l'historique des rendez-vous</button>
         </a>
       </li>
       <li>
-        <a th:href="@{/modcli}">
+        <a th:href="@{'/clicompte/modifier/' + ${clinique.id}}">
           <button>Cliquer ici pour voir modifier les informations de la clinique</button>
         </a>
       </li>

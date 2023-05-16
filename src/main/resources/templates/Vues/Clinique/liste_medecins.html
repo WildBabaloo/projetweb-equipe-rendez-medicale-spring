@@ -11,24 +11,24 @@
     <body class="bgcolorH">
     <nav class="nav navbar navbar-expand-lg bg-dark navbar-dark">
         <div class="container">
-            <a th:href="@{/cliniques}" style="text-indent: 10px;" class="navbar-brand">MediMeets</a>
+            <a th:href="@{/}" style="text-indent: 10px;" class="navbar-brand">MediMeets</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navmenu"><span class="navbar-toggler-icon"></span></button>
             <div class="collapse navbar-collapse" id="navmenu">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
-                        <a th:href="@{/cliniques}" class="nav-link">Home</a>
+                        <a th:href="@{'/clinique_index/' + ${clinique.id}}" class="nav-link">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a th:href="@{/clilistpat}" class="nav-link">Liste patients</a>
+                        <a th:href="@{'/clilistpat/' + ${clinique.id}}" class="nav-link">Liste patients</a>
                     </li>
                     <li class="nav-item">
-                        <a th:href="@{/clilistmed}" class="nav-link">Liste medecins</a>
+                        <a th:href="@{'/clilistmed/' + ${clinique.id}}" class="nav-link">Liste medecins</a>
                     </li>
                     <li class="nav-item">
-                        <a th:href="@{/histrdv}" class="nav-link">Historique</a>
+                        <a th:href="@{'/histrdv/' + ${clinique.id}}" class="nav-link">Historique</a>
                     </li>
                     <li class="nav-item">
-                        <a th:href="@{/clicompte}" class="nav-link">Ma clinique</a>
+                        <a th:href="@{'/clicompte/' + ${clinique.id}}" class="nav-link">Ma clinique</a>
                     </li>
                 </ul>
             </div>
@@ -42,28 +42,21 @@
             <tr>
                 <th>Prenom </th>
                 <th>Nom </th>
-                <th>Numero Profesionnel </th>
-                <th>Email </th>
-                <th>Numero Telephone </th>
-                <th>Specialite </th>
-                <th>Tarif Consultation </th>
+                <th>Courriel </th>
+                <th>Num Tele </th>
+<!--                <th>Specialite </th>-->
+                <th>Tarif Consult </th>
                 <th>Disponibilite </th>
-                <th>Clinique ID </th>
             </tr>
 
-            <tr>
-                <% if (listeMedecins != null){
-                for (Medecin unMedecin : listeMedecins){%>
-                <td><%=unMedecin.getPrenom()%></td>
-                <td><%=unMedecin.getNom()%></td>
-                <td><%=unMedecin.getNumProf()%></td>
-                <td><%=unMedecin.getEmail()%></td>
-                <td><%=unMedecin.getSpecialite()%></td>
-                <td><%=unMedecin.getTarifconsultation()%></td>
-                <td><%=unMedecin.getDisponibilite()%></td>
-                <td><%=unMedecin.getId_clinique()%></td>
-                <%}
-                }%>
+            <tr th:each="medecin : ${listeMedecins}">
+                <td>[[${medecin.prenom}]] </td>
+                <td>[[${medecin.nom}]] |</td>
+                <td>[[${medecin.email}]] |</td>
+                <td>[[${medecin.numtele}]] |</td>
+<!--                <td>[[${medecin.services_offerts}]] |</td>-->
+                <td>[[${medecin.tarifconsultation}]]$ |</td>
+                <td>[[${medecin.disponibilite}]] |</td>
             </tr>
         </table>
     </div>

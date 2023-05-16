@@ -37,10 +37,15 @@ public class CliniqueService {
     public List<Clinique> afficherCliniqueByNom(String nom){
         return (List<Clinique>) repo.getCliniquesByNom(nom);
     }
-    public List<Patient> afficherPatientsByClinique(int clinique){
-        return (List<Patient>) repo.getPatientsByClinique(clinique);
+    public List<Patient> afficherPatientsByClinique(int id){
+        return (List<Patient>) repo.getPatientsByClinique(id);
     }
 
+    public boolean isEmailUnique(String email){
+        Clinique clinique = repo.getCliniquesByEmail(email);
+        if(clinique == null)return true;
+        return false;
+    }
     public List<Medecin> afficherMedecinsByClinique(int clinique){
         return (List<Medecin>) repo.getMedecinByClinique(clinique);
     }
@@ -75,5 +80,9 @@ public class CliniqueService {
         }
 
         repo.deleteById(id);
+    }
+
+    public Clinique getId(int id){
+        return repo.findById(id).get();
     }
 }

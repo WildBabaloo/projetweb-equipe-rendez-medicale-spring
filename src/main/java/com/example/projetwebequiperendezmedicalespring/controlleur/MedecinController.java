@@ -37,6 +37,7 @@ public class MedecinController {
             Cookie c = new Cookie("id",String.valueOf(medecin.getId()));
             c.setMaxAge(60*60);
             c.setSecure(true);
+            c.setHttpOnly(true);
             c.setPath("/");
             response.addCookie(c);
             model.addAttribute("medecin",medecin);
@@ -44,6 +45,18 @@ public class MedecinController {
             return "/Vues/Medecin/medecin_index";
         }
         model.addAttribute("message", "Wrong (To edit)");
+        return "/Vues/login";
+    }
+
+    @GetMapping("/deconnexion/{id}")
+    public String deconnexionMed(@PathVariable(name="id")Integer id,HttpServletResponse response){
+        Medecin medecin = service.afficherMedecinById(id);
+        Cookie c = new Cookie("id",String.valueOf(medecin.getId()));
+        c.setMaxAge(0);
+        c.setSecure(true);
+        c.setHttpOnly(true);
+        c.setPath("/");
+        response.addCookie(c);
         return "/Vues/login";
     }
 
