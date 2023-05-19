@@ -54,7 +54,7 @@ public class PatientController {
     public String afficherPatients(Model model){
         List<Patient> listePatients = service.findAllPatient();
         model.addAttribute("listePatients", listePatients);
-        return "listePatientModifierSupprimer";
+        return "/Vues/Admin/listePatientModifierSupprimer";
     }
 
     @GetMapping("/adminPatients/new")

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-    <html lang="fr">
+    <html xmlns:th="http://www.thymeleaf.org" lang="fr">
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width">
@@ -42,20 +42,16 @@
         <h1>Liste des patients :</h1>
         <div id="patientList">
             <table id="tablePatient">
-                <% if (listePatient != null){
-                for (Patient unPatient : listePatient){%>
-                <tr>
+                <tr th:each="patient : ${listePatients}">
 
-                    <td><%=unPatient.getId()%></td>
-                    <td><%=unPatient.getNom()%></td>
-                    <td><%=unPatient.getPrenom()%></td>
+                    <td>[[${patient.id}]]</td>
+                    <td>[[${patient.nom}]]</td>
+                    <td>[[${patient.prenom}]]</td>
                     <td><%=unPatient.getNumAss()%></td>
                     <td><%=unPatient.getId_clinique()%></td>
                     <td><a href="adminModifierControlleur?fillInputModifierPatient=<%=unPatient.getId()%>" class="btn btn-primary">Modifier</a> </td>
                     <td><a href="adminDeleteControlleur?deletePatient=<%=unPatient.getId()%>" class="btn btn-primary">Supprimer</a> </td>
                 </tr>
-                <%}
-                }%>
             </table>
         </div>
     </div>
