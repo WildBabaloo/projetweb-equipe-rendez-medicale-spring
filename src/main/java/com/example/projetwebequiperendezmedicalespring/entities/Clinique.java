@@ -19,7 +19,7 @@ public class Clinique{
     private String coordonnees;
     @Column(length = 128, nullable = false, unique = true)
     private String email;
-    @Column(length = 12, nullable = false, unique = true)
+    @Column(length = 64, nullable = false, unique = true)
     private String numtele;
 
     @ManyToMany
