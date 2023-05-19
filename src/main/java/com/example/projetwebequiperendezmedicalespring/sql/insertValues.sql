@@ -62,27 +62,29 @@ VALUES
 
 INSERT INTO `medimeets`.`message_patient`
 (`id_message`,
+ `sujet`,
  `message`,
  `date`,
  `document`,
  `patient_id_patient`,
  `medecin_id_medecin`)
 VALUES
-    (2,'Oui je suis bien','2013-10-18 21:01:00','',1,1),
-    (3,'Est-ce que vous etes pret demain?','2013-10-19 12:00:00','',2,2),
-    (6,'Ah desole , je les perds hier','2013-10-18 19:00:00','',3,3);
+    (2,'Response','Oui je suis bien','2013-10-18 21:01:00','',1,1),
+    (3,'À propos de demain','Est-ce que vous etes pret demain?','2013-10-19 12:00:00','',2,2),
+    (6,'Im sorry', 'Ah desole , je les perds hier','2013-10-18 19:00:00','',3,3);
 
 INSERT INTO `medimeets`.`message_medecin`
 (`id_message`,
+ `sujet`,
  `message`,
  `date`,
  `document`,
  `medecin_id_medecin`,
  `patient_id_patient`)
 VALUES
-    (1,'Ca va bien?','2013-10-18 21:00:00','',1,1),
-    (4,'Oui a 13h','2013-10-18 12:10:00','',2,2),
-    (5,'Avez-vous pris votre medicaments?','2013-10-20 18:00:00','',3,3);
+    (1,'U good?', 'Ca va bien?','2013-10-18 21:00:00','',1,1),
+    (4,'Dispo', 'Oui a 13h','2013-10-18 12:10:00','',2,2),
+    (5,'Medicaments Update','Avez-vous pris votre medicaments?','2013-10-20 18:00:00','',3,3);
 
 INSERT INTO `medimeets`.`services`
 (`id_services`,
@@ -100,8 +102,8 @@ VALUES
     (1,1),
     (2,2),
     (3,3),
-    (4,4),
-    (5,5);
+    (4,1),
+    (5,2);
 
 INSERT INTO `medimeets`.`medecins_services`
 (`medecin_id`,
@@ -110,5 +112,5 @@ VALUES
     (1,1),
     (2,2),
     (3,3),
-    (4,4),
-    (5,5);
+    (4,1),
+    (5,2);
