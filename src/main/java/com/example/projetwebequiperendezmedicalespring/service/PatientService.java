@@ -41,7 +41,6 @@ public class PatientService {
         return repo.findById(id).get();
     }
     public void deletePatient(Integer id){
-        // Delete all messages with that patient id
         List<MessagePatient> messagePatients = repoMessagePatient.findAllByPatientId(id);
         for(MessagePatient messagePatient : messagePatients){
             repoMessagePatient.deleteById(messagePatient.getId_message());
@@ -49,16 +48,16 @@ public class PatientService {
 
         List<MessageMedecin> messageMedecins = repoMessageMedecin.findAllByPatientId(id);
         for(MessageMedecin messageMedecin : messageMedecins){
+            System.out.println(messageMedecin.getMessage());
             repoMessageMedecin.deleteById(messageMedecin.getId_message());
         }
+
+        repo.deleteById(id);
 
         List<RendezVous> rendezVousPatient = repoRendezVous.findAllByPatientId(id);
         for(RendezVous rendezVous : rendezVousPatient){
             repoRendezVous.deleteById(rendezVous.getId());
         }
-
-
-        repo.deleteById(id);
     }
     public Patient verifyPatientLogin(String numAss, String password){
         return repo.verifyNumAssAndPassword(numAss, password);

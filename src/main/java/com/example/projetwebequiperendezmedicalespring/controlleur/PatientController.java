@@ -83,7 +83,7 @@ public class PatientController {
     public String deletePatient(@PathVariable(name = "id") Integer id, Model model, RedirectAttributes redirectAttributes){
         service.deletePatient(id);
         redirectAttributes.addFlashAttribute("message", "Le patient dont l'id est " +id+ " à été supprimé");
-        return "redirect:/patients";
+        return "redirect:/adminPatients";
     }
 
 }

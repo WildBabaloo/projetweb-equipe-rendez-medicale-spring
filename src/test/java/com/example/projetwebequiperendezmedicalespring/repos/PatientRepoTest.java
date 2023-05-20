@@ -75,7 +75,7 @@ public class PatientRepoTest {
 
     @Test
     public void testDeletePatient(){
-        int id = 6;
+        int id = 7;
 
         List<MessagePatient> messagePatients = repoMessagePatient.findAllByPatientId(id);
         for(MessagePatient messagePatient : messagePatients){
@@ -88,13 +88,12 @@ public class PatientRepoTest {
             repoMessageMedecin.deleteById(messageMedecin.getId_message());
         }
 
+        repo.deleteById(id);
+
         List<RendezVous> rendezVousPatient = repoRendezVous.findAllByPatientId(id);
         for(RendezVous rendezVous : rendezVousPatient){
             repoRendezVous.deleteById(rendezVous.getId());
         }
-        Patient patient = repo.findById(id).get();
-        System.out.println(patient.getNom());
-        repo.deleteById(id);
 
     }
 
