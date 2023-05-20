@@ -73,7 +73,7 @@ public class PatientRepoTest {
         for(RendezVous rendezVous : rendezVousPatient){
             repoRendezVous.deleteById(rendezVous.getId());
         }
-        repo.deleteById(8);
+        repo.deleteById(5);
     }
 
     @Test
