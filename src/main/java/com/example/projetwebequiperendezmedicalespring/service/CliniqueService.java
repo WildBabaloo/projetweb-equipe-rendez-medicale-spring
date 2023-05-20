@@ -18,16 +18,13 @@ import java.util.NoSuchElementException;
 @Service
 @Transactional
 public class CliniqueService {
-
     @Autowired
     CliniqueRepository repo;
 
     @Autowired
     RendezVousRepository repoRendezVous;
-
     @Autowired
     MedecinRepository repoMedecin;
-
     public List<Clinique> afficherCliniqueById(int id_clinique){
         return (List<Clinique>) repo.getCliniquesById(id_clinique);
     }
