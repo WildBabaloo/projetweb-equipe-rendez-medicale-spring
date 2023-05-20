@@ -66,11 +66,7 @@ public class Services {
 
     @Override
     public String toString() {
-        return "Service{" +
-                "id_services=" + id_services +
-                ", nom='" + nom + '\'' +
-                ", description='" + description + '\'' +
-                '}';
+        return   nom;
     }
 
 

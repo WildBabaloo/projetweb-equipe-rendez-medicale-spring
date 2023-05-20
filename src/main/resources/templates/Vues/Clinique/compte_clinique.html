@@ -49,7 +49,7 @@
             <tr th:each="c : ${clinique}" >
                 <td>[[${c.nom}]]</td>
                 <td>[[${c.coordonnees}]]</td>
-                <td></td>
+                <td>[[${c.services_offerts}]]</td>
                 <td>[[${c.email}]]</td>
                 <td>[[${c.numtele}]]</td>
                 <td><a th:href="@{'/clicompte/modifier/' + ${clinique.id}}" class="btn btn-primary">Modifier</a></td>
