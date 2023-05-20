@@ -16,7 +16,7 @@ public class Medecin{
     private String prenom;
     @Column(length = 64, nullable = false)
     private String nom;
-    @Column(length = 12, nullable = false, unique = true)
+    @Column(length = 25, nullable = false, unique = true)
     private int numProf;
     @Column(length = 64, nullable = false)
     private String motPasse;
@@ -24,7 +24,7 @@ public class Medecin{
     private String email;
     @Column(length = 25, nullable = false, unique = true)
     private String numtele;
-    @Column(length = 5, nullable = false)
+    @Column(length = 10, nullable = false)
     private int tarifconsultation;
     @Temporal(TemporalType.DATE)
     private Date disponibilite;

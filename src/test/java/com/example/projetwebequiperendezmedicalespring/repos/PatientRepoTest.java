@@ -40,6 +40,12 @@ public class PatientRepoTest {
     @Autowired
     private TestEntityManager entityManager;
 
+    @Autowired
+    private Message_Medecin_Repository repoMessageMedecin;
+
+    @Autowired
+    private Message_Patient_Repository repoMessagePatient;
+
 
     @Test
     public void testCreatePatient(){
@@ -69,12 +75,35 @@ public class PatientRepoTest {
 
     @Test
     public void testDeletePatient(){
-        List<RendezVous> rendezVousPatient = repoRendezVous.findAllByPatientId(1);
+        int id = 6;
+
+        List<MessagePatient> messagePatients = repoMessagePatient.findAllByPatientId(id);
+        for(MessagePatient messagePatient : messagePatients){
+            repoMessagePatient.deleteById(messagePatient.getId_message());
+        }
+
+        List<MessageMedecin> messageMedecins = repoMessageMedecin.findAllByPatientId(id);
+        for(MessageMedecin messageMedecin : messageMedecins){
+            System.out.println(messageMedecin.getMessage());
+            repoMessageMedecin.deleteById(messageMedecin.getId_message());
+        }
+
+        List<RendezVous> rendezVousPatient = repoRendezVous.findAllByPatientId(id);
         for(RendezVous rendezVous : rendezVousPatient){
             repoRendezVous.deleteById(rendezVous.getId());
         }
-        repo.deleteById(5);
+        Patient patient = repo.findById(id).get();
+        System.out.println(patient.getNom());
+        repo.deleteById(id);
+
     }
+
+    @Test
+    public void testFindByIdPatient(){
+        Patient patient = repo.findById(2).get();
+        System.out.println(patient.getNom());
+    }
+
 
     @Test
     public void testVerifyLoginPatient(){
