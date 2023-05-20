@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-    <html lang="fr">
+    <html xmlns:th="http://www.thymeleaf.org" lang="fr">
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width">
@@ -42,20 +42,27 @@
         <h1>Liste des patients :</h1>
         <div id="patientList">
             <table id="tablePatient">
-                <% if (listePatient != null){
-                for (Patient unPatient : listePatient){%>
                 <tr>
-
-                    <td><%=unPatient.getId()%></td>
-                    <td><%=unPatient.getNom()%></td>
-                    <td><%=unPatient.getPrenom()%></td>
-                    <td><%=unPatient.getNumAss()%></td>
-                    <td><%=unPatient.getId_clinique()%></td>
-                    <td><a href="adminModifierControlleur?fillInputModifierPatient=<%=unPatient.getId()%>" class="btn btn-primary">Modifier</a> </td>
-                    <td><a href="adminDeleteControlleur?deletePatient=<%=unPatient.getId()%>" class="btn btn-primary">Supprimer</a> </td>
+                    <td>Id</td>
+                    <td>Nom</td>
+                    <td>Prenom</td>
+                    <td>Numéro d'assurance sociale</td>
+                    <td>Medecin du patient</td>
                 </tr>
-                <%}
-                }%>
+
+                <tr th:each="patient : ${listePatients}">
+
+                    <td>[[${patient.id}]]</td>
+                    <td>[[${patient.nom}]]</td>
+                    <td>[[${patient.prenom}]]</td>
+                    <td>[[${patient.numAss}]]</td>
+                    <td>[[${patient.medecin.nom}]] [[${patient.medecin.prenom}]]</td>
+                    <td><a href="adminModifierControlleur?fillInputModifierPatient=<%=unPatient.getId()%>" class="btn btn-primary">Modifier</a> </td>
+                    <td><a th:href="@{'/adminPatients/delete/' + ${patient.id}}" class="btn btn-primary"
+                    th:patientId="${patient.id}">
+                    <!-- th:patientId will be used for the ajax for confirmation to delete the patient -->
+                    Supprimer</a> </td>
+                </tr>
             </table>
         </div>
     </div>

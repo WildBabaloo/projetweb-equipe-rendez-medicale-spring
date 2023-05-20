@@ -22,7 +22,7 @@ public class Medecin{
     private String motPasse;
     @Column(length = 128, nullable = false, unique = true)
     private String email;
-    @Column(length = 12, nullable = false, unique = true)
+    @Column(length = 25, nullable = false, unique = true)
     private String numtele;
     @Column(length = 5, nullable = false)
     private int tarifconsultation;

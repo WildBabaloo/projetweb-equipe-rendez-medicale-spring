@@ -90,18 +90,57 @@ public class CliniqueController {
         return "Vues/Clinique/modifier_clinique";
     }
 
-//    @PostMapping("/clinique/save")
-//    public String modifierClinique(Clinique clinique, RedirectAttributes redirectAttributes){
-//        redirectAttributes.addFlashAttribute("message","La clinique " + clinique.getNom() + " a ete modifie avec success");
-//        cliservice.ajouterClinique(clinique);
-//        return "redirect:/Vues/clinique/compte_clinique";
-//    }
-
     @GetMapping("cliniques/delete/{id_clinique}")
     public String deleteClinique(@PathVariable(name = "id_clinique") int id_clinique, RedirectAttributes redirectAttributes){
         cliservice.deleteClinique(id_clinique);
         redirectAttributes.addFlashAttribute("message", "Le clinique dont l'id est " +id_clinique+ " à été supprimé");
         return "redirect:/cliniques";
     }
+
+
+
+
+
+
+
+
+
+
+    @GetMapping("/adminCliniques")
+    public String afficherCliniques(Model model){
+        List<Clinique> listeCliniques = cliservice.findAllCliniques();
+        model.addAttribute("listeCliniques", listeCliniques);
+        return "/Vues/Admin/listeCliniqueModifierSupprimer";
+    }
+
+    @GetMapping("/adminCliniques/new")
+    public String showNewCliniqueForm(Model model){
+        model.addAttribute("clinique", new Clinique());
+        return "/Vues/Admin/ajouter";
+    }
+
+    @GetMapping("/adminCliniques/save")
+    public String adminSaveClinique(Clinique clinique, RedirectAttributes redirectAttributes){
+        redirectAttributes.addFlashAttribute("message", "Le clinique à été ajouté!");
+        cliservice.ajouterClinique(clinique);
+        return "redirect:/adminCliniques";
+    }
+
+    @GetMapping("/adminCliniques/edit/{id}")
+    public String updateClinique(@PathVariable(name = "id") Integer id, Model model){
+        Clinique clinique = cliservice.getClinique(id);
+        model.addAttribute("pageTitle", "Editer le clinique dont l'id est " +id);
+        model.addAttribute("clinique", clinique);
+        // Have to add optionClinique if not possible then make a seperate page for add a clinique only
+        return "/Vues/Admin/ajouter";
+    }
+
+    @GetMapping("adminCliniques/delete/{id}")
+    public String deleteClinique(@PathVariable(name = "id") Integer id, RedirectAttributes redirectAttributes){
+        cliservice.deleteClinique(id);
+        redirectAttributes.addFlashAttribute("message", "Le clinique dont l'id est " +id+ " à été supprimé");
+        return "redirect:/adminCliniques";
+    }
+
 
 }
