@@ -60,14 +60,14 @@ public class PatientController {
     @GetMapping("/adminPatients/new")
     public String showNewPatientForm(Model model){
         model.addAttribute("patient", new Patient());
-        return "ajouter";
+        return "/Vues/Admin/ajouterModifierPatient";
     }
 
-    @GetMapping("/adminPatients/save")
+    @PostMapping("/adminPatients/save")
     public String savePatient(Patient patient, RedirectAttributes redirectAttributes){
         redirectAttributes.addFlashAttribute("message", "Le patient à été ajouté!");
         service.ajouterPatient(patient);
-        return "redirect:/patients";
+        return "redirect:/adminPatients";
     }
 
     @GetMapping("/adminPatients/edit/{id}")
@@ -76,14 +76,14 @@ public class PatientController {
         model.addAttribute("pageTitle", "Editer le patient dont l'id est " +id);
         model.addAttribute("patient", patient);
         // Have to add optionPatient if not possible then make a seperate page for add a patient only
-        return "ajouter";
+        return "/Vues/Admin/ajouterModifierPatient";
     }
 
     @GetMapping("/adminPatients/delete/{id}")
     public String deletePatient(@PathVariable(name = "id") Integer id, Model model, RedirectAttributes redirectAttributes){
         service.deletePatient(id);
         redirectAttributes.addFlashAttribute("message", "Le patient dont l'id est " +id+ " à été supprimé");
-        return "redirect:/patients";
+        return "redirect:/adminPatients";
     }
 
 }

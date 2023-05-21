@@ -36,54 +36,11 @@
   <br> <br> <br>
 </nav>
 <br> <br>
-<div class="maincontainerA">
-  <p> <label for="ajouter"> Qui voulez vous ajouter?</label>
-    <select name="ajouter" required id="ajouter" onchange="optionSelectedForm(this)">
-      <option value="invalidRaison">Choisir une option...</option>
-      <option value="patient">Patient</option>
-      <option value="medecin">Medecin</option>
-      <option value="clinique">Clinique</option>
-    </select></p>
-  <br>
-  Quand on choisi une option, un script va activer et puis on peut mettre les informations du select mis en haut. (À completer quand on utilise Spring Boot)
-</div>
-<script>
-  function optionSelectedForm(option){
-    document.getElementById("test").innerHTML = "Test"
-  }
-</script>
-<p id="test"></p>
-<br> <br>
-<h3>Ajouter un Patient</h3>
-<form action="../../adminAddControlleur" method="get" class="form-horizontal">
-  <div class="form-group">
-    <input type="hidden" class="form-control" id="OptionPatient" name="OptionPatient" value="active">
-  </div>
-  <div class="form-group">
-    <label for="prenomPatient">Prenom :</label> <br>
-    <input type="text" class="form-control" id="prenomPatient" name="prenomPatient">
-  </div>
-  <div class="form-group">
-    <label for="nomPatient">Nom :</label> <br>
-    <input type="text" class="form-control" id="nomPatient" name="nomPatient">
-  </div>
-  <div class="form-group">
-    <label for="numAssPatient">Numéro d'assurance sociale :</label> <br>
-    <input type="text" class="form-control" id="numAssPatient" name="numAssPatient">
-  </div>
-  <div class="form-group">
-    <label for="motPassePatient">Mot de passe :</label> <br>
-    <input type="password" class="form-control" id="motPassePatient" name="motPassePatient">
-  </div>
-  <div class="form-group">
-    <input type="submit" class="btn btn-primary" value="Ajouter" id="submitAjouterPatient">
-  </div>
-</form>
-<br> <br>
+
 
 <h3>Ajouter un medecin</h3>
 <div class="formMedecin">
-  <form id="formAjouterMedecin" method="get" class="form-horizontal" action="../../adminAddControlleur">
+  <form id="formAjouterMedecin" method="post" class="form-horizontal">
     <div class="form-group">
       <input type="hidden" class="form-control" id="OptionMedecin" name="OptionMedecin" value="active">
     </div>
@@ -129,43 +86,6 @@
     </div>
   </form>
 </div>
-<div class="formClinique">
-  <form id="formAddClinique" method="get" class="form-horizontal" action="../../adminAddControlleur">
-    <div class="form-group">
-      <input type="hidden" class="form-control" id="OptionClinique" name="OptionClinique" value="active">
-    </div>
-    <div class="form-group">
-      <label for="nomClinique">Nom :</label> <br>
-      <input type="text" class="form-control" id="nomClinique" name="nomClinique">
-    </div>
-    <div class="form-group">
-      <label for="coordonneesClinique">Coordonnées :</label> <br>
-      <input type="text" class="form-control" id="coordonneesClinique" name="coordonneesClinique">
-    </div>
-    <div class="form-group">
-      <label for="services_offertsClinique">Services Offerts :</label> <br>
-      <input type="text" class="form-control" id="services_offertsClinique" name="services_offertsClinique">
-    </div>
-    <div class="form-group">
-      <label for="emailClinique">Email :</label> <br>
-      <input type="text" class="form-control" id="emailClinique" name="emailClinique">
-    </div>
-    <div class="form-group">
-      <label for="numTeleClinique">Numéro de téléphone :</label> <br>
-      <input type="text" class="form-control" id="numTeleClinique" name="numTeleClinique">
-    </div>
-    <div class="form-group">
-      <input type="submit" class="btn btn-primary" value="Ajouter" id="submitAjouterClinique">
-    </div>
-  </form>
-</div>
-<div class="footer">
-  <div class="d-flex flex-column flex-md-row text-center text-md-start justify-content-between py-4 px-4 px-xl-5 bg-dark">
-    <!-- Copyright -->
-    <div class="text-white mb-3 mb-md-0">
-      Copyright © 2023. Tous droits réservés. (À mettre directement en bas de la page)
-    </div>
-  </div>
-</div>
+
 </body>
 </html>

@@ -12,7 +12,7 @@ public class Patient {
     private String prenom;
     @Column(length = 64, nullable = false)
     private String nom;
-    @Column(length = 12, nullable = false, unique = true)
+    @Column(length = 25, nullable = false, unique = true)
     private String numAss;
     @Column(length = 64, nullable = false)
     private String motPasse;

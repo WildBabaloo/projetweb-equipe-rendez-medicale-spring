@@ -39,6 +39,7 @@
     </nav>
     <br> <br>
     <div class="main">
+        <a th:href="@{/adminPatients/new}">AJOUTER UN PATIENT</a>
         <h1>Liste des patients :</h1>
         <div id="patientList">
             <table id="tablePatient">
@@ -56,8 +57,9 @@
                     <td>[[${patient.nom}]]</td>
                     <td>[[${patient.prenom}]]</td>
                     <td>[[${patient.numAss}]]</td>
-                    <td>[[${patient.medecin.nom}]] [[${patient.medecin.prenom}]]</td>
-                    <td><a href="adminModifierControlleur?fillInputModifierPatient=<%=unPatient.getId()%>" class="btn btn-primary">Modifier</a> </td>
+                    <td th:if="${patient.medecin != null}">[[${patient.medecin.nom}]] [[${patient.medecin.prenom}]]</td>
+                    <td th:if="${patient.medecin == null}">NULL</td>
+                    <td><a th:href="@{'/adminPatients/edit/' + ${patient.id}}" class="btn btn-primary">Modifier</a> </td>
                     <td><a th:href="@{'/adminPatients/delete/' + ${patient.id}}" class="btn btn-primary"
                     th:patientId="${patient.id}">
                     <!-- th:patientId will be used for the ajax for confirmation to delete the patient -->
