@@ -37,6 +37,16 @@ public class MedecinService {
         return (List<Patient>) repoPatient.findAllByPatientByMedecinId(id);
     }
 
+    public Medecin getId(int id){
+        return repo.findById(id).get();
+    }
+
+    public List<Patient> findPatientByNom(String keyword){
+        if(keyword !=null){
+            return repo.findAllByNom(keyword);
+        }
+        return null;
+    }
     public Medecin afficherMedecinById(int id){
         return repo.getMedecinById(id);
     }

@@ -1,12 +1,9 @@
 package com.example.projetwebequiperendezmedicalespring.controlleur;
-import com.example.projetwebequiperendezmedicalespring.entities.Medecin;
-import com.example.projetwebequiperendezmedicalespring.entities.Patient;
-import com.example.projetwebequiperendezmedicalespring.entities.RendezVous;
-import com.example.projetwebequiperendezmedicalespring.service.MedecinService;
+import com.example.projetwebequiperendezmedicalespring.entities.*;
+import com.example.projetwebequiperendezmedicalespring.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
-import com.example.projetwebequiperendezmedicalespring.entities.Services;
-import com.example.projetwebequiperendezmedicalespring.service.ServicesService;
 
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,7 +14,10 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
+import java.util.Locale;
 
 @Controller
 public class MedecinController {
@@ -26,7 +26,14 @@ public class MedecinController {
     MedecinService service;
 
     @Autowired
+    CliniqueService cliservice;
+    @Autowired
+    PatientService patservice;
+    @Autowired
     ServicesService serviceServices;
+
+    @Autowired
+    Message_MedecinService messMservice;
 
     @PostMapping("/medecinLogin")
     public String medecinLogin(Model model, @RequestParam("numProf") int numProf, @RequestParam("passwordMedecin") String password, HttpServletResponse response){
@@ -74,11 +81,73 @@ public class MedecinController {
         return "/Vues/Medecin/compte_medecin";
     }
 
+    @GetMapping("/compte_medecin/modifier/{id}")
+    public String modMedPage(@PathVariable("id")Integer id,Model model){
+        Medecin medecin = service.getId(id);
+        List<Clinique> listeCliniques = cliservice.findAllCliniques();
+        List<Services> listeServices = serviceServices.findAllServices();
+        String now = LocalDate.now().toString();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd", Locale.ENGLISH);
+        LocalDate date = LocalDate.parse(now, formatter);
+        model.addAttribute("date",date);
+        model.addAttribute("pageTitle","Editer Medecin (ID: " + id + ")");
+        model.addAttribute("listeServices",listeServices);
+        model.addAttribute("medecin",medecin);
+        return "Vues/Medecin/modifier_medecin";
+    }
+
+    @PostMapping("/medecins/save")
+    public String modifierMedecin(Medecin medecin,RedirectAttributes redirectAttributes){
+        redirectAttributes.addFlashAttribute("message", "Le medecin à été modifié!");
+        service.ajouterMedecin(medecin);
+        return "redirect:/compte_medecin/"+medecin.getId();
+    }
+
     @GetMapping("/contacter_patient/{id}")
-    public String contacter_patient(@PathVariable(name="id")Integer id, Model model){
+    public String contacter_patient(@PathVariable(name="id")Integer id,Model model,Patient patient){
         Medecin medecin = service.getMedecin(id);
+        model.addAttribute("patient",patient);
         model.addAttribute("medecin",medecin);
         return "/Vues/Medecin/contacter_patient";
+    }
+
+    @GetMapping("/contacter_patient/search/{id}")
+    public String showPatient(@PathVariable(name="id")Integer id,@Param("keyword") String keyword, Model model){
+        List<Patient> listePatients = service.findPatientByNom(keyword);
+        Medecin medecin = service.getMedecin(id);
+        model.addAttribute("medecin",medecin);
+        model.addAttribute("listePatients",listePatients);
+        model.addAttribute("keyword",keyword);
+        return "Vues/Medecin/contacter_results";
+    }
+
+    @GetMapping("/messager_patient/{id}")
+    public String messagePatient(Model model,@PathVariable("id")Integer id){
+        Medecin medecin = service.getMedecin(id);
+        Patient patient = patservice.getPatient(id);
+
+        List<Patient> listePatients = patservice.findAllPatient();
+        MessageMedecin messageMedecin = new MessageMedecin();
+        model.addAttribute("messageMedecin",messageMedecin);
+        model.addAttribute("listePatients",listePatients);
+        model.addAttribute("medecin",medecin);
+        return "Vues/Medecin/messager_patient";
+    }
+
+    @PostMapping("/messageM/send/{id}")
+    public String sendMessage(MessageMedecin messageMedecin,Model model,RedirectAttributes redirectAttributes){
+        messMservice.ajouterMessageM(messageMedecin);
+        return "redirect:/Vues/Medecin/contacter_patient";
+    }
+    @GetMapping("/sendMessage/{id}")
+    public String sendMessagePatient(@PathVariable(name = "id") Integer id,Model model ,RedirectAttributes redirectAttributes){
+        return "redirect:/Vues/Medecin/messager_patient";
+    }
+    @GetMapping("/contacter_results/{id}")
+    public String searchResult(Model model,@PathVariable(name="id")Integer id){
+        Medecin medecin = service.getMedecin(id);
+        model.addAttribute("medecin",medecin);
+        return "Vues/Medecin/contacter_results";
     }
 
     @GetMapping("/liste_patients/{id}")

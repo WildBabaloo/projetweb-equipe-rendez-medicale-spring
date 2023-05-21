@@ -37,12 +37,14 @@
   <div class="contactermain">
     <h1>Contacter un patient</h1>
     <br>
-    <p><label for="rechercherPatient">Le nom du patient:</label>
-      <input type="text" id="rechercherPatient" name="rechercherPatient" placeholder="Rechercher un patient..."/></p>
-
-
-    <input type="button" id="btn_rechercher" value="Rechercher"/>
-    <br> <br>
+    <form th:action="@{'/contacter_patient/search/' + ${medecin.id}}" >
+      <p><label for="rechercherPatient">Le nom du patient:</label>
+        <input type="text" name="keyword" th:value="${keyword}" id="rechercherPatient" class="form-control" placeholder="Rechercher un patient..." required/></p>
+      <button type="submit" class="btn btn-primary">
+        <i class="fas fa-search">Rechercher</i>
+      </button>
+      <br> <br>
+    </form>
   </div>
 </div>
 <div class="footer">

@@ -1,5 +1,7 @@
 package com.example.projetwebequiperendezmedicalespring.entities;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.persistence.*;
 import java.util.Date;
 
@@ -17,7 +19,7 @@ public class MessageMedecin {
     @Column(length = 10000, nullable = false)
     private String message;
 
-    @Temporal(TemporalType.DATE)
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date date;
 
     @Column
