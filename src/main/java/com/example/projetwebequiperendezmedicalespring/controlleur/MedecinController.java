@@ -103,7 +103,7 @@ public class MedecinController {
     public String afficherMedecins(Model model){
         List<Medecin> listeMedecins = service.findAllMedecins();
         model.addAttribute("listeMedecins", listeMedecins);
-        return "listeMedecinModifierSupprimer";
+        return "/Vues/Admin/listeMedecinModifierSupprimer";
     }
 
     @GetMapping("/adminMedecins/new")
@@ -111,18 +111,14 @@ public class MedecinController {
         model.addAttribute("medecin", new Medecin());
         List<Services> listeServices = serviceServices.findAllServices();
         model.addAttribute("listeServices", listeServices);
-        return "ajouter";
+        return "/Vues/Admin/ajouterModifierMedecin";
     }
 
     @GetMapping("/adminMedecins/save")
     public String saveMedecin(Medecin medecin, RedirectAttributes redirectAttributes){
         redirectAttributes.addFlashAttribute("message", "Le medecin à été ajouté!");
         service.ajouterMedecin(medecin);
-        // TO DO
-        //Find clinique of that medecin and add his service to the liste of services offered by the clinique
-        // And check if that service is not already in the list.
-        // If in list add Else dont
-        return "redirect:/medecins";
+        return "redirect:/adminMedecins";
     }
 
     @GetMapping("/adminMedecins/edit/{id}")
@@ -132,21 +128,16 @@ public class MedecinController {
         model.addAttribute("medecin", medecin);
         List<Services> listeServices = serviceServices.findAllServices();
         model.addAttribute("listeServices", listeServices);
-        // Have to add optionMedecin if not possible then make a seperate page for add a medecin only
-        return "ajouter";
+        return "/Vues/Admin/ajouterModifierMedecin";
     }
 
 
 
-    @GetMapping("medecins/delete/{id}")
+    @GetMapping("adminMedecins/delete/{id}")
     public String deleteMedecin(@PathVariable(name = "id") Integer id, RedirectAttributes redirectAttributes){
         service.deleteMedecin(id);
         redirectAttributes.addFlashAttribute("message", "Le medecin dont l'id est " +id+ " à été supprimé");
-        // TO DO
-        //Find clinique of that medecin and remove his service to the liste of services offered by the clinique
-        // And check if that service is not already in the list.
-        // If no other person has this service then remove Else keep
-        return "redirect:/medecins";
+        return "redirect:/adminMedecins";
     }
 
 
