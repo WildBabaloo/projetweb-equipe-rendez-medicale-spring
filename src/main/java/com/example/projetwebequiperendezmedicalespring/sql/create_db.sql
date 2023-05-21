@@ -206,27 +206,21 @@ VALUES
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS `medimeets`.`message_medecin` ;
 
-CREATE TABLE IF NOT EXISTS `medimeets`.`message_medecin` (
-    `id_message` INT NOT NULL,
-    `message` VARCHAR(255) NULL,
-    `date` DATETIME NULL,
-    `document` VARCHAR(100) NULL,
-    `medecin_id_medecin` INT NOT NULL,
-    `patient_id_patient` INT NOT NULL,
+CREATE TABLE `message_medecin` (
+    `id_message` int NOT NULL AUTO_INCREMENT,
+    `message` varchar(255) DEFAULT NULL,
+    `date` datetime DEFAULT NULL,
+    `document` varchar(100) DEFAULT NULL,
+    `medecin_id_medecin` int DEFAULT NULL,
+    `patient_id_patient` int DEFAULT NULL,
+    `sujet` varchar(255) NOT NULL,
     PRIMARY KEY (`id_message`),
-    INDEX `fk_message_medecin_medecin1_idx` (`medecin_id_medecin` ASC) VISIBLE,
-    INDEX `fk_message_medecin_patient1_idx` (`patient_id_patient` ASC) VISIBLE,
-    CONSTRAINT `fk_message_medecin_medecin1`
-    FOREIGN KEY (`medecin_id_medecin`)
-    REFERENCES `medimeets`.`medecins` (`id_medecin`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-    CONSTRAINT `fk_message_medecin_patient1`
-    FOREIGN KEY (`patient_id_patient`)
-    REFERENCES `medimeets`.`patients` (`id_patient`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-    ENGINE = InnoDB;
+    KEY `fk_message_medecin_medecin1_idx` (`medecin_id_medecin`),
+    KEY `fk_message_medecin_patient1_idx` (`patient_id_patient`),
+    CONSTRAINT `message_medecin_ibfk_1` FOREIGN KEY (`medecin_id_medecin`) REFERENCES `medecins` (`id_medecin`),
+    CONSTRAINT `message_medecin_ibfk_2` FOREIGN KEY (`patient_id_patient`) REFERENCES `patients` (`id_patient`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb3;
+
 
 INSERT INTO `medimeets`.`message_medecin`
 (`id_message`,
@@ -246,7 +240,7 @@ VALUES
 DROP TABLE IF EXISTS `medimeets`.`message_patient` ;
 
 CREATE TABLE IF NOT EXISTS `medimeets`.`message_patient` (
-    `id_message` INT NOT NULL,
+    `id_message` INT NOT NULL AUTO_INCREMENT,
     `message` VARCHAR(255) NULL,
     `date` DATETIME NULL,
     `document` VARCHAR(100) NULL,
