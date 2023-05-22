@@ -37,5 +37,44 @@
 </nav>
 <br> <br>
 
+<h3>Ajouter une clinique</h3>
+<div class="formClinique">
+  <form th:action="@{/adminCliniques/save}" th:object="${clinique}" id="formAddClinique" method="post" class="form-horizontal">
+    <div class="form-group">
+      <input type="hidden" th:field="*{id}" class="form-control" id="OptionClinique" name="OptionClinique" value="active">
+    </div>
+    <div class="form-group">
+      <label for="nomClinique">Nom :</label> <br>
+      <input type="text" th:field="*{nom}" class="form-control" id="nomClinique" name="nomClinique">
+    </div>
+    <div class="form-group">
+      <label for="coordonneesClinique">Coordonnées :</label> <br>
+      <input type="text" th:field="*{coordonnees}" class="form-control" id="coordonneesClinique" name="coordonneesClinique">
+    </div>
+    <div class="form-group">
+      <label>Services Offerts :</label> <br>
+      <th:block th:each="services : ${listeServices}">
+        <input type="checkbox" th:field="*{services_offerts}"
+               th:text="${services.description}"
+               th:value="${services.id}"
+               class="m-2"
+        >
+        <small>[[${services.nom}]]</small>
+        <br/>
+      </th:block>
+    </div>
+    <div class="form-group">
+      <label for="emailClinique">Email :</label> <br>
+      <input type="text" th:field="*{email}" class="form-control" id="emailClinique" name="emailClinique">
+    </div>
+    <div class="form-group">
+      <label for="numTeleClinique">Numéro de téléphone :</label> <br>
+      <input type="text" th:field="*{numtele}" class="form-control" id="numTeleClinique" name="numTeleClinique">
+    </div>
+    <div class="form-group">
+      <input type="submit" class="btn btn-primary" value="Ajouter" id="submitAjouterClinique">
+    </div>
+  </form>
+</div>
 </body>
 </html>

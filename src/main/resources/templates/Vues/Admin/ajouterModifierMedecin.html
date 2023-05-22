@@ -40,46 +40,56 @@
 
 <h3>Ajouter un medecin</h3>
 <div class="formMedecin">
-  <form id="formAjouterMedecin" method="post" class="form-horizontal">
+  <form th:action="@{/adminMedecins/save}" th:object="${medecin}" id="formAjouterMedecin" method="post" class="form-horizontal">
     <div class="form-group">
-      <input type="hidden" class="form-control" id="OptionMedecin" name="OptionMedecin" value="active">
+      <input type="hidden" th:field="*{id}" class="form-control" id="OptionMedecin" name="OptionMedecin" value="active">
     </div>
     <div class="form-group">
       <label for="nomMedecin">Nom :</label> <br>
-      <input type="text" class="form-control" id="nomMedecin" name="nomMedecin">
+      <input type="text" th:field="*{nom}" class="form-control" id="nomMedecin" name="nomMedecin">
     </div>
     <div class="form-group">
       <label for="prenomMedecin">Prenom :</label> <br>
-      <input type="text" class="form-control" id="prenomMedecin" name="prenomMedecin">
+      <input type="text" th:field="*{prenom}" class="form-control" id="prenomMedecin" name="prenomMedecin">
     </div>
     <div class="form-group">
       <label for="numProfMedecin">Numéro professionel :</label> <br>
-      <input type="text" class="form-control" id="numProfMedecin" name="numProfMedecin">
+      <input type="text" th:field="*{numProf}" class="form-control" id="numProfMedecin" name="numProfMedecin">
     </div>
     <div class="form-group">
       <label for="motPasseMedecin">Mot de passe :</label> <br>
-      <input type="password" class="form-control" id="motPasseMedecin" name="motPasseMedecin">
+      <input type="password" th:field="*{motPasse}" class="form-control" id="motPasseMedecin" name="motPasseMedecin">
     </div>
     <div class="form-group">
       <label for="emailMedecin">Email :</label> <br>
-      <input type="text" class="form-control" id="emailMedecin" name="emailMedecin">
+      <input type="text" th:field="*{email}" class="form-control" id="emailMedecin" name="emailMedecin">
     </div>
     <div class="form-group">
       <label for="numTeleMedecin">Numéro de téléphone :</label> <br>
-      <input type="text" class="form-control" id="numTeleMedecin" name="numTeleMedecin">
+      <input type="text" th:field="*{numtele}" class="form-control" id="numTeleMedecin" name="numTeleMedecin">
     </div>
     <div class="form-group">
-      <label for="specialiteMedecin">Specialité :</label> <br>
-      <input type="text" class="form-control" id="specialiteMedecin" name="specialiteMedecin">
+      <label>Specialité :</label> <br>
+        <th:block th:each="services : ${listeServices}">
+          <input type="checkbox" th:field="*{services_offerts}"
+                 th:text="${services.description}"
+                 th:value="${services.id}"
+                 class="m-2"
+          >
+          <small>[[${services.nom}]]</small>
+          <br/>
+        </th:block>
     </div>
     <div class="form-group">
       <label for="tarifconsultationMedecin">Tarif de consultation :</label> <br>
-      <input type="number" class="form-control" id="tarifconsultationMedecin" name="tarifconsultationMedecin">
+      <input type="number" th:field="*{tarifconsultation}" class="form-control" id="tarifconsultationMedecin" name="tarifconsultationMedecin">
     </div>
+    <!--
     <div class="form-group">
       <label for="clinique_id_cliniqueMedecin">Clinique du Medecin (ID) :</label> <br>
-      <input type="number" class="form-control" id="clinique_id_cliniqueMedecin" name="clinique_id_cliniqueMedecin">
+      <input type="number" th:field="*{clinique}" class="form-control" id="clinique_id_cliniqueMedecin" name="clinique_id_cliniqueMedecin">
     </div>
+    -->
 
     <div class="form-group">
       <input type="submit" class="btn btn-primary" value="Ajouter" id="submitAjouterMedecin">

@@ -200,7 +200,7 @@ public class MedecinController {
         return "/Vues/Admin/ajouterModifierMedecin";
     }
 
-    @GetMapping("/adminMedecins/save")
+    @PostMapping("/adminMedecins/save")
     public String saveMedecin(Medecin medecin, RedirectAttributes redirectAttributes){
         redirectAttributes.addFlashAttribute("message", "Le medecin à été ajouté!");
         service.ajouterMedecin(medecin);
