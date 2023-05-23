@@ -70,6 +70,13 @@
 <div class="containerB">
   <br> <br>
   <a th:href="@{/patient_index}">GO TO PATIENT INDEX</a>
+  <th>Patient</th>
+  </tr>
+  <tr th:each="patient : ${listePatients}">
+    <td><a th:href="@{'/patient_index/'+ ${patient.id}}">[[${patient.nom}]]</a></td>
+  </tr>
+  </table>
+  <br>
   <br>
   <a th:href="@{/medecin_index}">GO TO MEDECIN INDEX</a>
   <br>

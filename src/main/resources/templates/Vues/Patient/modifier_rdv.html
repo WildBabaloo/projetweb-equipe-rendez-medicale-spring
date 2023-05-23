@@ -36,7 +36,30 @@
 </nav>
 <br> <br>
 
-<h1 >Modifier un rendez-vous</h1>
+<div class="main container">
+    <h1 class="m_liste">Liste rendez-vous :</h1>
+    <table>
+        <tr>
+            <th>Patient </th>
+            <th>Clinique </th>
+            <th>Medecin </th>
+            <th>Date </th>
+            <th>Raison </th>
+            <th>Description </th>
+        </tr>
+        <tr th:each="rendezvous : ${listeRendezVous}">
 
+            <td>[[${rendezvous.patient.nom}]] [[${rendezvous.patient.prenom}]] |</td>
+            <td>[[${rendezvous.clinique.nom}]] |</td>
+            <td>[[${rendezvous.medecin.nom}]] |</td>
+            <td>[[${rendezvous.date}]] |</td>
+            <td>[[${rendezvous.raison}]] |</td>
+            <td>[[${rendezvous.description}]] |</td>
+            <td><a th:href="@{'/modifierRDV/modifier/' + ${patient.id}}" class="btn btn-primary">Modifier</a></td>
+            <td><a th:href="@{'/supprimer_rdv/delete/' + ${rendezvous.id}}" class="btn btn-primary">Supprimer</a></td>
+
+        </tr>
+    </table>
+</div>
 </body>
 </html>

@@ -34,6 +34,23 @@
 </nav>
 <br> <br>
 
+<div class="main container">
+    <h1 class="m_liste">Liste de mes patients :</h1>
+    <table>
+        <tr>
+            <th>Prenom </th>
+            <th>Nom </th>
+            <th>Courriel </th>
+
+        </tr>
+        <tr th:each="patient : ${listePatients}">
+            <td>| [[${patient.prenom}]] |</td>
+            <td>[[${patient.nom}]] |</td>
+            <td>[[${patient.email}]] |</td>
+        </tr>
+    </table>
+</div>
+
 <h1 class="p_deconnexion"><a href="../../deconnexion.html">Déconnexion</a></h1>
 </body>
 </html>

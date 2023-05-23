@@ -34,8 +34,8 @@
     <br> <br> <br>
 </nav>
 <br> <br>
-<div class="main container">
-    <h2>Bienvenue <%=session.getAttribute("nom")  %>  <%=session.getAttribute("prenom")  %></h2>
+<div class="main container" th:if="${patient}">
+    <h2>Bienvenue [[${patient.nom}]]</h2>
     <br> <br>
     <div class="options_Patients">
         <h3>Ici sont vos options :</h3> <br> <br>
@@ -46,12 +46,12 @@
                 </a>
             </li>
             <li>
-                <a th:href="@{/modifier_rdv}">
+                <a th:href="@{'/modifierRDV/' + ${patient.id}}">
                     <button>Cliquer ici pour modifier et voir mes rendez-vous</button>
                 </a>
             </li>
             <li>
-                <a th:href="@{/patient_compte}">
+                <a th:href="@{'/patient_compte/' +${patient.id}}">
                     <button>Cliquer ici pour modifier mon compte utilisateur</button>
                 </a>
             </li>

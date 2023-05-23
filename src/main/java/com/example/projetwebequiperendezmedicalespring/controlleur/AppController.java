@@ -1,7 +1,9 @@
 package com.example.projetwebequiperendezmedicalespring.controlleur;
 
 import com.example.projetwebequiperendezmedicalespring.entities.Clinique;
+import com.example.projetwebequiperendezmedicalespring.entities.Patient;
 import com.example.projetwebequiperendezmedicalespring.service.CliniqueService;
+import com.example.projetwebequiperendezmedicalespring.service.PatientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,6 +16,8 @@ public class AppController {
 
     @Autowired
     CliniqueService cliservice;
+    @Autowired
+    PatientService patservice;
     @GetMapping("/")
     public String homePage(){return "index";}
 
@@ -21,6 +25,8 @@ public class AppController {
     public String logPage(Model model){
         List<Clinique> listeCliniques = cliservice.findAllCliniques();
         model.addAttribute("listeCliniques",listeCliniques);
+        List<Patient> listePatients = patservice.findAllPatient();
+        model.addAttribute("listePatients", listePatients);
         return "Vues/login";
     }
 
