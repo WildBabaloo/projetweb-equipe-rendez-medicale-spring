@@ -1,6 +1,11 @@
 package com.example.projetwebequiperendezmedicalespring.controlleur;
 
+import com.example.projetwebequiperendezmedicalespring.entities.Medecin;
+import com.example.projetwebequiperendezmedicalespring.entities.MessageMedecin;
+import com.example.projetwebequiperendezmedicalespring.entities.MessagePatient;
 import com.example.projetwebequiperendezmedicalespring.entities.Patient;
+import com.example.projetwebequiperendezmedicalespring.service.MedecinService;
+import com.example.projetwebequiperendezmedicalespring.service.Message_PatientService;
 import com.example.projetwebequiperendezmedicalespring.service.PatientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.Banner;
@@ -13,7 +18,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletResponse;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
+import java.util.Locale;
 
 @Controller
 public class PatientController {
@@ -21,10 +31,23 @@ public class PatientController {
     @Autowired
     PatientService service;
 
+    @Autowired
+    MedecinService medservice;
+
+    @Autowired
+    Message_PatientService messPservice;
     @PostMapping("/patientLogin")
-    public String patientLogin(Model model, @RequestParam("numAss") String numAss, @RequestParam("passwordPatient") String password){
+    public String patientLogin(Model model, @RequestParam("numAss") String numAss, @RequestParam("passwordPatient") String password, HttpServletResponse response){
         if(service.verifyPatientLogin(numAss, password) != null){
             // Add cookies
+            Patient patient = service.findPatientNumAss(numAss);
+            Cookie c = new Cookie("id",String.valueOf(patient.getId()));
+            c.setMaxAge(60*60);
+            c.setSecure(true);
+            c.setHttpOnly(true);
+            c.setPath("/");
+            response.addCookie(c);
+            model.addAttribute("patient",patient);
             model.addAttribute("message", "Correct (To edit)");
             return "/Vues/Patient/patient_index";
         }
@@ -35,8 +58,21 @@ public class PatientController {
     @GetMapping("/prendre_rdv")
     public String prendre_rdv(){return "/Vues/Patient/prendre_rdv";}
 
-    @GetMapping("/patient_index")
-    public String patient_index(){return "/Vues/Patient/patient_index";}
+    @GetMapping("/patient_index/{id_patient}")
+    public String cliPage(@PathVariable("id_patient")int id_patient,Model model, HttpServletResponse response){
+        Patient patient = service.getPatient(id_patient);
+        Cookie c = new Cookie("id_patient",String.valueOf(id_patient));
+        c.setMaxAge(60*60);
+        c.setSecure(true);
+        c.setHttpOnly(true);
+        c.setPath("/");
+        response.addCookie(c);
+        model.addAttribute("patient",patient);
+        return "Vues/Patient/patient_index";
+    }
+
+
+
 
     @GetMapping("/patient_compte")
     public String patient_compte(){return "/Vues/Patient/patient_compte";}
@@ -44,8 +80,30 @@ public class PatientController {
     @GetMapping("/modifier_rdv")
     public String modifier_rdv(){return "/Vues/Patient/modifier_rdv";}
 
-    @GetMapping("/contacter_medecin")
-    public String contacter_medecin(){return "/Vues/Patient/contacter_medecin";}
+    @GetMapping("/contacter_medecin/{id}")
+    public String contacter_medecin(@PathVariable(name="id")Integer id,Model model){
+        Patient patient = service.getPatient(id);
+        String now = LocalDate.now().toString();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd", Locale.ENGLISH);
+        LocalDate dateNow = LocalDate.parse(now,formatter);
+        List<Patient> listePatients = service.findAllPatient();
+        List<Medecin> listeMedecins = medservice.findAllMedecins();
+        MessagePatient messagePatient = new MessagePatient();
+        model.addAttribute("dateNow",dateNow);
+        model.addAttribute("messagePatient",messagePatient);
+        model.addAttribute("listePatients",listePatients);
+        model.addAttribute("listeMedecins",listeMedecins);
+        model.addAttribute("patient",patient);
+        return "/Vues/Patient/contacter_medecin";
+    }
+
+    @PostMapping("/messageP/send/{id}")
+    public String sendMessage(@PathVariable(name = "id") Integer id, MessagePatient messagePatient, Model model, RedirectAttributes redirectAttributes){
+        messPservice.ajouterMessageP(messagePatient);
+        Patient patient = service.getPatient(id);
+        model.addAttribute("patient",patient);
+        return "/Vues/Patient/patient_index";
+    }
 
     @GetMapping("/contacter_clinique")
     public String contacter_clinique(){return "/Vues/Patient/contacter_clinique";}
