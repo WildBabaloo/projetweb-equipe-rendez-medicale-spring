@@ -55,7 +55,7 @@
             <td>[[${rendezvous.date}]] |</td>
             <td>[[${rendezvous.raison}]] |</td>
             <td>[[${rendezvous.description}]] |</td>
-            <td><a th:href="@{'/modifierRDV/modifier/' + ${patient.id}}" class="btn btn-primary">Modifier</a></td>
+            <td><a th:href="@{'/modifierRDV/modifier/' + ${rendezvous.id}}" class="btn btn-primary">Modifier</a></td>
             <td><a th:href="@{'/supprimer_rdv/delete/' + ${rendezvous.id}}" class="btn btn-primary">Supprimer</a></td>
 
         </tr>

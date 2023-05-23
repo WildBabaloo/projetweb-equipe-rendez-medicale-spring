@@ -29,7 +29,9 @@ public class RendezVousService {
         return repo.save(rendezVous);
     }
 
-    public void deleteRendezVous(Integer id){
+    public void deleteRendezVous(Integer id){repo.deleteById(id);}
+
+    public void deleteRendezVousByPatientId(Integer id){
         List<RendezVous> rendezVousPatient = repo.findAllByPatientId(id);
         for(RendezVous rendezVous : rendezVousPatient){
             repo.deleteById(rendezVous.getId());

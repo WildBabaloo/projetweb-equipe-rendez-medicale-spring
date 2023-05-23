@@ -78,19 +78,21 @@ public class PatientController {
         rdvservice.ajouterRendezvous(rendezVous);
         return "redirect:/modifierRDV/" +rendezVous.getPatient().getId();
     }
-    @GetMapping("/modifierRDV/modifier/{id_patient}")
-    public String modRDVPage(@PathVariable("id_patient")int id_patient, Model model){
-        RendezVous rendezVous = rdvservice.getId(id_patient);
-        model.addAttribute("pageTitle","Editer rendez vous (ID: " + id_patient + ")");
+    @GetMapping("/modifierRDV/modifier/{id_rendezvous}")
+    public String modRDVPage(@PathVariable("id_rendezvous")int id_rendezvous, Model model){
+        RendezVous rendezVous = rdvservice.getId(id_rendezvous);
+        model.addAttribute("pageTitle","Editer rendez vous (ID: " + id_rendezvous + ")");
         model.addAttribute("RendezVous",rendezVous);
         return "Vues/Patient/modifierLeRdv";
     }
 
     @GetMapping("/supprimer_rdv/delete/{id_rendezvous}")
     public String deleteRendezVous(@PathVariable(name = "id_rendezvous") Integer id, Model model, RedirectAttributes redirectAttributes){
+        RendezVous rendezVous = rdvservice.getId(id);
+        int idPatient = rendezVous.getPatient().getId();
         rdvservice.deleteRendezVous(id);
         redirectAttributes.addFlashAttribute("message", "Le rendez vous dont l'id est " +id+ " à été supprimé");
-        return "redirect:Vues/Patient/modifierLeRdv";
+        return "redirect:/modifierRDV/" +idPatient;
     }
     @GetMapping("/contacter_medecin")
     public String contacter_medecin(){return "/Vues/Patient/contacter_medecin";}
