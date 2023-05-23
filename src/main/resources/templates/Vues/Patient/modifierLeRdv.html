@@ -41,18 +41,19 @@
                 <input type="hidden" th:field="*{id}"/>
             </div>
             <div class="form-group">
-                <label class="col-sm-4 col-form-label">Nom:</label>
-                <input type="text" class="form-control" id="nomClinique" name="nomClinique" th:field="*{clinique}">
+                <input type="hidden" class="form-control" id="nomPatient" name="nomClinique" th:field="*{patient}">
             </div>
             <div class="form-group">
-                <label class="col-sm-4 col-form-label">Medecin:</label>
-                <input type="text" class="form-control" id="medecin" name="medecin" th:field="*{medecin}">
+                <input type="hidden" class="form-control" id="nomClinique" name="nomClinique" th:field="*{clinique}">
+            </div>
+            <div class="form-group">
+                <input type="hidden" class="form-control" id="medecin" name="medecin" th:field="*{medecin}">
             </div>
 
-            <!--<div class="form-group">
+            <div class="form-group">
                 <label class="col-sm-4 col-form-label">Date:</label>
                 <input type="date" class="form-control" id="date" name="date" th:field="*{date}">
-            </div>-->
+            </div>
             <div class="form-group">
                 <label class="col-sm-4 col-form-label">Raison:</label>
                 <input type="text" class="form-control" id="raisonRDV" name="Raison du rendez vous :" th:field="*{raison}">

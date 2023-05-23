@@ -1,5 +1,7 @@
 package com.example.projetwebequiperendezmedicalespring.entities;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.persistence.*;
 import java.util.Date;
 
@@ -20,7 +22,7 @@ public class RendezVous{
     @JoinColumn(name = "id_clinique", nullable = false)
     private Clinique clinique;
 
-    @Temporal(TemporalType.DATE)
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date date;
     @Column(nullable = false)
     private String raison;

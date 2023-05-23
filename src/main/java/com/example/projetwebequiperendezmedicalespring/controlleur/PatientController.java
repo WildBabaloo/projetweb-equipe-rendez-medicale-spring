@@ -76,7 +76,7 @@ public class PatientController {
     public String saveRendezVous(RendezVous rendezVous, RedirectAttributes redirectAttributes){
         redirectAttributes.addFlashAttribute("message", "Le rendez vous à été ajouté!");
         rdvservice.ajouterRendezvous(rendezVous);
-        return "redirect:Vues/Patient/modifierLeRdv"+rendezVous.getId();
+        return "redirect:/modifierRDV/" +rendezVous.getPatient().getId();
     }
     @GetMapping("/modifierRDV/modifier/{id_patient}")
     public String modRDVPage(@PathVariable("id_patient")int id_patient, Model model){
