@@ -11,7 +11,7 @@
 </head>
 <body class="bgcolorP">
 <nav class="nav navbar navbar-expand-lg bg-dark navbar-dark">
-    <div class="container">
+    <div class="container" th:if="${patient}">
         <a th:href="@{/patient_index}" style="text-indent: 10px;" class="navbar-brand">Medimeets</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navmenu"><span class="navbar-toggler-icon"></span></button>
         <div class="collapse navbar-collapse" id="navmenu">
@@ -26,7 +26,7 @@
                     <a th:href="@{/modifier_rdv}" class="nav-link">Modifier un rendez-vous</a>
                 </li>
                 <li class="nav-item">
-                    <a th:href="@{/patient_compte}" class="nav-link">Mon compte</a>
+                    <a th:href="@{'/patient_compte/' +${patient.id}}" class="nav-link">Mon compte</a>
                 </li>
             </ul>
         </div>

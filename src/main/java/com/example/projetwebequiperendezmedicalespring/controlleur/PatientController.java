@@ -36,6 +36,18 @@ public class PatientController {
         return "/Vues/login";
     }
 
+    @GetMapping("/deconnexionPatient/{id}")
+    public String deconnexionPatient(@PathVariable(name="id") Integer id, HttpServletResponse response){
+        Patient patient = service.getPatient(id);
+        Cookie cookie = new Cookie("id", String.valueOf(patient.getId()));
+        cookie.setMaxAge(0);
+        cookie.setSecure(true);
+        cookie.setHttpOnly(true);
+        cookie.setPath("/");
+        response.addCookie(cookie);
+        return "Vues/login";
+    }
+
     @GetMapping("/prendre_rdv")
     public String prendre_rdv(){return "/Vues/Patient/prendre_rdv";}
 
@@ -53,9 +65,11 @@ public class PatientController {
     }
     @GetMapping("/patient_compte/{id_patient}")
     public String listPatPage(@PathVariable("id_patient")int id_patient, Model model){
-        List<Patient> listePatients = service.findAllPatient();
-        model.addAttribute("listePatients",listePatients);
-        return "Vues/Clinique/liste_patients";
+        //List<Patient> listePatients = service.findAllPatient();
+        //model.addAttribute("listePatients",listePatients);
+        Patient patient = service.getPatient(id_patient);
+        model.addAttribute("patient", patient);
+        return "Vues/Patient/patient_compte";
     }
 
     @GetMapping("/modifierRDV/{id_patient}")
