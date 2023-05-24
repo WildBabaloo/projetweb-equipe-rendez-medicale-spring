@@ -36,6 +36,9 @@
                 <li class="nav-item">
                     <a th:href="@{/patient_compte}" class="nav-link">Mon compte</a>
                 </li>
+                <li class="nav-item">
+                    <a th:href="@{'/mes_messagesP/' + ${patient.id}}" class="nav-link">Mes messages</a>
+                </li>
             </ul>
         </div>
     </div>

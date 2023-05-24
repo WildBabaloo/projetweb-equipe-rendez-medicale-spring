@@ -18,6 +18,12 @@ public class Message_PatientService {
         return  repo.save(messagePatient);
     }
 
+    public List<MessagePatient> findMessagesByMed(int id){
+        return (List<MessagePatient>) repo.findAllByMedecinId(id);
+    }
+    public List<MessagePatient> findMessagesByPat(int id){
+        return (List<MessagePatient>) repo.findAllByPatientId(id);
+    }
     public List<MessagePatient> afficherMessagesP(){
         return  (List<MessagePatient>) repo.findAll();
     }

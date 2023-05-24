@@ -5,6 +5,7 @@ import com.example.projetwebequiperendezmedicalespring.entities.MessageMedecin;
 import com.example.projetwebequiperendezmedicalespring.entities.MessagePatient;
 import com.example.projetwebequiperendezmedicalespring.entities.Patient;
 import com.example.projetwebequiperendezmedicalespring.service.MedecinService;
+import com.example.projetwebequiperendezmedicalespring.service.Message_MedecinService;
 import com.example.projetwebequiperendezmedicalespring.service.Message_PatientService;
 import com.example.projetwebequiperendezmedicalespring.service.PatientService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,6 +37,8 @@ public class PatientController {
 
     @Autowired
     Message_PatientService messPservice;
+    @Autowired
+    Message_MedecinService messMservice;
     @PostMapping("/patientLogin")
     public String patientLogin(Model model, @RequestParam("numAss") String numAss, @RequestParam("passwordPatient") String password, HttpServletResponse response){
         if(service.verifyPatientLogin(numAss, password) != null){
@@ -79,6 +82,17 @@ public class PatientController {
 
     @GetMapping("/modifier_rdv")
     public String modifier_rdv(){return "/Vues/Patient/modifier_rdv";}
+
+    @GetMapping("/mes_messagesP/{id}")
+    public String messagePat(@PathVariable("id")Integer id,Model model){
+        Patient patient = service.getPatient(id);
+        List<MessagePatient> listeMessagesP = messPservice.findMessagesByPat(id);
+        List<MessageMedecin> listeMessagesM = messMservice.findMessagesByPat(id);
+        model.addAttribute("patient",patient);
+        model.addAttribute("listeMessagesP",listeMessagesP);
+        model.addAttribute("listeMessagesM",listeMessagesM);
+        return "Vues/Patient/mes_messages";
+    }
 
     @GetMapping("/contacter_medecin/{id}")
     public String contacter_medecin(@PathVariable(name="id")Integer id,Model model){
