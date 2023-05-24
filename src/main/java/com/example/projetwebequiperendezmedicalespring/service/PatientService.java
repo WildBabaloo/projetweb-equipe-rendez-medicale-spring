@@ -71,11 +71,20 @@ public class PatientService {
             throw new PatientNotFoundException("On ne peut pas trouver un patient avec l'id: "+id);
         }
     }
+
+    public boolean existsByEmail(String email) {
+        return repo.existsByEmail(email);
+    }
     public Patient getId(int id){
         return repo.findById(id).get();
     }
 
-
+    //public List<Patient> rechercherPatient(String kewyord) {
+      //  if (keyword != null) {
+         //   return repo.findAll(keyword);
+       // }
+       // return null;
+   // }
 
 
 }

@@ -1,20 +1,15 @@
 package com.example.projetwebequiperendezmedicalespring.controlleur;
 
-import com.example.projetwebequiperendezmedicalespring.entities.Clinique;
+import com.example.projetwebequiperendezmedicalespring.entities.Medecin;
 import com.example.projetwebequiperendezmedicalespring.entities.Patient;
 import com.example.projetwebequiperendezmedicalespring.entities.RendezVous;
-import com.example.projetwebequiperendezmedicalespring.service.PatientNotFoundException;
 import com.example.projetwebequiperendezmedicalespring.service.PatientService;
 import com.example.projetwebequiperendezmedicalespring.service.RendezVousService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.Banner;
-import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.Cookie;
@@ -86,6 +81,31 @@ public class PatientController {
         return "Vues/Patient/modifierLeRdv";
     }
 
+
+    @GetMapping("/inscriptionPatient")
+    public String afficherFormulaireInscriptionPatient(Model model) {
+        model.addAttribute("patient", new Patient());
+        return "Vues/creer_compte";
+    }
+
+    @PostMapping("/inscription")
+    public String traiterFormulaireInscription(@ModelAttribute("patient") Patient patient) {
+
+        if (service.existsByEmail(patient.getEmail())) {
+
+            return "Vues/creer_compte";
+        }
+
+        service.ajouterPatient(patient);
+
+        return "redirect:/Vues/Patient/patient_index";
+    }
+    @GetMapping("/inscription-medecin")
+    public String afficherFormulaireInscriptionMedecin(Model model) {
+        model.addAttribute("medecin", new Medecin());
+        return "Vues/creer_compte";
+    }
+
     @GetMapping("/supprimer_rdv/delete/{id_rendezvous}")
     public String deleteRendezVous(@PathVariable(name = "id_rendezvous") Integer id, Model model, RedirectAttributes redirectAttributes){
         RendezVous rendezVous = rdvservice.getId(id);
@@ -94,6 +114,13 @@ public class PatientController {
         redirectAttributes.addFlashAttribute("message", "Le rendez vous dont l'id est " +id+ " à été supprimé");
         return "redirect:/modifierRDV/" +idPatient;
     }
+    //@GetMapping("/patient/new/{id_patient}")
+    ///public String afficherFormulairePatient(model model) {
+       // Patient patient= new Patient();
+        //model.addAttribute("patient", patient);
+       // return "Vues/Patient/patient_index";
+    //}
+
     @GetMapping("/contacter_medecin")
     public String contacter_medecin(){return "/Vues/Patient/contacter_medecin";}
 
@@ -135,5 +162,13 @@ public class PatientController {
         redirectAttributes.addFlashAttribute("message", "Le patient dont l'id est " +id+ " à été supprimé");
         return "redirect:/adminPatients";
     }
+
+
+
+
+
+
+
+
 
 }
