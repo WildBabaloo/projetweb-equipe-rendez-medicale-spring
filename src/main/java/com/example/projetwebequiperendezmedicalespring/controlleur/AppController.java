@@ -1,6 +1,7 @@
 package com.example.projetwebequiperendezmedicalespring.controlleur;
 
 import com.example.projetwebequiperendezmedicalespring.entities.Clinique;
+import com.example.projetwebequiperendezmedicalespring.entities.Medecin;
 import com.example.projetwebequiperendezmedicalespring.entities.Patient;
 import com.example.projetwebequiperendezmedicalespring.service.CliniqueService;
 import com.example.projetwebequiperendezmedicalespring.service.PatientService;
@@ -40,4 +41,11 @@ public class AppController {
 
     @GetMapping("admin_index")
     public String admin_index(){return "Vues/Admin/admin_index";}
+
+    @GetMapping("/creer_compte")
+    public String page_creer_compte(Model model){
+        model.addAttribute("patient", new Patient());
+        model.addAttribute("medecin", new Medecin());
+        return "Vues/creer_compte";
+    }
 }

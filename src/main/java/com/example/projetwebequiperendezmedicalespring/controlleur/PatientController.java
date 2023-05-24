@@ -112,7 +112,7 @@ public class PatientController {
 
         service.ajouterPatient(patient);
 
-        return "redirect:/Vues/Patient/patient_index";
+        return "/Vues/login";
     }
     @GetMapping("/inscription-medecin")
     public String afficherFormulaireInscriptionMedecin(Model model) {

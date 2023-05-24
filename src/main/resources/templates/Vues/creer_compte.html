@@ -46,7 +46,7 @@
     </div>
 <br> <br>
 <div class="container">
-    <form id="patientForm" action="/inscription" method="post" th:object="${patient}">
+    <form id="patientForm" th:action="@{/inscription}" method="post" th:object="${patient}">
         <p><label for="nom">Nom :</label><br>
             <input type="text" id="nom" th:field="*{nom}" required placeholder="Entrez votre nom"/></p>
 
@@ -83,7 +83,7 @@
         </p>
     </form>
 
-    <form id="medecinForm" action="/inscription-medecin" method="post" th:object="${medecin}">
+    <form id="medecinForm" th:action="@{/inscription-medecin}" method="post" th:object="${medecin}">
         <p><label for="nomMedecin">Nom :</label><br>
             <input type="text" id="nomMedecin" th:field="*{nom}" required placeholder="Entrez votre nom"/></p>
 
