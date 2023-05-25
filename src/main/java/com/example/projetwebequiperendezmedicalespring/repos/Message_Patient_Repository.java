@@ -14,7 +14,6 @@ public interface Message_Patient_Repository extends JpaRepository<MessagePatient
 
     @Query("SELECT m from MessagePatient m JOIN m.patientSender p where p.id_patient = ?1")
     public List<MessagePatient> findAllByPatientId(int id);
-
     @Query("SELECT m from MessagePatient m JOIN m.medecinReceiver r where r.id_medecin = ?1")
-    public List<MessageMedecin> findAllByMedecinId(int id);
+    public List<MessagePatient> findAllByMedecinId(int id);
 }

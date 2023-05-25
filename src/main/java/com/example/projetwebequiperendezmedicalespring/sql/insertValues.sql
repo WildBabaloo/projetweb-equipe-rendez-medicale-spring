@@ -23,11 +23,11 @@ INSERT INTO `medimeets`.`medecins`
  `tarifconsultation`,
  `clinique_id`)
 VALUES
-    (1,'2013-10-18 22:00:00','peterler098@gmail.com','guava','Peter',54128,'+1 514-548-1384','Healer',30,1),
-    (2,'2013-10-18 10:00:00','ringer765@gmail.com','horace','Ringo',45877,'+1 514-987-2649','Hingo',50,2),
-    (3,'2013-10-18 11:00:00','queenaid432@gmail.com','ingus','Queen',78535,'+1 514-145-1794','Bandaid',20,3),
-    (4,'2013-10-18 12:00:00','oleodoleo109@gmail.com','juice','Oleo',15816,'+1 514-218-3843','Jones',10,4),
-    (5,'2013-10-18 09:00:00','johnerson876@gmail.com','ecorce','John',26947,'+1 514-487-1658','Beterson',40,5);
+    (1,'2013-10-18','peterler098@gmail.com','guava','Peter',54128,'+1 514-548-1384','Healer',30,1),
+    (2,'2013-10-18','ringer765@gmail.com','horace','Ringo',45877,'+1 514-987-2649','Hingo',50,2),
+    (3,'2013-10-18','queenaid432@gmail.com','ingus','Queen',78535,'+1 514-145-1794','Bandaid',20,3),
+    (4,'2013-10-18','oleodoleo109@gmail.com','juice','Oleo',15816,'+1 514-218-3843','Jones',10,4),
+    (5,'2013-10-18','johnerson876@gmail.com','ecorce','John',26947,'+1 514-487-1658','Beterson',40,5);
 
 INSERT INTO `medimeets`.`patients`
 (`id_patient`,

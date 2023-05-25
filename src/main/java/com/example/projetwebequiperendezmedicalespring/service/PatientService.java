@@ -59,6 +59,11 @@ public class PatientService {
             repoRendezVous.deleteById(rendezVous.getId());
         }
     }
+
+    public Patient findPatientNumAss(String numAss){
+        return repo.getPatientByNumAss(numAss);
+    }
+
     public Patient verifyPatientLogin(String numAss, String password){
         return repo.verifyNumAssAndPassword(numAss, password);
     }

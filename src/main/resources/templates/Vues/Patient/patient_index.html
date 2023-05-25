@@ -23,10 +23,13 @@
                     <a th:href="@{/prendre_rdv}" class="nav-link">Prendre un rendez-vous</a>
                 </li>
                 <li class="nav-item">
-                    <a th:href="@{/modifier_rdv}" class="nav-link">Modifier un rendez-vous</a>
+                    <a th:href="@{'/modifierRDV/' + ${patient.id}}" class="nav-link">Modifier un rendez-vous</a>
                 </li>
                 <li class="nav-item">
-                    <a th:href="@{/patient_compte}" class="nav-link">Mon compte</a>
+                    <a th:href="@{'/patient_compte/' +${patient.id}}" class="nav-link">Mon compte</a>
+                </li>
+                <li class="nav-item">
+                    <a th:href="@{'/mes_messagesP/' + ${patient.id}}" class="nav-link">Mes messages</a>
                 </li>
             </ul>
         </div>
@@ -34,8 +37,8 @@
     <br> <br> <br>
 </nav>
 <br> <br>
-<div class="main container">
-    <h2>Bienvenue <%=session.getAttribute("nom")  %>  <%=session.getAttribute("prenom")  %></h2>
+<div class="main container" th:if="${patient}">
+    <h2>Bienvenue [[${patient.nom}]]</h2>
     <br> <br>
     <div class="options_Patients">
         <h3>Ici sont vos options :</h3> <br> <br>
@@ -46,17 +49,17 @@
                 </a>
             </li>
             <li>
-                <a th:href="@{/modifier_rdv}">
+                <a th:href="@{'/modifierRDV/' + ${patient.id}}">
                     <button>Cliquer ici pour modifier et voir mes rendez-vous</button>
                 </a>
             </li>
             <li>
-                <a th:href="@{/patient_compte}">
+                <a th:href="@{'/patient_compte/' +${patient.id}}">
                     <button>Cliquer ici pour modifier mon compte utilisateur</button>
                 </a>
             </li>
             <li>
-                <a th:href="@{/contacter_medecin}">
+                <a th:href="@{'/contacter_medecin/' + ${patient.id}}">
                     <button>Cliquer ici pour contacter un medecin qui est incris avec MediMeets</button>
                 </a>
             </li>

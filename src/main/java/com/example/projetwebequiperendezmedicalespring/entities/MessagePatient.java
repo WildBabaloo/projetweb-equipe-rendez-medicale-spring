@@ -1,5 +1,7 @@
 package com.example.projetwebequiperendezmedicalespring.entities;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.persistence.*;
 import java.util.Date;
 
@@ -17,18 +19,18 @@ public class MessagePatient {
     @Column(length = 10000, nullable = false)
     private String message;
 
-    @Temporal(TemporalType.DATE)
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date date;
 
     @Column
     private String document;
 
-    @OneToOne(optional = false)
-    @JoinColumn(name = "patient_id_patient", nullable = false)
+    @OneToOne
+    @JoinColumn(name = "patient_id_patient")
     private Patient patientSender;
 
-    @OneToOne(optional = false)
-    @JoinColumn(name = "medecin_id_medecin", nullable = false)
+    @OneToOne
+    @JoinColumn(name = "medecin_id_medecin")
     private Medecin medecinReceiver;
 
     public MessagePatient() {

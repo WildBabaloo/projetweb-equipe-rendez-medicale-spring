@@ -35,6 +35,8 @@ public class MedecinController {
     @Autowired
     Message_MedecinService messMservice;
 
+    @Autowired
+    Message_PatientService messPservice;
     @PostMapping("/medecinLogin")
     public String medecinLogin(Model model, @RequestParam("numProf") int numProf, @RequestParam("passwordMedecin") String password, HttpServletResponse response){
         // Check if numProf is int (FOR FUTURE ME TO DO BECAUSE I WAS SLEEPY)
@@ -81,13 +83,23 @@ public class MedecinController {
         return "/Vues/Medecin/compte_medecin";
     }
 
+    @GetMapping("/mes_messagesM/{id}")
+    public String messageMed(@PathVariable("id")Integer id,Model model){
+        Medecin medecin = service.getMedecin(id);
+        List<MessagePatient> listeMessagesP = messPservice.findMessagesByMed(id);
+        List<MessageMedecin> listeMessagesM = messMservice.findMessagesByMed(id);
+        model.addAttribute("medecin",medecin);
+        model.addAttribute("listeMessagesP",listeMessagesP);
+        model.addAttribute("listeMessagesM",listeMessagesM);
+        return "Vues/Medecin/mes_messages";
+    }
     @GetMapping("/compte_medecin/modifier/{id}")
     public String modMedPage(@PathVariable("id")Integer id,Model model){
         Medecin medecin = service.getId(id);
         List<Clinique> listeCliniques = cliservice.findAllCliniques();
         List<Services> listeServices = serviceServices.findAllServices();
         String now = LocalDate.now().toString();
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy", Locale.ENGLISH);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd", Locale.ENGLISH);
         LocalDate date = LocalDate.parse(now, formatter);
         model.addAttribute("date",date);
         model.addAttribute("pageTitle","Editer Medecin (ID: " + id + ")");
