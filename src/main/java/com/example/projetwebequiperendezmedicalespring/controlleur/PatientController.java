@@ -3,6 +3,7 @@ package com.example.projetwebequiperendezmedicalespring.controlleur;
 import com.example.projetwebequiperendezmedicalespring.entities.*;
 import com.example.projetwebequiperendezmedicalespring.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -32,6 +33,10 @@ public class PatientController {
     Message_PatientService messPservice;
     @Autowired
     Message_MedecinService messMservice;
+
+    @Autowired
+    RendezVousService rdvservice;
+
     @PostMapping("/patientLogin")
     public String patientLogin(Model model, @RequestParam("numAss") String numAss, @RequestParam("passwordPatient") String password, HttpServletResponse response){
         if(service.verifyPatientLogin(numAss, password) != null){
@@ -77,20 +82,6 @@ public class PatientController {
         model.addAttribute("medecins", medecins);
         model.addAttribute("rendezvous", new RendezVous());
         return "/Vues/Patient/prendre_rdv";
-    }
-
-
-    @GetMapping("/patient_index/{id_patient}")
-    public String cliPage(@PathVariable("id_patient")int id_patient,Model model, HttpServletResponse response){
-        Patient patient = service.getPatient(id_patient);
-        Cookie c = new Cookie("id_patient",String.valueOf(id_patient));
-        c.setMaxAge(60*60);
-        c.setSecure(true);
-        c.setHttpOnly(true);
-        c.setPath("/");
-        response.addCookie(c);
-        model.addAttribute("patient",patient);
-        return "Vues/Patient/patient_index";
     }
     @GetMapping("/patient_compte/{id_patient}")
     public String listPatPage(@PathVariable("id_patient")int id_patient, Model model){
@@ -217,7 +208,7 @@ public class PatientController {
     }
 
     @GetMapping("/rechercher/cliniques/{id}")
-    public String rechercherClinique(@PathVariable(name="id")Integer id,@Param("keyword")String keyword,Model model){
+    public String rechercherClinique(@PathVariable(name="id")Integer id, @Param("keyword")String keyword, Model model){
         List<Clinique> listeCliniques = cliservice.rechercherClinique(keyword);
         Patient patient = service.getPatient(id);
         model.addAttribute("patient",patient);
