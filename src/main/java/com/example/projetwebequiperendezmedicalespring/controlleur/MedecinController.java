@@ -54,7 +54,7 @@ public class MedecinController {
             return "/Vues/Medecin/medecin_index";
         }
         model.addAttribute("message", "Wrong (To edit)");
-        return "/Vues/login";
+        return "redirect:/login";
     }
 
     @GetMapping("/deconnexion/{id}")

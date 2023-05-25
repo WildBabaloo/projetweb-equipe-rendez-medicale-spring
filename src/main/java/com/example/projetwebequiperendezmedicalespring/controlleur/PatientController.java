@@ -56,8 +56,8 @@ public class PatientController {
         if(numAss.equals("root") && password.equals("root")){
             return "/Vues/Admin/admin_index";
         }
-        model.addAttribute("message", "Wrong (To edit)");
-        return "/Vues/login";
+        model.addAttribute("messageFailedLogin", "Mauvais mot de passe");
+        return "redirect:/login";
     }
 
     @GetMapping("/deconnexionPatient/{id}")
@@ -144,8 +144,8 @@ public class PatientController {
             return "Vues/creer_compte";
         }
         service.ajouterPatient(patient);
-        
-        return "/Vues/login";
+
+        return "redirect:/login";
     }
     @GetMapping("/inscriptionMedecin")
     public String afficherFormulaireInscriptionMedecin(Model model) {
@@ -160,7 +160,7 @@ public class PatientController {
         }
         medservice.ajouterMedecinInscrip(medecin);
 
-        return "/Vues/login";
+        return "redirect:/login";
     }
 
     @GetMapping("/supprimer_rdv/delete/{id_rendezvous}")
