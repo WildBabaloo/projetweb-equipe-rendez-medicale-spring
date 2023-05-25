@@ -68,12 +68,12 @@ public class CliniqueRepoTest {
     // TO DO
     @Test
     public void testDeleteClinique(){
-        List<RendezVous> rendezVousClinique = repoRendezVous.findAllByCliniqueId(1);
+        List<RendezVous> rendezVousClinique = repoRendezVous.findAllByCliniqueId(2);
         for(RendezVous rendezVous : rendezVousClinique){
             repoRendezVous.deleteById(rendezVous.getId());
         }
 
-        List<Medecin> listeMedecin = repoMedecin.findAllByCliniqueId(1);
+        List<Medecin> listeMedecin = repoMedecin.findAllByCliniqueId(2);
         for (Medecin medecin: listeMedecin){
             medecin.setClinique(null);
             repoMedecin.save(medecin);

@@ -4,10 +4,7 @@ import com.example.projetwebequiperendezmedicalespring.entities.*;
 import com.example.projetwebequiperendezmedicalespring.entities.Medecin;
 import com.example.projetwebequiperendezmedicalespring.entities.Patient;
 import com.example.projetwebequiperendezmedicalespring.entities.RendezVous;
-import com.example.projetwebequiperendezmedicalespring.repos.CliniqueRepository;
-import com.example.projetwebequiperendezmedicalespring.repos.MedecinRepository;
-import com.example.projetwebequiperendezmedicalespring.repos.PatientRepository;
-import com.example.projetwebequiperendezmedicalespring.repos.RendezVousRepository;
+import com.example.projetwebequiperendezmedicalespring.repos.*;
 //import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -32,6 +29,12 @@ public class MedecinService {
 
     @Autowired
     CliniqueRepository repoClinique;
+
+    @Autowired
+    private Message_Medecin_Repository repoMessageMedecin;
+
+    @Autowired
+    private Message_Patient_Repository repoMessagePatient;
 
     public List<Patient> afficherPatientByMedecin(int id){
         return (List<Patient>) repoPatient.findAllByPatientByMedecinId(id);
@@ -93,12 +96,25 @@ public class MedecinService {
             repoRendezVous.deleteById(rendezVous.getId());
         }
 
-        // Delete all patients associated to him
+        // Delete all patients associated to him by setting their medecin to null
         List<Patient> listePatient = repoPatient.findAllByPatientByMedecinId(id);
         for (Patient patient : listePatient){
             patient.setMedecin(null);
             repoPatient.save(patient);
         }
+
+        // Delete all messages medecin
+        List<MessageMedecin> messageMedecins = repoMessageMedecin.findAllByMedecinId(id);
+        for(MessageMedecin messageMedecin : messageMedecins){
+            repoMessageMedecin.deleteById(messageMedecin.getId_message());
+        }
+
+        // Delete all messages patient
+        List<MessagePatient> messagePatients = repoMessagePatient.findAllByPatientId(id);
+        for(MessagePatient messagePatient : messagePatients){
+            repoMessagePatient.deleteById(messagePatient.getId_message());
+        }
+
 
         // Delete his service to the clinique if he is the only one who has it
         Medecin leMedecin = repo.findById(id).get();
