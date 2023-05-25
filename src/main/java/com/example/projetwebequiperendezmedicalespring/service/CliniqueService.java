@@ -75,12 +75,12 @@ public class CliniqueService {
         return repo.findById(id).get();
     }
     public void deleteClinique(Integer id){
-        List<RendezVous> rendezVousClinique = repoRendezVous.findAllByCliniqueId(1);
+        List<RendezVous> rendezVousClinique = repoRendezVous.findAllByCliniqueId(id);
         for(RendezVous rendezVous : rendezVousClinique){
             repoRendezVous.deleteById(rendezVous.getId());
         }
 
-        List<Medecin> listeMedecin = repoMedecin.findAllByCliniqueId(1);
+        List<Medecin> listeMedecin = repoMedecin.findAllByCliniqueId(id);
         for (Medecin medecin: listeMedecin){
             medecin.setClinique(null);
             repoMedecin.save(medecin);
