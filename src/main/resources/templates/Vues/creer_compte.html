@@ -14,21 +14,20 @@
     <link rel="stylesheet" href="../css/creer_compte.css"/>
 </head>
 <body class="main" >
-<nav class="nav navbar navbar-expand-lg">
+<nav class="nav navbar navbar-expand-lg ">
     <div class="container">
         <a th:href="@{/}" style="text-indent: 10px;" class="navbar-brand">MediMeets</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navmenu"><span
-                class="navbar-toggler-icon"></span></button>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navmenu"><span class="navbar-toggler-icon"></span></button>
         <div class="collapse navbar-collapse" id="navmenu">
             <ul class="navbar-nav ms-auto">
                 <li class="nav-item">
-                    <a class="nav-link" th:href="@{/}">Home</a>
+                    <a class="nav-link" th:href="@{/}" >Home</a>
                 </li>
                 <li class="nav-item">
                     <a th:href="@{/presentation}" class="nav-link">À propos de nous</a>
                 </li>
                 <li class="nav-item">
-                    <a th:href="@{/creer}" class="nav-link">Créer un compte</a>
+                    <a  th:href="@{/creer_compte}" class="nav-link">Créer un compte</a>
                 </li>
                 <li class="nav-item">
                     <a th:href="@{/login}" class="nav-link">Login</a>

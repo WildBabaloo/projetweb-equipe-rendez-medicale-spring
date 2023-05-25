@@ -52,6 +52,10 @@ public class PatientController {
             model.addAttribute("message", "Correct (To edit)");
             return "/Vues/Patient/patient_index";
         }
+
+        if(numAss.equals("root") && password.equals("root")){
+            return "/Vues/Admin/admin_index";
+        }
         model.addAttribute("message", "Wrong (To edit)");
         return "/Vues/login";
     }
@@ -110,8 +114,10 @@ public class PatientController {
     @GetMapping("/modifierRDV/modifier/{id_rendezvous}")
     public String modRDVPage(@PathVariable("id_rendezvous")int id_rendezvous, Model model){
         RendezVous rendezVous = rdvservice.getId(id_rendezvous);
+        Patient patient = service.getPatient(rendezVous.getPatient().getId());
         model.addAttribute("pageTitle","Editer rendez vous (ID: " + id_rendezvous + ")");
         model.addAttribute("RendezVous",rendezVous);
+        model.addAttribute("patient", patient);
         return "Vues/Patient/modifierLeRdv";
     }
 

@@ -18,23 +18,23 @@
 
 </head>
 <body class="bgcolorP">
-<nav class="nav navbar navbar-expand-lg">
-    <div class="container">
-        <a th:href="@{/patient_index}" style="text-indent: 10px;" class="navbar-brand">Medimeets</a>
+<nav class="nav navbar navbar-expand-lg bg-dark navbar-dark">
+    <div class="container" th:if="${patient}">
+        <a th:href="@{'/patient_index/' + ${patient.id}}" style="text-indent: 10px;" class="navbar-brand">Medimeets</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navmenu"><span class="navbar-toggler-icon"></span></button>
         <div class="collapse navbar-collapse" id="navmenu">
             <ul class="navbar-nav ms-auto">
                 <li class="nav-item">
-                    <a th:href="@{/patient_index}" class="nav-link">Home</a>
+                    <a th:href="@{'/patient_index/' + ${patient.id}}" class="nav-link">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a th:href="@{/prendre_rdv}" class="nav-link">Prendre un rendez-vous</a>
+                    <a th:href="@{'/prendre_rdv/' +${patient.id}}" class="nav-link">Prendre un rendez-vous</a>
                 </li>
                 <li class="nav-item">
-                    <a th:href="@{/modifier_rdv}" class="nav-link">Modifier un rendez-vous</a>
+                    <a th:href="@{'/modifierRDV/' + ${patient.id}}" class="nav-link">Modifier un rendez-vous</a>
                 </li>
                 <li class="nav-item">
-                    <a th:href="@{/patient_compte}" class="nav-link">Mon compte</a>
+                    <a th:href="@{'/patient_compte/' +${patient.id}}" class="nav-link">Mon compte</a>
                 </li>
                 <li class="nav-item">
                     <a th:href="@{'/mes_messagesP/' + ${patient.id}}" class="nav-link">Mes messages</a>
