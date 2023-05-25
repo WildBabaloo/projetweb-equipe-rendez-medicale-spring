@@ -4,6 +4,7 @@ import com.example.projetwebequiperendezmedicalespring.entities.Medecin;
 import com.example.projetwebequiperendezmedicalespring.entities.Patient;
 import com.example.projetwebequiperendezmedicalespring.entities.RendezVous;
 import com.example.projetwebequiperendezmedicalespring.service.CliniqueService;
+import com.example.projetwebequiperendezmedicalespring.service.MedecinService;
 import com.example.projetwebequiperendezmedicalespring.service.PatientService;
 import com.example.projetwebequiperendezmedicalespring.service.RendezVousService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +23,9 @@ public class PatientController {
 
     @Autowired
     PatientService service;
+
+    @Autowired
+    MedecinService medservice;
 
     @Autowired
     RendezVousService rdvservice;
@@ -60,6 +64,7 @@ public class PatientController {
         model.addAttribute("descriptions", descriptions);
         model.addAttribute("raisons", raisons);
         model.addAttribute("cliniques", cliniques);
+        model.addAttribute("rendezvous", new RendezVous());
         return "/Vues/Patient/prendre_rdv";
     }
 
@@ -117,20 +122,25 @@ public class PatientController {
 
     @PostMapping("/inscription")
     public String traiterFormulaireInscription(@ModelAttribute("patient") Patient patient) {
-
         if (service.existsByEmail(patient.getEmail())) {
-
             return "Vues/creer_compte";
         }
-
         service.ajouterPatient(patient);
-
         return "/Vues/login";
     }
-    @GetMapping("/inscription-medecin")
+    @GetMapping("/inscriptionMedecin")
     public String afficherFormulaireInscriptionMedecin(Model model) {
         model.addAttribute("medecin", new Medecin());
         return "Vues/creer_compte";
+    }
+
+    @PostMapping("/inscriptionMed")
+    public String traiterFormulaireInscriptionMedecin(@ModelAttribute("medecin") Medecin medecin) {
+        if (service.existsByEmail(medecin.getEmail())) {
+            return "Vues/creer_compte";
+        }
+        medservice.ajouterMedecinInscrip(medecin);
+        return "/Vues/login";
     }
 
     @GetMapping("/supprimer_rdv/delete/{id_rendezvous}")

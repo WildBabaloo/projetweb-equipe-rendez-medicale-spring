@@ -38,9 +38,8 @@
     <h1>Prendre un rendez-vous</h1>
     <br> <br>
     <div class="inscription">
-        <form action="#" method="post">
-            <br> <br>
-            <form method="post">
+
+            <form method="post" th:action="@{/formRendezVous}">
                 <!--<h3>Choisi la clinique que vous voulez !</h3>-->
                 <label for="clinique">La clinique de votre rendez-vous :</label>
                 <select name="clinique" required id="clinique">
@@ -91,44 +90,5 @@
         </div>
     </div>
 </div>
-<script>
-    function searchClinic() {
-        var input = document.getElementById("rechercherClinique");
-        var query = input.value.toLowerCase();
-
-        // Effectuer une requête AJAX pour récupérer les cliniques correspondantes à la première lettre saisie
-        var xhr = new XMLHttpRequest();
-        xhr.open("GET", "/searchClinics?query=" + query, true);
-        xhr.onreadystatechange = function () {
-            if (xhr.readyState === 4 && xhr.status === 200) {
-                var clinics = JSON.parse(xhr.responseText);
-
-                // Afficher les résultats dans une liste déroulante
-                var clinicsList = document.getElementById("clinicsList");
-                clinicsList.innerHTML = "";
-
-                var select = document.createElement("select");
-                select.setAttribute("name", "clinic");
-                select.setAttribute("required", "required");
-
-                var defaultOption = document.createElement("option");
-                defaultOption.value = "";
-                defaultOption.text = "Sélectionner une clinique...";
-                select.appendChild(defaultOption);
-
-                clinics.forEach(function (clinic) {
-                    var option = document.createElement("option");
-                    option.value = clinic.id;
-                    option.text = clinic.name;
-                    select.appendChild(option);
-                });
-
-                clinicsList.appendChild(select);
-            }
-        };
-        xhr.send();
-    }
-</script>
-
 </body>
 </html>
