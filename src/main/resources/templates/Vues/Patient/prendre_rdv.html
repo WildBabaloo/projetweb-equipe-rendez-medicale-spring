@@ -55,28 +55,20 @@
 
                 <p><label for="dateRDV"> Saisir la date du rendez-vous :</label>
                     <input type="date" name="dateRDV" required id="dateRDV"> </p>
-                <p><label for="preferanceJournee">Vos préférances dans le moment de la journée :</label></p>
-                <p><input type="checkbox" id="moment1" name="moment1" value="Avant-Midi">
-                    <label for="moment1">Avant-Midi</label>
-                    <input type="checkbox" id="moment2" name="moment2" value="Après-Midi">
-                    <label for="moment2">Après-Midi</label>
-                    <input type="checkbox" id="moment3" name="moment3" value="Soiree">
-                    <label for="moment3">Soirée</label></p>
-
                 <p>
-                    <label for="description">La description de votre rendez-vous : </label>
-                    <select name="description" required id="description">
-                        <option value="invalidDescription">Choisir une description...</option>
-                        <option th:each="description : ${descriptions}" th:value="${description}" th:text="${description}"></option>
-                    </select></p>
+                    <label for="heureRDV">Choisir l'heure du rendez-vous :</label>
+                    <input type="time" name="heureRDV" required id="heureRDV">
+                </p>
 
+                <label for="description">La description de votre rendez-vous :</label>
+                    <input type="text" th:field="${rendezvous.description}" required id="description" placeholder="Saisir la description du rendez-vous"><br>
 
                     <label for="raison">La raison de votre rendez-vous :</label>
-                    <select name="raison" required id="raison">
-                        <option value="invalidRaison">Choisir une raison...</option>
-                        <option th:each="raison : ${raisons}" th:value="${raison}" th:text="${raison}"></option>
-                    </select></p>
-                <input type="submit" value="Envoyer"/>
+                    <input type="text" th:field="${rendezvous.raison}" required id="raison" placeholder="Saisir la raison du rendez-vous"><br>
+
+                <input type="hidden" name="dateTimeRDV" id="dateTimeRDV">
+                
+                    <input type="submit" value="Envoyer"/>
             </form>
         </form>
     </div>
@@ -90,5 +82,23 @@
         </div>
     </div>
 </div>
+<script>
+    // Fonction pour combiner la date et l'heure avant de soumettre le formulaire
+    function combineDateAndTime() {
+        // Récupérer les valeurs de la date et de l'heure
+        var dateRDV = document.getElementById("dateRDV").value;
+        var heureRDV = document.getElementById("heureRDV").value;
+
+        // Combinez la date et l'heure dans un format souhaité (par exemple, YYYY-MM-DD HH:mm)
+        var dateTimeRDV = dateRDV + " " + heureRDV;
+
+        // Mettez à jour la valeur de l'élément input pour l'envoyer dans le formulaire
+        document.getElementById("dateTimeRDV").value = dateTimeRDV;
+    }
+
+    // Ajoutez un écouteur d'événement sur la soumission du formulaire pour appeler la fonction combineDateAndTime
+    document.getElementById("formRendezVous").addEventListener("submit", combineDateAndTime);
+</script>
+
 </body>
 </html>
