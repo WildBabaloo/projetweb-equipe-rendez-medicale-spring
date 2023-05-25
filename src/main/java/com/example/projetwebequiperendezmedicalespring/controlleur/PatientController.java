@@ -144,6 +144,7 @@ public class PatientController {
             return "Vues/creer_compte";
         }
         service.ajouterPatient(patient);
+        
         return "/Vues/login";
     }
     @GetMapping("/inscriptionMedecin")
@@ -158,6 +159,7 @@ public class PatientController {
             return "Vues/creer_compte";
         }
         medservice.ajouterMedecinInscrip(medecin);
+
         return "/Vues/login";
     }
 

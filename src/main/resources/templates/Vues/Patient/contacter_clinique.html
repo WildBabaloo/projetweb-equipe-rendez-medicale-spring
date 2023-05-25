@@ -45,11 +45,11 @@
             <p>
                 <label>Le nom de la clinique :</label>
                 <input type="search" name="keyword" th:value="${keyword}" id="rechercherClinique" required/></p>
-            <button type="submit">Rechercher</button><br>
+            <button type="submit" class="motto button small-button button2">Rechercher</button><br>
             <div id="ta" hidden><textarea id="messageContent" rows="15" cols="100"></textarea></div><br>
         </form>
         <form th:action="@{'/contacter_clinique/' +${patient.id}}">
-            <button type="submit">Réinitialiser</button><br>
+            <button type="submit" class="motto button small-button button2">Réinitialiser</button><br>
         </form>
         <h1>Les informations de la clinique</h1>
         <br>
