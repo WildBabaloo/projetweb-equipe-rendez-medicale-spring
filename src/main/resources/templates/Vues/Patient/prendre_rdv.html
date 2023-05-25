@@ -44,7 +44,7 @@
                 <label for="clinique">La clinique de votre rendez-vous :</label>
                 <select name="clinique" required id="clinique">
                     <option value="invalidClinique">Choisir une clinique...</option>
-                    <option th:each="clinique : ${cliniques}" th:value="${clinique}" th:text="${clinique}"></option>
+                    <option th:each="clinique : ${cliniques}" th:value="${clinique.id}" th:text="${clinique}"></option>
                 </select></p>
 
                <!-- <p><label for="rechercherClinique">Le nom de la clinique :</label>
