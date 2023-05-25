@@ -5,6 +5,7 @@ import com.example.projetwebequiperendezmedicalespring.entities.RendezVous;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -19,5 +20,15 @@ public interface RendezVousRepository extends JpaRepository<RendezVous, Integer>
 
     @Query("SELECT r from RendezVous r JOIN r.clinique c where c.id_clinique = ?1")
     public List<RendezVous> findAllByCliniqueId(int id);
+
+    @Query("SELECT DISTINCT r.description FROM RendezVous r")
+    List<String> findAllDescriptions();
+
+
+    @Query("SELECT DISTINCT r.raison FROM RendezVous r")
+    List<String> findAllRaisons();
+
+
+
 
 }

@@ -41,72 +41,51 @@
     <h1>Prendre un rendez-vous</h1>
     <br> <br>
     <div class="inscription">
-        <form action="#" method="post">
-            <form method="get">
-                <h3> Rechercher une clinique près de chez vous :</h3> <br>
+
+            <form method="post" th:action="@{/formRendezVous}" th:object="${rendezvous}">
+                <input type="hidden" th:field="*{id}">
+                <th:block>
+                    <input type="checkbox" th:field="*{patient}" th:value="${patient.id}">
+                </th:block>
+                <!--<h3>Choisi la clinique que vous voulez !</h3>-->
+                <label for="clinique">La clinique de votre rendez-vous :</label>
+                <select name="clinique" required id="clinique">
+                    <option value="invalidClinique">Choisir une clinique...</option>
+                    <th:block th:each="clinique : ${cliniques}">
+                        <option th:field="*{clinique}" th:text="${clinique.nom}" th:value="${clinique.id}"></option>
+                    </th:block>
+                </select></p>
+                <label for="medecin">Le medecin de votre rendez-vous</label>
+                <select name="medecin" required id="medecin">
+                    <option value="invalidMedecin">Choisir un medecin...</option>
+                    <th:block th:each="medecin : ${medecins}">
+                        <option th:field="*{medecin}" th:text="${medecin.nom}+ ' ' + ${medecin.prenom}" th:value="${medecin.id}"></option>
+                    </th:block>
+                </select>
+
+               <!-- <p><label for="rechercherClinique">Le nom de la clinique :</label>
+                    <input type="text" id="rechercherClinique" name="rechercherClinique" required placeholder="Rechercher la clinique..." oninput="searchClinic()"/> -->
+
+
+
+
                 <p><label for="dateRDV"> Saisir la date du rendez-vous :</label>
                     <input type="date" name="dateRDV" required id="dateRDV"> </p>
-                <p><label for="preferanceJournee">Vos préférance dans le moment de la journée :</label></p>
-                <p><input type="checkbox" id="moment1" name="moment1" value="Avant-Midi">
-                    <label for="moment1">Avant-Midi</label>
-                    <input type="checkbox" id="moment2" name="moment2" value="Après-Midi">
-                    <label for="moment2">Après-Midi</label>
-                    <input type="checkbox" id="moment3" name="moment3" value="Soiree">
-                    <label for="moment3">Soirée</label></p>
-                <p> <label for="codePostal"> Votre code postal : </label>
-                    <input type="text" name="codePostal" required id="codePostal"/> </p>
-                <p> <label for="perimetreRecherche"> Votre Périmètre de recherche (en KM) :</label>
-                    <select name="perimetreRecherche" required id="perimetreRecherche">
-                        <option value="10km">10 km</option>
-                        <option value="20km">20 km</option>
-                        <option value="30km">30 km</option>
-                        <option value="40km">40 km</option>
-                        <option value="50km">50 km</option>
-                    </select></p>
                 <p>
-                    <label for="raison">La raison de votre rendez-vous</label>
-                    <select name="raison" required id="raison" value="Choisir une raison...">
-                        <option value="invalidRaison">Choisir une raison...</option>
-                        <option value="raison1">Covid-19</option>
-                        <option value="raison2">Prise de sang et prélèvements</option>
-                        <option value="raison1">Vaccination</option>
-                        <option value="raison1">Clinique Jeunesse</option>
-                        <option value="raison1">Dépistage ITSS et santé sexuelle</option>
-                        <option value="raison1">Consultation avec un professionnel</option>
-                        <option value="raison1">Grossesse et Pédiatrie</option>
-                        <option value="raison1">Imagerie médiacle</option>
-                        <option value="raison1">Maladies chroniques</option>
-                        <option value="raison1">Médicaments et ordonnace</option>
-                        <option value="raison1">Soins de santé</option>
-                        <option value="raison1">Santé voyage</option>
-                    </select></p>
-                <input type="submit" value="Rechercher"/>
+                    <label for="heureRDV">Choisir l'heure du rendez-vous :</label>
+                    <input type="time" name="heureRDV" required id="heureRDV">
+                </p>
+
+                <label for="description">La description de votre rendez-vous :</label>
+                    <input type="text" th:field="*{description}" required id="description" placeholder="Saisir la description du rendez-vous"><br>
+
+                    <label for="raison">La raison de votre rendez-vous :</label>
+                    <input type="text" th:field="*{raison}" required id="raison" placeholder="Saisir la raison du rendez-vous"><br>
+
+                <input type="hidden" name="dateTimeRDV" id="dateTimeRDV">
+
+                    <input type="submit" value="Envoyer"/>
             </form>
-            <br> <br>
-            <form method="post">
-                <h3>Sinon rechercher une clinique spécifique :</h3>
-                <p><label for="rechercherClinique">Le nom de la clinique :</label>
-                    <input type="text" id="rechercherClinique" name="rechercherClinique" required placeholder="Rechercher la clinique..."/></p>
-                <p><label for="dateRDV"> Saisir la date du rendez-vous :</label>
-                    <input type="date" name="dateRDV" required id="dateRDV"> </p>
-                <p><label for="preferanceJournee">Vos préférance dans le moment de la journée :</label></p>
-                <p><input type="checkbox" id="moment1" name="moment1" value="Avant-Midi">
-                    <label for="moment1">Avant-Midi</label>
-                    <input type="checkbox" id="moment2" name="moment2" value="Après-Midi">
-                    <label for="moment2">Après-Midi</label>
-                    <input type="checkbox" id="moment3" name="moment3" value="Soiree">
-                    <label for="moment3">Soirée</label></p>
-                <p> <label for="codePostal"> Votre code postal : </label>
-                    <input type="text" name="codePostal" required id="codePostal"/> </p>
-                <p>
-                    <label for="raison">La raison de votre rendez-vous</label>
-                    <select name="raison" required id="raison">
-                        <option value="invalidRaison">Choisir une raison...</option>
-                        <option value="raison1">Les options offert par la clinique (À completer quand BD fini)</option>
-                    </select></p>
-                <input type="submit" value="Envoyer"/>
-            </form>
-        </form>
     </div>
 </div>
 <br> <br>
@@ -118,5 +97,18 @@
         </div>
     </div>
 </div>
+<script>
+    function combineDateAndTime() {
+        var dateRDV = document.getElementById("dateRDV").value;
+        var heureRDV = document.getElementById("heureRDV").value;
+
+        var dateTimeRDV = dateRDV + " " + heureRDV;
+
+        document.getElementById("dateTimeRDV").value = dateTimeRDV;
+    }
+
+    document.getElementById("formRendezVous").addEventListener("submit", combineDateAndTime);
+</script>
+
 </body>
 </html>

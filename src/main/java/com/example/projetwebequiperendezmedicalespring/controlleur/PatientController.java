@@ -3,14 +3,10 @@ package com.example.projetwebequiperendezmedicalespring.controlleur;
 import com.example.projetwebequiperendezmedicalespring.entities.*;
 import com.example.projetwebequiperendezmedicalespring.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.Banner;
-import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.Cookie;
@@ -55,8 +51,79 @@ public class PatientController {
         return "/Vues/login";
     }
 
-    @GetMapping("/prendre_rdv")
-    public String prendre_rdv(){return "/Vues/Patient/prendre_rdv";}
+    @GetMapping("/deconnexionPatient/{id}")
+    public String deconnexionPatient(@PathVariable(name="id") Integer id, HttpServletResponse response){
+        Patient patient = service.getPatient(id);
+        Cookie cookie = new Cookie("id", String.valueOf(patient.getId()));
+        cookie.setMaxAge(0);
+        cookie.setSecure(true);
+        cookie.setHttpOnly(true);
+        cookie.setPath("/");
+        response.addCookie(cookie);
+        return "Vues/login";
+    }
+
+    @GetMapping("/prendre_rdv/{id_patient}")
+    public String prendre_rdv(@PathVariable(name="id_patient") int id_patient, Model model) {
+        //List<String> descriptions = rdvservice.getAllDescriptions();
+        //List<String> raisons = rdvservice.getAllRaisons();
+        Patient patient = service.getPatient(id_patient);
+        List<Clinique> cliniques = cliservice.findAllCliniques();
+        List<Medecin> medecins = medservice.findAllMedecins();
+        //model.addAttribute("descriptions", descriptions);
+        //model.addAttribute("raisons", raisons);
+        model.addAttribute("patient", patient);
+        model.addAttribute("cliniques", cliniques);
+        model.addAttribute("medecins", medecins);
+        model.addAttribute("rendezvous", new RendezVous());
+        return "/Vues/Patient/prendre_rdv";
+    }
+
+
+    @GetMapping("/patient_index/{id_patient}")
+    public String cliPage(@PathVariable("id_patient")int id_patient,Model model, HttpServletResponse response){
+        Patient patient = service.getPatient(id_patient);
+        Cookie c = new Cookie("id_patient",String.valueOf(id_patient));
+        c.setMaxAge(60*60);
+        c.setSecure(true);
+        c.setHttpOnly(true);
+        c.setPath("/");
+        response.addCookie(c);
+        model.addAttribute("patient",patient);
+        return "Vues/Patient/patient_index";
+    }
+    @GetMapping("/patient_compte/{id_patient}")
+    public String listPatPage(@PathVariable("id_patient")int id_patient, Model model){
+        //List<Patient> listePatients = service.findAllPatient();
+        //model.addAttribute("listePatients",listePatients);
+        Patient patient = service.getPatient(id_patient);
+        model.addAttribute("patient", patient);
+        return "Vues/Patient/patient_compte";
+    }
+
+    @GetMapping("/modifierRDV/{id_patient}")
+    public String afficherRendezVous(@PathVariable("id_patient")int id_patient, Model model){
+        Patient patient = service.getPatient(id_patient);
+        List<RendezVous> listeRendezVous = service.afficherRendezVousByPatient(id_patient);
+        model.addAttribute("patient",patient);
+        model.addAttribute("listeRendezVous",listeRendezVous);
+        return "Vues/Patient/modifier_rdv";
+    }
+
+    @PostMapping("/rendezvous/save")
+    public String saveRendezVous(RendezVous rendezVous, RedirectAttributes redirectAttributes){
+        redirectAttributes.addFlashAttribute("message", "Le rendez vous à été ajouté!");
+        rdvservice.ajouterRendezvous(rendezVous);
+        return "redirect:/modifierRDV/" +rendezVous.getPatient().getId();
+    }
+    @GetMapping("/modifierRDV/modifier/{id_rendezvous}")
+    public String modRDVPage(@PathVariable("id_rendezvous")int id_rendezvous, Model model){
+        RendezVous rendezVous = rdvservice.getId(id_rendezvous);
+        model.addAttribute("pageTitle","Editer rendez vous (ID: " + id_rendezvous + ")");
+        model.addAttribute("RendezVous",rendezVous);
+        return "Vues/Patient/modifierLeRdv";
+    }
+
 
     @GetMapping("/patient_index/{id_patient}")
     public String cliPage(@PathVariable("id_patient")int id_patient,Model model, HttpServletResponse response){
@@ -74,11 +141,43 @@ public class PatientController {
 
 
 
-    @GetMapping("/patient_compte")
-    public String patient_compte(){return "/Vues/Patient/patient_compte";}
+    @PostMapping("/inscription")
+    public String traiterFormulaireInscription(@ModelAttribute("patient") Patient patient) {
+        if (service.existsByEmail(patient.getEmail())) {
+            return "Vues/creer_compte";
+        }
+        service.ajouterPatient(patient);
+        return "/Vues/login";
+    }
+    @GetMapping("/inscriptionMedecin")
+    public String afficherFormulaireInscriptionMedecin(Model model) {
+        model.addAttribute("medecin", new Medecin());
+        return "Vues/creer_compte";
+    }
 
-    @GetMapping("/modifier_rdv")
-    public String modifier_rdv(){return "/Vues/Patient/modifier_rdv";}
+    @PostMapping("/inscriptionMed")
+    public String traiterFormulaireInscriptionMedecin(@ModelAttribute("medecin") Medecin medecin) {
+        if (service.existsByEmail(medecin.getEmail())) {
+            return "Vues/creer_compte";
+        }
+        medservice.ajouterMedecinInscrip(medecin);
+        return "/Vues/login";
+    }
+
+    @GetMapping("/supprimer_rdv/delete/{id_rendezvous}")
+    public String deleteRendezVous(@PathVariable(name = "id_rendezvous") Integer id, Model model, RedirectAttributes redirectAttributes){
+        RendezVous rendezVous = rdvservice.getId(id);
+        int idPatient = rendezVous.getPatient().getId();
+        rdvservice.deleteRendezVous(id);
+        redirectAttributes.addFlashAttribute("message", "Le rendez vous dont l'id est " +id+ " à été supprimé");
+        return "redirect:/modifierRDV/" +idPatient;
+    }
+    //@GetMapping("/patient/new/{id_patient}")
+    ///public String afficherFormulairePatient(model model) {
+    // Patient patient= new Patient();
+    //model.addAttribute("patient", patient);
+    // return "Vues/Patient/patient_index";
+    //}
 
     @GetMapping("/mes_messagesP/{id}")
     public String messagePat(@PathVariable("id")Integer id,Model model){
@@ -173,5 +272,13 @@ public class PatientController {
         redirectAttributes.addFlashAttribute("message", "Le patient dont l'id est " +id+ " à été supprimé");
         return "redirect:/adminPatients";
     }
+
+
+
+
+
+
+
+
 
 }

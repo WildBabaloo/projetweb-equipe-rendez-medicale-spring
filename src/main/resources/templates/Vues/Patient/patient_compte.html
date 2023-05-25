@@ -37,6 +37,27 @@
 </nav>
 <br> <br>
 
-<h1 class="p_deconnexion"><a href="../../deconnexion.html">Déconnexion</a></h1>
+<div class="main container">
+    <h1 class="m_liste">Mon compte :</h1> <br> <br>
+    <table>
+        <tr>
+            <th>Prenom </th>
+            <th>Nom </th>
+            <th>Numéro d'assurance sociale</th>
+            <th>Courriel </th>
+            <th>Mon medecin:</th>
+
+        </tr>
+        <tr th:each="patient : ${patient}">
+            <td> [[${patient.prenom}]] |</td>
+            <td>[[${patient.nom}]] |</td>
+            <td> [[${patient.numAss}]] |</td>
+            <td>[[${patient.email}]] |</td>
+            <td>[[${patient.medecin.nom}]] [[${patient.medecin.prenom}]]</td>
+        </tr>
+    </table>
+</div>
+
+<h1 class="p_deconnexion"><a th:href="@{'/deconnexionPatient/' +${patient.id}}">Déconnexion</a></h1>
 </body>
 </html>

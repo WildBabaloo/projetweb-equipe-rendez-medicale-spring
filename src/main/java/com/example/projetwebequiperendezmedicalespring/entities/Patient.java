@@ -16,7 +16,7 @@ public class Patient {
     private String numAss;
     @Column(length = 64, nullable = false)
     private String motPasse;
-    @Column(length = 128, nullable = false, unique = true)
+    @Column(length = 128, nullable = false)
     private String email;
     @ManyToOne
     @JoinColumn(name = "medecin_id")

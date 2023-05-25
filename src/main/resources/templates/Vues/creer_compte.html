@@ -1,29 +1,34 @@
 <!DOCTYPE html>
-<html  xmlns:th="http://www.thymeleaf.org" lang="fr">
+<html xmlns:th="http://www.thymeleaf.org" lang="fr">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width">
     <title>Projet Medical</title>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <link rel="stylesheet"  href="../css/style.css" />
-    <link rel="stylesheet"  href="../css/creer_compte.css" />
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+            crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+          rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+          crossorigin="anonymous">
+    <link rel="stylesheet" href="../css/style.css"/>
+    <link rel="stylesheet" href="../css/creer_compte.css"/>
 </head>
 <body class="main" >
 <nav class="nav navbar navbar-expand-lg">
     <div class="container">
         <a th:href="@{/}" style="text-indent: 10px;" class="navbar-brand">MediMeets</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navmenu"><span class="navbar-toggler-icon"></span></button>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navmenu"><span
+                class="navbar-toggler-icon"></span></button>
         <div class="collapse navbar-collapse" id="navmenu">
             <ul class="navbar-nav ms-auto">
                 <li class="nav-item">
-                    <a class="nav-link" th:href="@{/}" >Home</a>
+                    <a class="nav-link" th:href="@{/}">Home</a>
                 </li>
                 <li class="nav-item">
                     <a th:href="@{/presentation}" class="nav-link">À propos de nous</a>
                 </li>
                 <li class="nav-item">
-                    <a  th:href="@{/creer}" class="nav-link">Créer un compte</a>
+                    <a th:href="@{/creer}" class="nav-link">Créer un compte</a>
                 </li>
                 <li class="nav-item">
                     <a th:href="@{/login}" class="nav-link">Login</a>
@@ -33,30 +38,72 @@
     </div>
     <br> <br> <br>
 </nav>
+
+<div class="container">
+    <div class="d-grid gap-2 mb-4">
+        <button class="btn btn-primary" onclick="redirectToPatientForm()">Patient</button>
+        <button class="btn btn-primary" onclick="redirectToMedecinForm()">Médecin</button>
+    </div>
 <br> <br>
 <div class="container">
-    <form action="login.html" method="post">
-        <p><label for="nom">Nom :</label> <br>
-            <input type="text" id="nom" name="nom" required placeholder="Entrez votre nom"/> </p>
-        <p><label for="prenom">Prenom :</label> <br>
-            <input type="text" id="prenom" name="prenom" required placeholder="Entrez votre prenom"/> </p>
-        <p><label for="nbr_assurance_maladie">Numero d'assurance maladie :</label> <br>
-            <input type="text" id="nbr_assurance_maladie" name="nbr_assurance_maladie" required placeholder="Entrez votre numéro d'assurance maladie"/> </p>
-        <p><label for="nbr_sequentiel_assurance_maladie">Numero séquentiel de la carte d'assurance maladie :</label> <br>
-            <input type="text" id="nbr_sequentiel_assurance_maladie" name="nbr_sequentiel_assurance_maladie" required placeholder="Entrez votre numéro séquentiel d'assurance maladie"/> </p>
-        <p><label for="date_naissance">Date de naissance :</label> <br>
-            <input type="date" id="date_naissance" name="date_naissance" required placeholder="Entrez votre date de naissance"/> </p>
-        <p> <input type="radio" id="sexe" name="sexes" required/> <label for="sexe">Homme</label><br>
-            <input type="radio" id="sexe" name="sexes" required/> <label for="sexe">Femme</label><br>
-            <input type="radio" id="sexe" name="sexes" required/> <label for="sexe">Autre</label><br>
+    <form id="patientForm" th:action="@{/inscription}" method="post" th:object="${patient}">
+        <p><label for="nom">Nom :</label><br>
+            <input type="text" id="nom" th:field="*{nom}" required placeholder="Entrez votre nom"/></p>
+
+
+        <p><label for="prenom">Prenom :</label><br>
+            <input type="text" id="prenom" th:field="*{prenom}" required placeholder="Entrez votre prenom"/></p>
+        <p><label for="nbr_assurance_maladie">Numero d'assurance maladie :</label><br>
+            <input type="text" id="nbr_assurance_maladie" th:field="*{numAss}" required
+                   placeholder="Entrez votre numéro d'assurance maladie"/></p>
+        <!--<p><label for="nbr_sequentiel_assurance_maladie">Numero séquentiel de la carte d'assurance maladie :</label><br>
+            <input type="text" id="nbr_sequentiel_assurance_maladie" th:field="{numSeqAss}" required
+                   placeholder="Entrez votre numéro séquentiel d'assurance maladie"/></p> -->
+        <p><label for="email">Email :</label><br>
+            <input type="email" id="email" th:field="*{email}" required placeholder="Entrez votre email"/></p>
+        <!-- <p><label for="date_naissance">Date de naissance :</label><br>
+             <input type="date" id="date_naissance" th:field="{dateNaissance}" required
+                    placeholder="Entrez votre date de naissance"/></p -->
+        <!-- <p>
+             <label for="sexe">Sexe :</label><br>
+             <input type="radio" id="sexeHomme" th:field="{sexe}" value="Homme" required/>
+             <label for="sexeHomme">Homme</label><br>
+             <input type="radio" id="sexeFemme" th:field="{sexe}" value="Femme" required/>
+             <label for="sexeFemme">Femme</label><br>
+             <input type="radio" id="sexeAutre" th:field="{sexe}" value="Autre" required/>
+             <label for="sexeAutre">Autre</label><br>
+         </p> -->
+        <p>
+            <label for="mot_de_passe">Mot de passe :</label><br>
+            <input type="password" id="mot_de_passe" th:field="*{motPasse}" required
+                   placeholder="Entrez votre mot de passe"/>
+        <p>
+            <input type="submit" value="S'inscrire en tant que patient"/>
         </p>
-        <p><label for="username">Nom d'utilisateur :</label> <br>
-            <input type="text" id="username" name="username" required placeholder="Entrez votre nom d'utilisateur"/> </p>
-        <p><label for="prenom">Mot de passe :</label> <br>
-            <input type="password" id="mot_passe" name="mot_passe" required placeholder="Entrez votre mot de passe:"/> </p>
-        <p><input type="submit" value="Soumettre"/></p>
-        <p><a href="login.html">Vous avez déjâ un compte?</a></p>
     </form>
+
+    <form id="medecinForm" th:action="@{/inscriptionMed}" method="post" th:object="${medecin}">
+        <p><label for="nomMedecin">Nom :</label><br>
+            <input type="text" id="nomMedecin" name="nom" th:field="*{nom}" required placeholder="Entrez votre nom"/></p>
+
+        <p><label for="prenomMedecin">Prenom :</label><br>
+            <input type="text" id="prenomMedecin" name="prenom" th:field="*{prenom}" required placeholder="Entrez votre prenom"/></p>
+
+        <p><label for="numtele">Numéro de téléphone :</label><br>
+            <input type="text" id="numtele" name="numtele" th:field="*{numtele}" required
+                   placeholder="Entrez votre numéro de téléphone"/></p>
+
+        <p><label for="emailMedecin">Email :</label><br>
+            <input type="email" id="emailMedecin" name="email" th:field="*{email}" required placeholder="Entrez votre email"/></p>
+
+        <p>
+            <label for="mot_passeMedecin">Mot de passe :</label><br>
+            <input type="password" id="mot_passeMedecin" name="mot_passe" th:field="*{motPasse}" required
+                   placeholder="Entrez votre mot de passe"/>
+        </p>
+        <p>
+            <input type="submit" value="S'inscrire en tant que Médecin"/>
+        </p>
     </form>
     <img src="images/doctor.png" width="200px"/>
 </div>
@@ -69,5 +116,21 @@
         </div>
     </div>
 </div>
+</div>
+<script>
+    window.onload = function() {
+        document.getElementById("patientForm").style.display = "none";
+        document.getElementById("medecinForm").style.display = "none";
+    };
+    function redirectToPatientForm() {
+        document.getElementById("patientForm").style.display = "block";
+        document.getElementById("medecinForm").style.display = "none";
+    }
+
+    function redirectToMedecinForm() {
+        document.getElementById("patientForm").style.display = "none";
+        document.getElementById("medecinForm").style.display = "block";
+    }
+</script>
 </body>
-</html>
+

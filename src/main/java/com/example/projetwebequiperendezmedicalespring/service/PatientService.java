@@ -1,9 +1,6 @@
 package com.example.projetwebequiperendezmedicalespring.service;
 
-import com.example.projetwebequiperendezmedicalespring.entities.MessageMedecin;
-import com.example.projetwebequiperendezmedicalespring.entities.MessagePatient;
-import com.example.projetwebequiperendezmedicalespring.entities.Patient;
-import com.example.projetwebequiperendezmedicalespring.entities.RendezVous;
+import com.example.projetwebequiperendezmedicalespring.entities.*;
 import com.example.projetwebequiperendezmedicalespring.repos.Message_Medecin_Repository;
 import com.example.projetwebequiperendezmedicalespring.repos.Message_Patient_Repository;
 import com.example.projetwebequiperendezmedicalespring.repos.PatientRepository;
@@ -14,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 @Service
 @Transactional
@@ -31,6 +29,9 @@ public class PatientService {
     @Autowired
     private Message_Patient_Repository repoMessagePatient;
 
+    public List<RendezVous> afficherRendezVousByPatient(int patient){
+        return (List<RendezVous>) repo.getRendezVousByPatient(patient);
+    }
     public List<Patient> findAllPatient(){
         return repo.findAll();
     }
@@ -67,4 +68,27 @@ public class PatientService {
     public Patient verifyPatientLogin(String numAss, String password){
         return repo.verifyNumAssAndPassword(numAss, password);
     }
+    public Patient get(int id) throws PatientNotFoundException{
+        try{
+            return repo.findById(id).get();
+        } catch (NoSuchElementException exception){
+            throw new PatientNotFoundException("On ne peut pas trouver un patient avec l'id: "+id);
+        }
+    }
+
+    public boolean existsByEmail(String email) {
+        return repo.existsByEmail(email);
+    }
+    public Patient getId(int id){
+        return repo.findById(id).get();
+    }
+
+    //public List<Patient> rechercherPatient(String kewyord) {
+      //  if (keyword != null) {
+         //   return repo.findAll(keyword);
+       // }
+       // return null;
+   // }
+
+
 }

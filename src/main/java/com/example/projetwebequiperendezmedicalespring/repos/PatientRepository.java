@@ -2,6 +2,7 @@ package com.example.projetwebequiperendezmedicalespring.repos;
 
 import com.example.projetwebequiperendezmedicalespring.entities.Medecin;
 import com.example.projetwebequiperendezmedicalespring.entities.Patient;
+import com.example.projetwebequiperendezmedicalespring.entities.RendezVous;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -19,4 +20,13 @@ public interface PatientRepository extends JpaRepository<Patient, Integer> {
 
     @Query("SELECT p from Patient p WHERE p.numAss = :numAss and p.motPasse = :password")
     public Patient verifyNumAssAndPassword(@Param("numAss") String numAss,@Param("password") String password);
+
+    @Query("SELECT u FROM RendezVous u WHERE u.patient.id_patient=:patient")
+    public List<RendezVous> getRendezVousByPatient(@Param("patient")int patient);
+
+    @Query("SELECT r FROM RendezVous r JOIN r.patient c where c.id_patient = ?1")
+    public List<RendezVous> findAllRendezVous( String keyword);
+
+    @Query("SELECT COUNT(p) > 0 FROM Patient p WHERE p.email = :email")
+    boolean existsByEmail(@Param("email") String email);
 }

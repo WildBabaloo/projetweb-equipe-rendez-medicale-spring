@@ -79,6 +79,10 @@ public class MedecinService {
         }
         return repo.save(medecin);
     }
+
+    public Medecin ajouterMedecinInscrip(Medecin medecin){
+        return repo.save(medecin);
+    }
     public Medecin getMedecin(Integer id){
         return repo.findById(id).get();
     }
