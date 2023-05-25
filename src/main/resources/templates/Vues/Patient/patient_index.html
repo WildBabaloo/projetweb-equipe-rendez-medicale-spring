@@ -17,16 +17,19 @@
         <div class="collapse navbar-collapse" id="navmenu">
             <ul class="navbar-nav ms-auto">
                 <li class="nav-item">
-                    <a th:href="@{/patient_index}" class="nav-link">Home</a>
+                    <a th:href="@{'/patient_index/' + ${patient.id}}" class="nav-link">Home</a>
                 </li>
                 <li class="nav-item">
                     <a th:href="@{'/prendre_rdv/' +${patient.id}}" class="nav-link">Prendre un rendez-vous</a>
                 </li>
                 <li class="nav-item">
-                    <a th:href="@{/modifier_rdv}" class="nav-link">Modifier un rendez-vous</a>
+                    <a th:href="@{'/modifierRDV/' + ${patient.id}}" class="nav-link">Modifier un rendez-vous</a>
                 </li>
                 <li class="nav-item">
                     <a th:href="@{'/patient_compte/' +${patient.id}}" class="nav-link">Mon compte</a>
+                </li>
+                <li class="nav-item">
+                    <a th:href="@{'/mes_messagesP/' + ${patient.id}}" class="nav-link">Mes messages</a>
                 </li>
             </ul>
         </div>
@@ -56,12 +59,12 @@
                 </a>
             </li>
             <li>
-                <a th:href="@{/contacter_medecin}">
+                <a th:href="@{'/contacter_medecin/' + ${patient.id}}">
                     <button>Cliquer ici pour contacter un medecin qui est incris avec MediMeets</button>
                 </a>
             </li>
             <li>
-                <a th:href="@{/contacter_clinique}">
+                <a th:href="@{'/contacter_clinique/' + ${patient.id}}">
                     <button>Cliquer ici pour contacter une clinique qui est incris avec MediMeets</button>
                 </a>
             </li>
@@ -71,10 +74,10 @@
 </div>
 <br> <br>
 <div class="footer">
-    <div class="d-flex flex-column flex-md-row text-center text-md-start justify-content-between py-4 px-4 px-xl-5 bg-dark">
+    <div class="d-flex flex-column flex-md-row text-center text-md-start justify-content-between py-4 px-4 px-xl-5 ">
         <!-- Copyright -->
         <div class="text-white mb-3 mb-md-0">
-            Copyright © 2023. Tous droits réservés. (À mettre directement en bas de la page)
+            Copyright © 2023. Tous droits réservés.
         </div>
     </div>
 </div>

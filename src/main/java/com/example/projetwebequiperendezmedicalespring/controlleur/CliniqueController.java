@@ -1,9 +1,6 @@
 package com.example.projetwebequiperendezmedicalespring.controlleur;
 
-import com.example.projetwebequiperendezmedicalespring.entities.Clinique;
-import com.example.projetwebequiperendezmedicalespring.entities.Medecin;
-import com.example.projetwebequiperendezmedicalespring.entities.Patient;
-import com.example.projetwebequiperendezmedicalespring.entities.RendezVous;
+import com.example.projetwebequiperendezmedicalespring.entities.*;
 import com.example.projetwebequiperendezmedicalespring.service.CliniqueNotFoundException;
 import com.example.projetwebequiperendezmedicalespring.service.CliniqueService;
 import com.example.projetwebequiperendezmedicalespring.service.ServicesService;
@@ -119,10 +116,12 @@ public class CliniqueController {
     @GetMapping("/adminCliniques/new")
     public String showNewCliniqueForm(Model model){
         model.addAttribute("clinique", new Clinique());
-        return "/Vues/Admin/ajouter";
+        List<Services> listeServices = serviceServices.findAllServices();
+        model.addAttribute("listeServices", listeServices);
+        return "/Vues/Admin/ajouterModifierClinique";
     }
 
-    @GetMapping("/adminCliniques/save")
+    @PostMapping("/adminCliniques/save")
     public String adminSaveClinique(Clinique clinique, RedirectAttributes redirectAttributes){
         redirectAttributes.addFlashAttribute("message", "Le clinique à été ajouté!");
         cliservice.ajouterClinique(clinique);
@@ -134,8 +133,10 @@ public class CliniqueController {
         Clinique clinique = cliservice.getClinique(id);
         model.addAttribute("pageTitle", "Editer le clinique dont l'id est " +id);
         model.addAttribute("clinique", clinique);
+        List<Services> listeServices = serviceServices.findAllServices();
+        model.addAttribute("listeServices", listeServices);
         // Have to add optionClinique if not possible then make a seperate page for add a clinique only
-        return "/Vues/Admin/ajouter";
+        return "/Vues/Admin/ajouterModifierClinique";
     }
 
     @GetMapping("adminCliniques/delete/{id}")

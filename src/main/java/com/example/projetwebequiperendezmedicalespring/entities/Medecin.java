@@ -1,5 +1,7 @@
 package com.example.projetwebequiperendezmedicalespring.entities;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.persistence.*;
 
 import java.util.ArrayList;
@@ -26,7 +28,7 @@ public class Medecin{
     private String numtele;
     @Column(length = 10, nullable = false)
     private int tarifconsultation;
-    @Temporal(TemporalType.DATE)
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date disponibilite;
     @ManyToMany
     @JoinTable(

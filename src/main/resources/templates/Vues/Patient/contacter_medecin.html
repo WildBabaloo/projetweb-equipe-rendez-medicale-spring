@@ -18,7 +18,7 @@
 
 </head>
 <body class="bgcolorP">
-<nav class="nav navbar navbar-expand-lg bg-dark navbar-dark">
+<nav class="nav navbar navbar-expand-lg">
     <div class="container">
         <a th:href="@{/patient_index}" style="text-indent: 10px;" class="navbar-brand">Medimeets</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navmenu"><span class="navbar-toggler-icon"></span></button>
@@ -36,6 +36,9 @@
                 <li class="nav-item">
                     <a th:href="@{/patient_compte}" class="nav-link">Mon compte</a>
                 </li>
+                <li class="nav-item">
+                    <a th:href="@{'/mes_messagesP/' + ${patient.id}}" class="nav-link">Mes messages</a>
+                </li>
             </ul>
         </div>
     </div>
@@ -44,23 +47,57 @@
 <br> <br>
 <div class="main container">
     <div class="contactermain">
-        <h1>Contacter un medecin</h1>
+        <h1>Envoyer un message</h1>
         <br>
-        <p><label for="rechercherMedecin">Le nom du medecin:</label>
-            <input type="text" id="rechercherMedecin" name="rechercherMedecin" placeholder="Rechercher un medecin..."/></p>
-
-
-        <input type="button" id="btn_rechercher" value="Rechercher"/><br>
-
-        <div id="ta" hidden><textarea id="messageContent" rows="15" cols="100"></textarea></div><br>
+        <form th:action="@{'/messageP/send/' + ${patient.id}}" method="post" th:object="${messagePatient}" >
+            <input type="hidden" th:field="*{id_message}" id="idmessage" class="form-control" placeholder="idmessage" required/></p>
+            <div class="form-group row">
+                <label class="col-sm-4 col-form-label">Confirmation:</label>
+                <div class="col-sm-8">
+                    <input type="checkbox" th:field="*{patientSender}"
+                           th:text="${patient.nom}"
+                           th:value="${patient.id}"
+                           class="m-2"
+                           required>
+                    <br/>
+                </div>
+            </div>
+            <label class="col-sm-4 col-form-label">Sujet:</label>
+            <input type="text" th:field="*{sujet}" id="rechercherPatient" class="form-control" placeholder="Sujet" required/></p>
+            <label class="col-sm-4 col-form-label">Message:</label>
+            <input type="text"  th:field="*{message}" class="form-control" placeholder="Message" required/></p>
+            <input class="form-control" type="date" th:attr="value=${dateNow}"  id="disponibiliteMedecin" name="disponibiliteMedecin" th:field="*{date}">
+            <div class="form-group row">
+                <label class="col-sm-4 col-form-label">Patient:</label>
+                <div class="col-sm-8">
+                    <th:block th:each="medecin :${listeMedecins}">
+                        <input type="checkbox" th:field="*{medecinReceiver}"
+                               th:text="${medecin.nom}"
+                               th:value="${medecin.id}"
+                               class="m-2"
+                        >
+                        <br/>
+                    </th:block>
+                    <input type="submit" value="Submit" th:field="*{medecinReceiver}">
+                    <br/>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label">Document:</label>
+                <div class="col-sm-10">
+                    <input type="file" id="fileImage" name="fileImage"/>
+                </div>
+            </div>
+            <br> <br>
+        </form>
     </div>
 </div>
 <br> <br>
 <div class="footer">
-    <div class="d-flex flex-column flex-md-row text-center text-md-start justify-content-between py-4 px-4 px-xl-5 bg-dark">
+    <div class="d-flex flex-column flex-md-row text-center text-md-start justify-content-between py-4 px-4 px-xl-5 ">
         <!-- Copyright -->
         <div class="text-white mb-3 mb-md-0">
-            Copyright © 2023. Tous droits réservés. (À mettre directement en bas de la page)
+            Copyright © 2023. Tous droits réservés.
         </div>
     </div>
 </div>

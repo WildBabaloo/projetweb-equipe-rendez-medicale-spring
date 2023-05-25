@@ -11,26 +11,23 @@
 
     </head>
     <body class="bgcolorA">
-    <nav class="nav navbar navbar-expand-lg bg-dark navbar-dark">
+    <nav class="nav navbar navbar-expand-lg ">
         <div class="container">
-            <a href="/Vues/Admin/admin_index.html"/>" style="text-indent: 10px;" class="navbar-brand">MediMeets</a>
+            <a th:href="@{/admin_index}" style="text-indent: 10px;" class="navbar-brand">MediMeets</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navmenu"><span class="navbar-toggler-icon"></span></button>
             <div class="collapse navbar-collapse" id="navmenu">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
-                        <a href="/Vues/Admin/admin_index.html"/>" class="nav-link">Home</a>
+                        <a th:href="@{/admin_index}" class="nav-link">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a href="/Vues/Admin/ajouter.html"/>" class="nav-link">Ajouter</a>
+                        <a th:href="@{/adminPatients}" class="nav-link">Liste des patients</a>
                     </li>
                     <li class="nav-item">
-                        <a href="adminControlleur?goToMedecin=optionPatient" class="nav-link">Liste des patients</a>
+                        <a th:href="@{/adminMedecins}" class="nav-link">Liste des medecins</a>
                     </li>
                     <li class="nav-item">
-                        <a href="adminControlleur?goToMedecin=optionMedecin" class="nav-link">Liste des medecins</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="adminControlleur?goToClinique=optionClinique" class="nav-link">Liste des cliniques</a>
+                        <a th:href="@{/adminCliniques}" class="nav-link">Liste des cliniques</a>
                     </li>
                 </ul>
             </div>
@@ -39,29 +36,45 @@
     </nav>
     <br> <br>
     <div class="main">
+        <a th:href="@{/adminMedecins/new}">AJOUTER UN MEDECIN</a>
         <h1>Liste des medecins :</h1>
         <div id="patientList">
             <table id="tableMedecin">
-                <% if (listeMedecin != null){
-                for (Medecin unMedecin : listeMedecin){%>
                 <tr>
-
-                    <td><%=unMedecin.getId()%></td>
-                    <td><%=unMedecin.getNom()%></td>
-                    <td><%=unMedecin.getPrenom()%></td>
-                    <td><%=unMedecin.getNumProf()%></td>
-                    <td><%=unMedecin.getMotPasse()%></td>
-                    <td><%=unMedecin.getEmail()%></td>
-                    <td><%=unMedecin.getNumtele()%></td>
-                    <td><%=unMedecin.getSpecialite()%></td>
-                    <td><%=unMedecin.getTarifconsultation()%>$</td>
-                    <td><%=unMedecin.getDisponibilite()%></td>
-                    <td><%=unMedecin.getId_clinique()%></td>
-                    <td><a href="adminModifierControlleur?fillInputModifierMedecin=<%=unMedecin.getId()%>" class="btn btn-primary">Modifier</a></td>
-                    <td><a href="adminDeleteControlleur?deleteMedecin=<%=unMedecin.getId()%>" class="btn btn-primary">Supprimer</a></td>
+                    <td>Id</td>
+                    <td>Nom</td>
+                    <td>Prenom</td>
+                    <td>Numéro Professionel</td>
+                    <td>Email</td>
+                    <td>Numéro de téléphone</td>
+                    <td>Specialité</td>
+                    <td>Tarif de consultation</td>
+                    <td>Disponibilite</td>
+                    <td>Clinique</td>
                 </tr>
-                <%}
-                }%>
+                <tr th:each="medecin : ${listeMedecins}">
+
+                    <td>[[${medecin.id}]]</td>
+                    <td>[[${medecin.nom}]]</td>
+                    <td>[[${medecin.prenom}]]</td>
+                    <td>[[${medecin.numProf}]]</td>
+                    <td>[[${medecin.email}]]</td>
+                    <td>[[${medecin.numtele}]]</td>
+                    <table id="listeServicesMedecins">
+                        <tr th:each="service : ${medecin.getServices_offerts()}">
+                            <td>[[${service.nom}]]</td>
+                        </tr>
+                    </table>
+                    <td>[[${medecin.tarifconsultation}]]</td>
+                    <td>[[${medecin.disponibilite}]]</td>
+                    <td th:if="${medecin.clinique != null}">[[${medecin.clinique.nom}]]</td>
+                    <td th:if="${medecin.clinique == null}">NULL</td>
+                    <td><a th:href="@{'/adminMedecins/edit/' + ${medecin.id}}" class="btn btn-primary">Modifier</a></td>
+                    <td><a th:href="@{'/adminMedecins/delete/' + ${medecin.id}}" class="btn btn-primary"
+                    th:medecinId="${medecin.id}">
+                        <!-- th:medecinId will be used for the ajax for confirmation to delete the medecin -->
+                        Supprimer</a></td>
+                </tr>
             </table>
         </div>
     </div>

@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>Projet Medical</title>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+  <link rel="stylesheet" href="/css/style.css" />
+</head>
+<body class="bgcolorA">
+<nav class="nav navbar navbar-expand-lg ">
+  <div class="container">
+    <a th:href="@{/admin_index}" style="text-indent: 10px;" class="navbar-brand">MediMeets</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navmenu"><span class="navbar-toggler-icon"></span></button>
+    <div class="collapse navbar-collapse" id="navmenu">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item">
+          <a th:href="@{/admin_index}" class="nav-link">Home</a>
+        </li>
+        <li class="nav-item">
+          <a th:href="@{/adminPatients}" class="nav-link">Liste des patients</a>
+        </li>
+        <li class="nav-item">
+          <a th:href="@{/adminMedecins}" class="nav-link">Liste des medecins</a>
+        </li>
+        <li class="nav-item">
+          <a th:href="@{/adminCliniques}" class="nav-link">Liste des cliniques</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <br> <br> <br>
+</nav>
+<br> <br>
+
+
+<h3>Ajouter un medecin</h3>
+<div class="formMedecin">
+  <form th:action="@{/adminMedecins/save}" th:object="${medecin}" id="formAjouterMedecin" method="post" class="form-horizontal">
+    <div class="form-group">
+      <input type="hidden" th:field="*{id}" class="form-control" id="OptionMedecin" name="OptionMedecin" value="active">
+    </div>
+    <div class="form-group">
+      <label for="nomMedecin">Nom :</label> <br>
+      <input type="text" th:field="*{nom}" class="form-control" id="nomMedecin" name="nomMedecin">
+    </div>
+    <div class="form-group">
+      <label for="prenomMedecin">Prenom :</label> <br>
+      <input type="text" th:field="*{prenom}" class="form-control" id="prenomMedecin" name="prenomMedecin">
+    </div>
+    <div class="form-group">
+      <label for="numProfMedecin">Numéro professionel :</label> <br>
+      <input type="text" th:field="*{numProf}" class="form-control" id="numProfMedecin" name="numProfMedecin">
+    </div>
+    <div class="form-group">
+      <label for="motPasseMedecin">Mot de passe :</label> <br>
+      <input type="password" th:field="*{motPasse}" class="form-control" id="motPasseMedecin" name="motPasseMedecin">
+    </div>
+    <div class="form-group">
+      <label for="emailMedecin">Email :</label> <br>
+      <input type="text" th:field="*{email}" class="form-control" id="emailMedecin" name="emailMedecin">
+    </div>
+    <div class="form-group">
+      <label for="numTeleMedecin">Numéro de téléphone :</label> <br>
+      <input type="text" th:field="*{numtele}" class="form-control" id="numTeleMedecin" name="numTeleMedecin">
+    </div>
+    <div class="form-group">
+      <label>Specialité :</label> <br>
+        <th:block th:each="services : ${listeServices}">
+          <input type="checkbox" th:field="*{services_offerts}"
+                 th:text="${services.description}"
+                 th:value="${services.id}"
+                 class="m-2"
+          >
+          <small>[[${services.nom}]]</small>
+          <br/>
+        </th:block>
+    </div>
+    <div class="form-group">
+      <label for="tarifconsultationMedecin">Tarif de consultation :</label> <br>
+      <input type="number" th:field="*{tarifconsultation}" class="form-control" id="tarifconsultationMedecin" name="tarifconsultationMedecin">
+    </div>
+    <!--
+    <div class="form-group">
+      <label for="clinique_id_cliniqueMedecin">Clinique du Medecin (ID) :</label> <br>
+      <input type="number" th:field="*{clinique}" class="form-control" id="clinique_id_cliniqueMedecin" name="clinique_id_cliniqueMedecin">
+    </div>
+    -->
+
+    <div class="form-group">
+      <input type="submit" class="btn btn-primary" value="Ajouter" id="submitAjouterMedecin">
+    </div>
+  </form>
+</div>
+
+</body>
+</html>

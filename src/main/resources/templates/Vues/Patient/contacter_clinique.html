@@ -6,34 +6,30 @@
     <title>MediMeets</title>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
-    <script>
-        $(document).ready(function(){
-            $("#btn_rechercher").click(function(){
-                $("#ta").show();
-            });
-        });
-    </script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="stylesheet" href="/css/style.css" />
 </head>
 <body class="bgcolorP">
-<nav class="nav navbar navbar-expand-lg bg-dark navbar-dark">
+<nav class="nav navbar navbar-expand-lg ">
     <div class="container">
-        <a th:href="@{/patient_index}" style="text-indent: 10px;" class="navbar-brand">Medimeets</a>
+        <a th:href="@{'/patient_index/' + ${patient.id}}" style="text-indent: 10px;" class="navbar-brand">Medimeets</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navmenu"><span class="navbar-toggler-icon"></span></button>
         <div class="collapse navbar-collapse" id="navmenu">
             <ul class="navbar-nav ms-auto">
                 <li class="nav-item">
-                    <a th:href="@{/patient_index}" class="nav-link">Home</a>
+                    <a th:href="@{'/patient_index/' + ${patient.id}}" class="nav-link">Home</a>
                 </li>
                 <li class="nav-item">
                     <a th:href="@{/prendre_rdv}" class="nav-link">Prendre un rendez-vous</a>
                 </li>
                 <li class="nav-item">
-                    <a th:href="@{/modifier_rdv}" class="nav-link">Modifier un rendez-vous</a>
+                    <a th:href="@{'/modifierRDV/' + ${patient.id}}" class="nav-link">Modifier un rendez-vous</a>
                 </li>
                 <li class="nav-item">
-                    <a th:href="@{/patient_compte}" class="nav-link">Mon compte</a>
+                    <a th:href="@{'/patient_compte/' +${patient.id}}" class="nav-link">Mon compte</a>
+                </li>
+                <li class="nav-item">
+                    <a th:href="@{'/mes_messagesP/' + ${patient.id}}" class="nav-link">Mes messages</a>
                 </li>
             </ul>
         </div>
@@ -43,23 +39,40 @@
 <br> <br>
 <div class="main container">
     <div class="contactermain">
-        <h1>Contacter une clinique</h1>
+        <form th:action="@{'/rechercher/cliniques' + '/' +${patient.id}}">
+            <h1>Contacter une clinique</h1>
+            <br>
+            <p>
+                <label>Le nom de la clinique :</label>
+                <input type="search" name="keyword" th:value="${keyword}" id="rechercherClinique" required/></p>
+            <button type="submit">Rechercher</button><br>
+            <div id="ta" hidden><textarea id="messageContent" rows="15" cols="100"></textarea></div><br>
+        </form>
+        <form th:action="@{'/contacter_clinique/' +${patient.id}}">
+            <button type="submit">Réinitialiser</button><br>
+        </form>
+        <h1>Les informations de la clinique</h1>
         <br>
-        <p><label for="rechercherClinique">Le nom de la clinique :</label>
-            <input type="text" id="rechercherClinique" name="rechercherClinique" placeholder="Rechercher la clinique..."/></p>
-
-
-        <input type="button" id="btn_rechercher" value="Rechercher"/><br>
-
-        <div id="ta" hidden><textarea id="messageContent" rows="15" cols="100"></textarea></div><br>
+        <table>
+            <tr>
+                <th>Le nom :</th>
+                <th>Le numéro de téléphone :</th>
+                <th>Le courriel :</th>
+            </tr>
+            <tr th:each="clinique : ${listeCliniques}">
+                <td>[[${clinique.nom}]]</td>
+                <td>[[${clinique.numtele}]]</td>
+                <td>[[${clinique.email}]]</td>
+            </tr>
+        </table>
     </div>
 </div>
 <br> <br>
 <div class="footer">
-    <div class="d-flex flex-column flex-md-row text-center text-md-start justify-content-between py-4 px-4 px-xl-5 bg-dark">
+    <div class="d-flex flex-column flex-md-row text-center text-md-start justify-content-between py-4 px-4 px-xl-5 ">
         <!-- Copyright -->
         <div class="text-white mb-3 mb-md-0">
-            Copyright © 2023. Tous droits réservés. (À mettre directement en bas de la page)
+            Copyright © 2023. Tous droits réservés.
         </div>
     </div>
 </div>

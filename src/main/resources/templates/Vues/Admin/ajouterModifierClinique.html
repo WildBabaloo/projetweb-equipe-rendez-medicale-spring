@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>Projet Medical</title>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+  <link rel="stylesheet" href="/css/style.css" />
+</head>
+<body class="bgcolorA">
+<nav class="nav navbar navbar-expand-lg ">
+  <div class="container">
+    <a th:href="@{/admin_index}" style="text-indent: 10px;" class="navbar-brand">MediMeets</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navmenu"><span class="navbar-toggler-icon"></span></button>
+    <div class="collapse navbar-collapse" id="navmenu">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item">
+          <a th:href="@{/admin_index}" class="nav-link">Home</a>
+        </li>
+        <li class="nav-item">
+          <a th:href="@{/adminPatients}" class="nav-link">Liste des patients</a>
+        </li>
+        <li class="nav-item">
+          <a th:href="@{/adminMedecins}" class="nav-link">Liste des medecins</a>
+        </li>
+        <li class="nav-item">
+          <a th:href="@{/adminCliniques}" class="nav-link">Liste des cliniques</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <br> <br> <br>
+</nav>
+<br> <br>
+
+<h3>Ajouter une clinique</h3>
+<div class="formClinique">
+  <form th:action="@{/adminCliniques/save}" th:object="${clinique}" id="formAddClinique" method="post" class="form-horizontal">
+    <div class="form-group">
+      <input type="hidden" th:field="*{id}" class="form-control" id="OptionClinique" name="OptionClinique" value="active">
+    </div>
+    <div class="form-group">
+      <label for="nomClinique">Nom :</label> <br>
+      <input type="text" th:field="*{nom}" class="form-control" id="nomClinique" name="nomClinique">
+    </div>
+    <div class="form-group">
+      <label for="coordonneesClinique">Coordonnées :</label> <br>
+      <input type="text" th:field="*{coordonnees}" class="form-control" id="coordonneesClinique" name="coordonneesClinique">
+    </div>
+    <div class="form-group">
+      <label>Services Offerts :</label> <br>
+      <th:block th:each="services : ${listeServices}">
+        <input type="checkbox" th:field="*{services_offerts}"
+               th:text="${services.description}"
+               th:value="${services.id}"
+               class="m-2"
+        >
+        <small>[[${services.nom}]]</small>
+        <br/>
+      </th:block>
+    </div>
+    <div class="form-group">
+      <label for="emailClinique">Email :</label> <br>
+      <input type="text" th:field="*{email}" class="form-control" id="emailClinique" name="emailClinique">
+    </div>
+    <div class="form-group">
+      <label for="numTeleClinique">Numéro de téléphone :</label> <br>
+      <input type="text" th:field="*{numtele}" class="form-control" id="numTeleClinique" name="numTeleClinique">
+    </div>
+    <div class="form-group">
+      <input type="submit" class="btn btn-primary" value="Ajouter" id="submitAjouterClinique">
+    </div>
+  </form>
+</div>
+</body>
+</html>

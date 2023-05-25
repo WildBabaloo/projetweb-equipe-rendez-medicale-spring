@@ -34,6 +34,16 @@ public class CliniqueService {
     public List<Clinique> afficherCliniqueByNom(String nom){
         return (List<Clinique>) repo.getCliniquesByNom(nom);
     }
+
+    public List<Clinique> rechercherClinique(String keyword){
+        if(keyword != null){
+            return repo.findAllCliniques(keyword);
+        }
+        return null;
+    }
+    public Clinique rechercherCliniqueByNom(String nom){
+        return repo.getCliniquesByNom(nom);
+    }
     public List<Patient> afficherPatientsByClinique(int id){
         return (List<Patient>) repo.getPatientsByClinique(id);
     }
