@@ -41,7 +41,9 @@
 
             <form method="post" th:action="@{/formRendezVous}" th:object="${rendezvous}">
                 <input type="hidden" th:field="*{id}">
-                <input type="hidden" th:field="*{patient}" th:value="${patient.id}" th:text="${patient.id}">
+                <th:block>
+                    <input type="checkbox" th:field="*{patient}" th:value="${patient.id}">
+                </th:block>
                 <!--<h3>Choisi la clinique que vous voulez !</h3>-->
                 <label for="clinique">La clinique de votre rendez-vous :</label>
                 <select name="clinique" required id="clinique">

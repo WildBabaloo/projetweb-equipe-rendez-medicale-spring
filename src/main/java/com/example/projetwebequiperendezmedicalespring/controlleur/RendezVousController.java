@@ -26,7 +26,7 @@ public class RendezVousController {
     public String traiterFormulaireRendezVous(@ModelAttribute("rendezvous") RendezVous rendezVous) {
 
         service.ajouterRendezvous(rendezVous);
-        return "redirect:/Vues/Patient/modifier_rdv";
+        return "redirect:/modifierRDV/"+rendezVous.getPatient().getId();
     }
 
 

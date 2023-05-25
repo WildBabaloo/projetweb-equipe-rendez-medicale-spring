@@ -11,15 +11,15 @@ public class RendezVous{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id_rendezvous;
-    @OneToOne(optional = false)
-    @JoinColumn(name = "id_patient", nullable = false)
+    @OneToOne
+    @JoinColumn(name = "id_patient")
     private Patient patient;
 
-    @OneToOne(optional = false)
-    @JoinColumn(name = "id_medecin", nullable = false)
+    @OneToOne
+    @JoinColumn(name = "id_medecin")
     private Medecin medecin;
-    @OneToOne(optional = false)
-    @JoinColumn(name = "id_clinique", nullable = false)
+    @OneToOne
+    @JoinColumn(name = "id_clinique")
     private Clinique clinique;
 
     @DateTimeFormat(pattern = "yyyy-MM-dd")
