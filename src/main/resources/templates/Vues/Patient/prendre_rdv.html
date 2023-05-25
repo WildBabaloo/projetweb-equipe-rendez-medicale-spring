@@ -67,7 +67,7 @@
                     <input type="text" th:field="${rendezvous.raison}" required id="raison" placeholder="Saisir la raison du rendez-vous"><br>
 
                 <input type="hidden" name="dateTimeRDV" id="dateTimeRDV">
-                
+
                     <input type="submit" value="Envoyer"/>
             </form>
         </form>
@@ -83,20 +83,15 @@
     </div>
 </div>
 <script>
-    // Fonction pour combiner la date et l'heure avant de soumettre le formulaire
     function combineDateAndTime() {
-        // Récupérer les valeurs de la date et de l'heure
         var dateRDV = document.getElementById("dateRDV").value;
         var heureRDV = document.getElementById("heureRDV").value;
 
-        // Combinez la date et l'heure dans un format souhaité (par exemple, YYYY-MM-DD HH:mm)
         var dateTimeRDV = dateRDV + " " + heureRDV;
 
-        // Mettez à jour la valeur de l'élément input pour l'envoyer dans le formulaire
         document.getElementById("dateTimeRDV").value = dateTimeRDV;
     }
 
-    // Ajoutez un écouteur d'événement sur la soumission du formulaire pour appeler la fonction combineDateAndTime
     document.getElementById("formRendezVous").addEventListener("submit", combineDateAndTime);
 </script>
 
