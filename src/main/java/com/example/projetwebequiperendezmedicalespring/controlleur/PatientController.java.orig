@@ -145,7 +145,7 @@ public class PatientController {
         }
         service.ajouterPatient(patient);
 
-        return "redirect:/login";
+        return "/Vues/login";
     }
     @GetMapping("/inscriptionMedecin")
     public String afficherFormulaireInscriptionMedecin(Model model) {
@@ -160,7 +160,7 @@ public class PatientController {
         }
         medservice.ajouterMedecinInscrip(medecin);
 
-        return "redirect:/login";
+        return "/Vues/login";
     }
 
     @GetMapping("/supprimer_rdv/delete/{id_rendezvous}")
