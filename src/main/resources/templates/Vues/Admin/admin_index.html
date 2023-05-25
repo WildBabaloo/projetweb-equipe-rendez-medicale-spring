@@ -42,23 +42,18 @@
         <h3>Ici sont vos options (Options/Fonctionnalités à perfectionner avec Spring Boot):</h3> <br> <br>
         <ul class="LesOptions" style="list-style-type: none;">
             <li>
-                <a href="ajouter.html">
-                    <button>Cliquer ici pour voir ajouter un patient, medecin ou clinique</button>
+                <a th:href="@{/adminPatients}">
+                    <button>Cliquer ici pour voir la liste, ajouter, modifier ou supprimer un patient</button>
                 </a>
             </li>
             <li>
-                <a href="../../adminControlleur?goToPatient=optionPatient">
-                    <button>Cliquer ici pour voir la liste, modifier ou supprimer un patient</button>
+                <a th:href="@{/adminMedecins}">
+                    <button>Cliquer ici pour voir la liste, ajouter, modifier ou supprimer un medecin</button>
                 </a>
             </li>
             <li>
-                <a href="../../adminControlleur?goToMedecin=optionMedecin">
-                    <button>Cliquer ici pour voir la liste, modifier ou supprimer un medecin</button>
-                </a>
-            </li>
-            <li>
-                <a href="../../adminControlleur?goToClinique=optionClinique">
-                    <button>Cliquer ici pour voir la liste, modifier ou supprimer une clinique</button>
+                <a th:href="@{/adminCliniques}">
+                    <button>Cliquer ici pour voir la liste, ajouter, modifier ou supprimer une clinique</button>
                 </a>
             </li>
         </ul>
