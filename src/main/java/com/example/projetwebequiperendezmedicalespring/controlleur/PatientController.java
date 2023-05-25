@@ -3,6 +3,7 @@ package com.example.projetwebequiperendezmedicalespring.controlleur;
 import com.example.projetwebequiperendezmedicalespring.entities.Medecin;
 import com.example.projetwebequiperendezmedicalespring.entities.Patient;
 import com.example.projetwebequiperendezmedicalespring.entities.RendezVous;
+import com.example.projetwebequiperendezmedicalespring.service.CliniqueService;
 import com.example.projetwebequiperendezmedicalespring.service.PatientService;
 import com.example.projetwebequiperendezmedicalespring.service.RendezVousService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +25,9 @@ public class PatientController {
 
     @Autowired
     RendezVousService rdvservice;
+
+    @Autowired
+    CliniqueService cliservice;
 
     @PostMapping("/patientLogin")
     public String patientLogin(Model model, @RequestParam("numAss") String numAss, @RequestParam("passwordPatient") String password){
@@ -49,7 +53,16 @@ public class PatientController {
     }
 
     @GetMapping("/prendre_rdv")
-    public String prendre_rdv(){return "/Vues/Patient/prendre_rdv";}
+    public String prendre_rdv(Model model) {
+        List<String> descriptions = rdvservice.getAllDescriptions();
+        List<String> raisons = rdvservice.getAllRaisons();
+        List<String> cliniques = cliservice.getAllCliniques();
+        model.addAttribute("descriptions", descriptions);
+        model.addAttribute("raisons", raisons);
+        model.addAttribute("cliniques", cliniques);
+        return "/Vues/Patient/prendre_rdv";
+    }
+
 
     @GetMapping("/patient_index/{id_patient}")
     public String cliPage(@PathVariable("id_patient")int id_patient,Model model, HttpServletResponse response){
@@ -130,9 +143,9 @@ public class PatientController {
     }
     //@GetMapping("/patient/new/{id_patient}")
     ///public String afficherFormulairePatient(model model) {
-       // Patient patient= new Patient();
-        //model.addAttribute("patient", patient);
-       // return "Vues/Patient/patient_index";
+    // Patient patient= new Patient();
+    //model.addAttribute("patient", patient);
+    // return "Vues/Patient/patient_index";
     //}
 
     @GetMapping("/contacter_medecin")

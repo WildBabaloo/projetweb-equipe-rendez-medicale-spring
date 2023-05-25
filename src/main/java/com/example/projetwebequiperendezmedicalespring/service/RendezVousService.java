@@ -31,6 +31,15 @@ public class RendezVousService {
 
     public void deleteRendezVous(Integer id){repo.deleteById(id);}
 
+    public List<String> getAllDescriptions() {
+        return repo.findAllDescriptions();
+    }
+
+    public List<String> getAllRaisons() {
+        return repo.findAllRaisons();
+    }
+
+
     public void deleteRendezVousByPatientId(Integer id){
         List<RendezVous> rendezVousPatient = repo.findAllByPatientId(id);
         for(RendezVous rendezVous : rendezVousPatient){

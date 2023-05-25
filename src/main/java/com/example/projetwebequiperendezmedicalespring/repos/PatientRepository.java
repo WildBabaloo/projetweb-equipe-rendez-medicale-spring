@@ -21,7 +21,7 @@ public interface PatientRepository extends JpaRepository<Patient, Integer> {
     public List<RendezVous> getRendezVousByPatient(@Param("patient")int patient);
 
     @Query("SELECT r FROM RendezVous r JOIN r.patient c where c.id_patient = ?1")
-    public List<RendezVous> findAll( String keyword);
+    public List<RendezVous> findAllRendezVous( String keyword);
 
     @Query("SELECT COUNT(p) > 0 FROM Patient p WHERE p.email = :email")
     boolean existsByEmail(@Param("email") String email);

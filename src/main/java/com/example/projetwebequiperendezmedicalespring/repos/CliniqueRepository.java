@@ -7,6 +7,7 @@ import com.example.projetwebequiperendezmedicalespring.entities.RendezVous;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
@@ -29,6 +30,9 @@ public interface CliniqueRepository extends JpaRepository<Clinique,Integer> {
     @Query("SELECT u FROM RendezVous u WHERE u.clinique.id_clinique=:clinique")
     public List<RendezVous> getRendezVousByClinique(@Param("clinique")int clinique);
 
+    //public List<Clinique> findByNameStartingWithIgnoreCase(String query);
 
+    @Query("SELECT DISTINCT c.nom FROM Clinique c")
+    List<String> findAllCliniques();
 
 }

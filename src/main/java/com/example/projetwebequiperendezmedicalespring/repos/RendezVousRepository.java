@@ -21,6 +21,13 @@ public interface RendezVousRepository extends JpaRepository<RendezVous, Integer>
     @Query("SELECT r from RendezVous r JOIN r.clinique c where c.id_clinique = ?1")
     public List<RendezVous> findAllByCliniqueId(int id);
 
+    @Query("SELECT DISTINCT r.description FROM RendezVous r")
+    List<String> findAllDescriptions();
+
+
+    @Query("SELECT DISTINCT r.raison FROM RendezVous r")
+    List<String> findAllRaisons();
+
 
 
 

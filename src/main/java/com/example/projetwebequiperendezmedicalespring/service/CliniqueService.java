@@ -82,4 +82,8 @@ public class CliniqueService {
     public Clinique getId(int id){
         return repo.findById(id).get();
     }
+
+    public List<String> getAllCliniques() {
+        return repo.findAllCliniques();
+    }
 }
