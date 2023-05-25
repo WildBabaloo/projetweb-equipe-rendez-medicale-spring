@@ -48,19 +48,19 @@
 <div class="container">
     <form id="patientForm" th:action="@{/inscription}" method="post" th:object="${patient}">
         <p><label for="nom">Nom :</label><br>
-            <input type="text" id="nom" th:field="{nom}" required placeholder="Entrez votre nom"/></p>
+            <input type="text" id="nom" th:field="*{nom}" required placeholder="Entrez votre nom"/></p>
 
 
         <p><label for="prenom">Prenom :</label><br>
-            <input type="text" id="prenom" th:field="{prenom}" required placeholder="Entrez votre prenom"/></p>
+            <input type="text" id="prenom" th:field="*{prenom}" required placeholder="Entrez votre prenom"/></p>
         <p><label for="nbr_assurance_maladie">Numero d'assurance maladie :</label><br>
-            <input type="text" id="nbr_assurance_maladie" th:field="{numAss}" required
+            <input type="text" id="nbr_assurance_maladie" th:field="*{numAss}" required
                    placeholder="Entrez votre numéro d'assurance maladie"/></p>
         <!--<p><label for="nbr_sequentiel_assurance_maladie">Numero séquentiel de la carte d'assurance maladie :</label><br>
             <input type="text" id="nbr_sequentiel_assurance_maladie" th:field="{numSeqAss}" required
                    placeholder="Entrez votre numéro séquentiel d'assurance maladie"/></p> -->
         <p><label for="email">Email :</label><br>
-            <input type="email" id="email" th:field="{email}" required placeholder="Entrez votre email"/></p>
+            <input type="email" id="email" th:field="*{email}" required placeholder="Entrez votre email"/></p>
         <!-- <p><label for="date_naissance">Date de naissance :</label><br>
              <input type="date" id="date_naissance" th:field="{dateNaissance}" required
                     placeholder="Entrez votre date de naissance"/></p -->
@@ -75,9 +75,8 @@
          </p> -->
         <p>
             <label for="mot_de_passe">Mot de passe :</label><br>
-            <input type="password" id="mot_de_passe" th:field="{motPasse}" required
+            <input type="password" id="mot_de_passe" th:field="*{motPasse}" required
                    placeholder="Entrez votre mot de passe"/>
-        </
         <p>
             <input type="submit" value="S'inscrire en tant que patient"/>
         </p>
