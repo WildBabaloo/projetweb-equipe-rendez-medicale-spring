@@ -18,6 +18,8 @@ public interface CliniqueRepository extends JpaRepository<Clinique,Integer> {
     @Query("SELECT u FROM Clinique u WHERE u.nom=:nom")
     public Clinique getCliniquesByNom(@Param("nom")String nom);
 
+    @Query("SELECT u FROM Clinique u WHERE u.nom  LIKE %?1%")
+    public List<Clinique> findAllCliniques(String keyword);
     @Query("SELECT u FROM Patient u  JOIN Medecin v ON u.id_patient = v.id_medecin WHERE v.clinique.id_clinique= ?1")
     public List<Patient> getPatientsByClinique(int id_clinique);
 

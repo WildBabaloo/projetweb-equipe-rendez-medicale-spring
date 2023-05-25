@@ -1,13 +1,7 @@
 package com.example.projetwebequiperendezmedicalespring.controlleur;
 
-import com.example.projetwebequiperendezmedicalespring.entities.Medecin;
-import com.example.projetwebequiperendezmedicalespring.entities.MessageMedecin;
-import com.example.projetwebequiperendezmedicalespring.entities.MessagePatient;
-import com.example.projetwebequiperendezmedicalespring.entities.Patient;
-import com.example.projetwebequiperendezmedicalespring.service.MedecinService;
-import com.example.projetwebequiperendezmedicalespring.service.Message_MedecinService;
-import com.example.projetwebequiperendezmedicalespring.service.Message_PatientService;
-import com.example.projetwebequiperendezmedicalespring.service.PatientService;
+import com.example.projetwebequiperendezmedicalespring.entities.*;
+import com.example.projetwebequiperendezmedicalespring.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.Banner;
 import org.springframework.data.repository.query.Param;
@@ -23,6 +17,7 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
@@ -35,6 +30,8 @@ public class PatientController {
     @Autowired
     MedecinService medservice;
 
+    @Autowired
+    CliniqueService cliservice;
     @Autowired
     Message_PatientService messPservice;
     @Autowired
@@ -111,7 +108,26 @@ public class PatientController {
         return "/Vues/Patient/contacter_medecin";
     }
 
-    @PostMapping("/messageP/send/{id}")
+    @GetMapping("/contacter_clinique/{id}")
+    public String contacter_clinique(@PathVariable(name="id")Integer id,Model model,@Param("keyword")String keyword){
+        Patient patient = service.getPatient(id);
+        List<Clinique> listeCliniques = new ArrayList<>();
+        model.addAttribute("listeCliniques",listeCliniques);
+        model.addAttribute("patient",patient);
+        return "/Vues/Patient/contacter_clinique";
+    }
+
+    @GetMapping("/rechercher/cliniques/{id}")
+    public String rechercherClinique(@PathVariable(name="id")Integer id,@Param("keyword")String keyword,Model model){
+        List<Clinique> listeCliniques = cliservice.rechercherClinique(keyword);
+        Patient patient = service.getPatient(id);
+        model.addAttribute("patient",patient);
+        model.addAttribute("keyword", keyword);
+        model.addAttribute("listeCliniques",listeCliniques);
+        return "/Vues/Patient/contacter_clinique";
+    }
+
+        @PostMapping("/messageP/send/{id}")
     public String sendMessage(@PathVariable(name = "id") Integer id, MessagePatient messagePatient, Model model, RedirectAttributes redirectAttributes){
         messPservice.ajouterMessageP(messagePatient);
         Patient patient = service.getPatient(id);

@@ -17,7 +17,7 @@
         <div class="collapse navbar-collapse" id="navmenu">
             <ul class="navbar-nav ms-auto">
                 <li class="nav-item">
-                    <a th:href="@{/patient_index}" class="nav-link">Home</a>
+                    <a th:href="@{'/patient_index/' + ${patient.id}}" class="nav-link">Home</a>
                 </li>
                 <li class="nav-item">
                     <a th:href="@{/prendre_rdv}" class="nav-link">Prendre un rendez-vous</a>
@@ -64,7 +64,7 @@
                 </a>
             </li>
             <li>
-                <a th:href="@{/contacter_clinique}">
+                <a th:href="@{'/contacter_clinique/' + ${patient.id}}">
                     <button>Cliquer ici pour contacter une clinique qui est incris avec MediMeets</button>
                 </a>
             </li>
