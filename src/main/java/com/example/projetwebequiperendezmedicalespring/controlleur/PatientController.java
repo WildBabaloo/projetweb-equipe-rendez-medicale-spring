@@ -1,5 +1,6 @@
 package com.example.projetwebequiperendezmedicalespring.controlleur;
 
+import com.example.projetwebequiperendezmedicalespring.entities.Clinique;
 import com.example.projetwebequiperendezmedicalespring.entities.Medecin;
 import com.example.projetwebequiperendezmedicalespring.entities.Patient;
 import com.example.projetwebequiperendezmedicalespring.entities.RendezVous;
@@ -56,14 +57,18 @@ public class PatientController {
         return "Vues/login";
     }
 
-    @GetMapping("/prendre_rdv")
-    public String prendre_rdv(Model model) {
-        List<String> descriptions = rdvservice.getAllDescriptions();
-        List<String> raisons = rdvservice.getAllRaisons();
-        List<String> cliniques = cliservice.getAllCliniques();
-        model.addAttribute("descriptions", descriptions);
-        model.addAttribute("raisons", raisons);
+    @GetMapping("/prendre_rdv/{id_patient}")
+    public String prendre_rdv(@PathVariable(name="id_patient") int id_patient, Model model) {
+        //List<String> descriptions = rdvservice.getAllDescriptions();
+        //List<String> raisons = rdvservice.getAllRaisons();
+        Patient patient = service.getPatient(id_patient);
+        List<Clinique> cliniques = cliservice.findAllCliniques();
+        List<Medecin> medecins = medservice.findAllMedecins();
+        //model.addAttribute("descriptions", descriptions);
+        //model.addAttribute("raisons", raisons);
+        model.addAttribute("patient", patient);
         model.addAttribute("cliniques", cliniques);
+        model.addAttribute("medecins", medecins);
         model.addAttribute("rendezvous", new RendezVous());
         return "/Vues/Patient/prendre_rdv";
     }

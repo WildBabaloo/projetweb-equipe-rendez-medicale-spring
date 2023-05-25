@@ -39,13 +39,24 @@
     <br> <br>
     <div class="inscription">
 
-            <form method="post" th:action="@{/formRendezVous}">
+            <form method="post" th:action="@{/formRendezVous}" th:object="${rendezvous}">
+                <input type="hidden" th:field="*{id}">
+                <input type="hidden" th:field="*{patient}" th:value="${patient.id}" th:text="${patient.id}">
                 <!--<h3>Choisi la clinique que vous voulez !</h3>-->
                 <label for="clinique">La clinique de votre rendez-vous :</label>
                 <select name="clinique" required id="clinique">
                     <option value="invalidClinique">Choisir une clinique...</option>
-                    <option th:each="clinique : ${cliniques}" th:value="${clinique.id}" th:text="${clinique}"></option>
+                    <th:block th:each="clinique : ${cliniques}">
+                        <option th:field="*{clinique}" th:text="${clinique.nom}" th:value="${clinique.id}"></option>
+                    </th:block>
                 </select></p>
+                <label for="medecin">Le medecin de votre rendez-vous</label>
+                <select name="medecin" required id="medecin">
+                    <option value="invalidMedecin">Choisir un medecin...</option>
+                    <th:block th:each="medecin : ${medecins}">
+                        <option th:field="*{medecin}" th:text="${medecin.nom}+ ' ' + ${medecin.prenom}" th:value="${medecin.id}"></option>
+                    </th:block>
+                </select>
 
                <!-- <p><label for="rechercherClinique">Le nom de la clinique :</label>
                     <input type="text" id="rechercherClinique" name="rechercherClinique" required placeholder="Rechercher la clinique..." oninput="searchClinic()"/> -->
@@ -61,16 +72,15 @@
                 </p>
 
                 <label for="description">La description de votre rendez-vous :</label>
-                    <input type="text" th:field="${rendezvous.description}" required id="description" placeholder="Saisir la description du rendez-vous"><br>
+                    <input type="text" th:field="*{description}" required id="description" placeholder="Saisir la description du rendez-vous"><br>
 
                     <label for="raison">La raison de votre rendez-vous :</label>
-                    <input type="text" th:field="${rendezvous.raison}" required id="raison" placeholder="Saisir la raison du rendez-vous"><br>
+                    <input type="text" th:field="*{raison}" required id="raison" placeholder="Saisir la raison du rendez-vous"><br>
 
                 <input type="hidden" name="dateTimeRDV" id="dateTimeRDV">
 
                     <input type="submit" value="Envoyer"/>
             </form>
-        </form>
     </div>
 </div>
 <br> <br>

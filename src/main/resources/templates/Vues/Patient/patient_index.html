@@ -41,7 +41,7 @@
         <h3>Ici sont vos options :</h3> <br> <br>
         <ul class="LesOptions" style="list-style-type: none;">
             <li>
-                <a th:href="@{/prendre_rdv}">
+                <a th:href="@{/'prendre_rdv/' + ${patient.id}}">
                     <button>Cliquer ici pour prendre un rendez-vous</button>
                 </a>
             </li>
