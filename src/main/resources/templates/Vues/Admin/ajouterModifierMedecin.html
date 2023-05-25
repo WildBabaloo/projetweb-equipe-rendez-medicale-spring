@@ -11,15 +11,12 @@
 <body class="bgcolorA">
 <nav class="nav navbar navbar-expand-lg bg-dark navbar-dark">
   <div class="container">
-    <a href="admin_index.html" style="text-indent: 10px;" class="navbar-brand">MediMeets</a>
+    <a th:href="@{/admin_index}" style="text-indent: 10px;" class="navbar-brand">MediMeets</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navmenu"><span class="navbar-toggler-icon"></span></button>
     <div class="collapse navbar-collapse" id="navmenu">
       <ul class="navbar-nav ms-auto">
         <li class="nav-item">
-          <a href="admin_index.html" class="nav-link">Home</a>
-        </li>
-        <li class="nav-item">
-          <a href="ajouter.html" class="nav-link">Ajouter (To delete and put in each section)</a>
+          <a th:href="@{/admin_index}" class="nav-link">Home</a>
         </li>
         <li class="nav-item">
           <a th:href="@{/adminPatients}" class="nav-link">Liste des patients</a>

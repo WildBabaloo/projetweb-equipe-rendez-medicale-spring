@@ -56,10 +56,10 @@
       <td>[[${med.services_offerts}]] |</td>
       <td>[[${med.tarifconsultation}]]$ |</td>
       <td>[[${med.disponibilite}]] |</td>
-      <td><a th:href="@{'/compte_medecin/modifier/' + ${medecin.id}}">Modifier</a></td>
+      <td><a th:href="@{'/compte_medecin/modifier/' + ${medecin.id}}" class="btn btn-primary">Modifier</a></td>
     </tr>
   </table>
-  <h1><a th:href="@{'/deconnexion/' + ${medecin.id}}">Deconnexion...</a></h1>
+  <h1 class="p_deconnexion"><a th:href="@{'/deconnexion/' + ${medecin.id}}">Deconnexion...</a></h1>
 </div>
 <br> <br>
 <div class="footer">
