@@ -49,10 +49,10 @@
 
         </tr>
         <tr th:each="patient : ${patient}">
-            <td> [[${patient.prenom}]] |</td>
-            <td>[[${patient.nom}]] |</td>
-            <td> [[${patient.numAss}]] |</td>
-            <td>[[${patient.email}]] |</td>
+            <td>[[${patient.prenom}]]</td>
+            <td>[[${patient.nom}]]</td>
+            <td>[[${patient.numAss}]]</td>
+            <td>[[${patient.email}]]</td>
             <td th:if="${patient.medecin != null}">[[${patient.medecin.nom}]] [[${patient.medecin.prenom}]]</td>
             <td th:if="${patient.medecin == null}" >NULL</td>
         </tr>

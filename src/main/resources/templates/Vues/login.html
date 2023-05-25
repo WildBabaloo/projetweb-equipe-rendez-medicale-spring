@@ -38,11 +38,11 @@
 <br> <br>
 
 <div th:if="${messageFailedLogin!=null}"><h1>[[${message}]]</h1></div>
-
-
+<button class="btn btn-primary me-3 " onclick="redirectToPatientForm()">Patient</button>
+<button class="btn btn-primary" onclick="redirectToMedecinForm()">Médecin</button>
 <div class="container">
   <div class="patientLogin">
-  <form th:action="@{/patientLogin}" method="post">
+  <form th:action="@{/patientLogin}" method="post" id="patientFormLogin">
     <p><label for="numAss">Numéro d'assurance sociale :</label> <br>
       <input type="text" id="numAss" name="numAss" required placeholder="Entrez votre numéro d'assurance sociale:"/> </p>
     <p><label for="passwordPatient">Mot de passe :</label> <br>
@@ -56,7 +56,7 @@
 
 
 <div class="medecinLogin">
-  <form th:action="@{/medecinLogin}" method="post">
+  <form th:action="@{/medecinLogin}" method="post" id="medecinFormLogin">
     <p><label for="numAss">Numéro professionel de santé :</label> <br>
       <input type="text" id="numProf" name="numProf" required placeholder="Entrez votre numéro professionel de santé:"/> </p>
     <p><label for="passwordMedecin">Mot de passe :</label> <br>
@@ -102,5 +102,20 @@
     </div>
   </div>
 </div>
+<script>
+  window.onload = function() {
+    document.getElementById("patientFormLogin").style.display = "block";
+    document.getElementById("medecinFormLogin").style.display = "none";
+  };
+  function redirectToPatientForm() {
+    document.getElementById("patientFormLogin").style.display = "block";
+    document.getElementById("medecinFormLogin").style.display = "none";
+  }
+
+  function redirectToMedecinForm() {
+    document.getElementById("patientFormLogin").style.display = "none";
+    document.getElementById("medecinFormLogin").style.display = "block";
+  }
+  </script>
 </body>
 </html>

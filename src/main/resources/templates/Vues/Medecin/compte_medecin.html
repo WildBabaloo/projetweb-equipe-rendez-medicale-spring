@@ -49,13 +49,13 @@
       <th>Disponibilite </th>
     </tr>
     <tr th:each="med : ${medecin}">
-      <td>[[${med.prenom}]] </td>
-      <td>[[${med.nom}]] |</td>
-      <td>[[${med.email}]] |</td>
-      <td>[[${med.numtele}]] |</td>
-      <td>[[${med.services_offerts}]] |</td>
-      <td>[[${med.tarifconsultation}]]$ |</td>
-      <td>[[${med.disponibilite}]] |</td>
+      <td>[[${med.prenom}]]</td>
+      <td>[[${med.nom}]]</td>
+      <td>[[${med.email}]]</td>
+      <td>[[${med.numtele}]]</td>
+      <td>[[${med.services_offerts}]]</td>
+      <td>[[${med.tarifconsultation}]]$</td>
+      <td>[[${med.disponibilite}]]</td>
       <td><a th:href="@{'/compte_medecin/modifier/' + ${medecin.id}}" class="btn btn-primary">Modifier</a></td>
     </tr>
   </table>

@@ -46,10 +46,10 @@
                 <th>Date</th>
             </tr>
             <tr th:each="messagesP : ${listeMessagesP}">
-                <td>| [[${messagesP.medecinReceiver.email}]] |</td>
-                <td>[[${messagesP.sujet}]] |</td>
-                <td>[[${messagesP.message}]] |</td>
-                <td>[[${messagesP.date}]] |</td>
+                <td>[[${messagesP.medecinReceiver.email}]]</td>
+                <td>[[${messagesP.sujet}]]</td>
+                <td>[[${messagesP.message}]]</td>
+                <td>[[${messagesP.date}]]</td>
             </tr>
         </table>
     </div>
@@ -63,10 +63,10 @@
                 <th>Date</th>
             </tr>
             <tr th:each="messagesM : ${listeMessagesM}">
-                <td>| [[${messagesM.medecinSender.email}]] |</td>
-                <td>[[${messagesM.sujet}]] |</td>
-                <td>[[${messagesM.message}]] |</td>
-                <td>[[${messagesM.date}]] |</td>
+                <td>[[${messagesM.medecinSender.email}]]</td>
+                <td>[[${messagesM.sujet}]]</td>
+                <td>[[${messagesM.message}]]</td>
+                <td>[[${messagesM.date}]]</td>
             </tr>
         </table>
     </div>

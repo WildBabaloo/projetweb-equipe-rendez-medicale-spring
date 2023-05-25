@@ -166,7 +166,7 @@ public class MedecinController {
         messMservice.ajouterMessageM(messageMedecin);
         Medecin medecin = service.getMedecin(id);
         model.addAttribute("medecin",medecin);
-        return "/Vues/Medecin/medecin_index";
+        return "redirect:/medecin_index/"+medecin.getId();
     }
 //    @GetMapping("/sendMessage/{id}")
 //    public String sendMessagePatient(@PathVariable(name = "id") Integer id,Model model ,RedirectAttributes redirectAttributes){
