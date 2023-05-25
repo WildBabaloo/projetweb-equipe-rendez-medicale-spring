@@ -144,7 +144,7 @@ public class PatientController {
             return "Vues/creer_compte";
         }
         service.ajouterPatient(patient);
-        
+
         return "/Vues/login";
     }
     @GetMapping("/inscriptionMedecin")

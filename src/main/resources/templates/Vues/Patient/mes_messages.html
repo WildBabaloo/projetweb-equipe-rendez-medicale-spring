@@ -8,8 +8,8 @@
     <link href="https://cdn.jsdelivr.n  et/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="stylesheet" href="/css/style.css" />
 </head>
-<body class="bgcolorP">
-<nav class="nav navbar navbar-expand-lg bg-dark navbar-dark">
+<body class="">
+<nav class="nav navbar navbar-expand-lg">
     <div class="container" th:if="${patient}">
         <a th:href="@{'/patient_index/' + ${patient.id}}" style="text-indent: 10px;" class="navbar-brand">Medimeets</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navmenu"><span class="navbar-toggler-icon"></span></button>
