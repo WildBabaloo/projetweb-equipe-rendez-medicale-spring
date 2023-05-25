@@ -11,8 +11,8 @@
 </head>
 
 
-<body class="">
-<nav class="nav navbar navbar-expand-lg bg-dark navbar-dark">
+<body class="login-bg">
+<nav class="nav navbar navbar-expand-lg ">
   <div class="container">
     <a th:href="@{/}" style="text-indent: 10px;" class="navbar-brand">MediMeets</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navmenu"><span class="navbar-toggler-icon"></span></button>
@@ -42,29 +42,29 @@
 
 <div class="container">
   <div class="patientLogin">
-  <form th:action="@{/patientLogin}" method="post">
-    <p><label for="numAss">Numéro d'assurance sociale :</label> <br>
-      <input type="text" id="numAss" name="numAss" required placeholder="Entrez votre numéro d'assurance sociale:"/> </p>
-    <p><label for="passwordPatient">Mot de passe :</label> <br>
-      <input type="password" id="passwordPatient" name="passwordPatient" required placeholder="Entrez votre mot de passe:"/> </p>
-    <input type="submit" value="Soumettre"/>
-    <p><a href="creer_compte.html">Pas de compte? Créer un ici!</a></p>
-  </form>
-</div>
-  <img class="img-login" src="../images/RencontreMedecin.jpg" alt="Card image" style="width: 40%">
+    <form th:action="@{/patientLogin}" method="post">
+      <p><label for="numAss">Numéro d'assurance sociale :</label> <br>
+        <input type="text" id="numAss" name="numAss" required placeholder="Entrez votre numéro d'assurance sociale:"/> </p>
+      <p><label for="passwordPatient">Mot de passe :</label> <br>
+        <input type="password" id="passwordPatient" name="passwordPatient" required placeholder="Entrez votre mot de passe:"/> </p>
+      <input type="submit" value="Soumettre"/>
+      <p><a href="creer_compte.html">Pas de compte? Créer un ici!</a></p>
+    </form>
+  </div>
+
   <br> <br>
 
 
-<div class="medecinLogin">
-  <form th:action="@{/medecinLogin}" method="post">
-    <p><label for="numAss">Numéro professionel de santé :</label> <br>
-      <input type="text" id="numProf" name="numProf" required placeholder="Entrez votre numéro professionel de santé:"/> </p>
-    <p><label for="passwordMedecin">Mot de passe :</label> <br>
-      <input type="password" id="passwordMedecin" name="passwordMedecin" required placeholder="Entrez votre mot de passe:"/> </p>
-    <input type="submit" value="Soumettre"/>
-    <p><a href="creer_compte.html">Pas de compte? Créer un ici!</a></p>
-  </form>
-</div>
+  <div class="medecinLogin">
+    <form th:action="@{/medecinLogin}" method="post">
+      <p><label for="numAss">Numéro professionel de santé :</label> <br>
+        <input type="text" id="numProf" name="numProf" required placeholder="Entrez votre numéro professionel de santé:"/> </p>
+      <p><label for="passwordMedecin">Mot de passe :</label> <br>
+        <input type="password" id="passwordMedecin" name="passwordMedecin" required placeholder="Entrez votre mot de passe:"/> </p>
+      <input type="submit" value="Soumettre"/>
+      <p><a href="creer_compte.html">Pas de compte? Créer un ici!</a></p>
+    </form>
+  </div>
 </div>
 
 <div class="containerB">
@@ -88,10 +88,10 @@
 </div>
 <br> <br>
 <div class="footer">
-  <div class="d-flex flex-column flex-md-row text-center text-md-start justify-content-between py-4 px-4 px-xl-5 bg-dark">
+  <div class="d-flex flex-column flex-md-row text-center text-md-start justify-content-between py-4 px-4 px-xl-5 ">
     <!-- Copyright -->
     <div class="text-white mb-3 mb-md-0">
-      Copyright © 2023. Tous droits réservés. (À mettre directement en bas de la page)
+      Copyright © 2023. Tous droits réservés.
     </div>
   </div>
 </div>

@@ -1,0 +1,68 @@
+.inscription form {
+    display: inline-flex;
+    vertical-align: top;
+    margin-right: 50px;
+    padding: 20px;
+    border: 2px solid #ccc;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    background-color: #f2cb05;
+}
+.inscription h3 {
+    border-bottom: 3px solid #000;
+    padding-bottom: 5px;
+    font-size: 1.5rem;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+/* Style pour le titre principal */
+h1 {
+    font-size: 3rem;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+/* Style pour les paragraphes */
+p {
+    font-size: 1.2rem;
+    line-height: 1.5;
+    margin-bottom: 1rem;
+}
+
+/* Style pour les labels */
+label {
+    font-size: 1.2rem;
+
+}
+
+/* Style pour les inputs */
+input[type="text"],
+input[type="date"],
+select {
+    font-size: 1.2rem;
+    padding: 0.5rem;
+    border-radius: 0.5rem;
+    border: none;
+    box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.2);
+    margin-bottom: 1rem;
+}
+
+input[type="submit"] {
+    background-color: #007bff;
+    color: #fff;
+    font-size: 1.2rem;
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+    border: none;
+    cursor: pointer;
+}
+
+/* Style pour les checkboxes */
+input[type="checkbox"] {
+    margin-right: 0.5rem;
+}
+
+
