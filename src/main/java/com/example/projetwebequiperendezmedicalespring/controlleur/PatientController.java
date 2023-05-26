@@ -145,7 +145,7 @@ public class PatientController {
 
 
     @PostMapping("/inscription")
-    public String traiterFormulaireInscription(@ModelAttribute("patient") Patient patient, Model model) {
+    public String traiterFormulaireInscription(@ModelAttribute("patient") Patient patient) {
         if (service.existsByEmail(patient.getEmail())) {
             return "Vues/creer_compte";
         }
@@ -232,8 +232,9 @@ public class PatientController {
     }
 
         @PostMapping("/messageP/send/{id}")
-    public String sendMessage(@PathVariable(name = "id") @RequestParam("file") MultipartFile file, Integer id, MessagePatient messagePatient, Model model, RedirectAttributes redirectAttributes){
+    public String sendMessage(@PathVariable(name = "id")Integer id, @RequestParam("file") MultipartFile file, MessagePatient messagePatient, Model model, RedirectAttributes redirectAttributes){
 
+        /*
             if (!file.isEmpty()) {
                 try {
 
@@ -254,10 +255,12 @@ public class PatientController {
                     e.printStackTrace();
                 }
             }
+
+         */
         messPservice.ajouterMessageP(messagePatient);
         Patient patient = service.getPatient(id);
         model.addAttribute("patient",patient);
-            return "redirect:/mes_messages/";
+            return "redirect:/mes_messagesP/" +patient.getId();
     }
 
     @GetMapping("/contacter_clinique")
