@@ -43,12 +43,17 @@
                 <th>Courriel</th>
                 <th>Sujet</th>
                 <th>Message</th>
+                <th>File</th>
                 <th>Date</th>
             </tr>
             <tr th:each="messagesP : ${listeMessagesP}">
                 <td>[[${messagesP.medecinReceiver.email}]]</td>
                 <td>[[${messagesP.sujet}]]</td>
                 <td>[[${messagesP.message}]]</td>
+                <td>
+                    <embed th:if="${messagesP.document}" th:attr="src=@{'/uploads/' + ${messagesP.document}}"></embed>
+                </td>
+
                 <td>[[${messagesP.date}]]</td>
             </tr>
         </table>

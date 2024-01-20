@@ -119,7 +119,6 @@ public class MedecinController {
     public String contacter_patient(@PathVariable(name="id")Integer id,Model model){
         Medecin medecin = service.getMedecin(id);
         Patient patient = patservice.getPatient(id);
-        // Secret
         String now = LocalDate.now().toString();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd", Locale.ENGLISH);
         LocalDate dateNow = LocalDate.parse(now, formatter);

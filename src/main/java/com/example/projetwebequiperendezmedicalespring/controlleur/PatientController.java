@@ -8,10 +8,15 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.context.request.WebRequest;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.StandardCopyOption;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -138,6 +143,7 @@ public class PatientController {
 
 
 
+
     @PostMapping("/inscription")
     public String traiterFormulaireInscription(@ModelAttribute("patient") Patient patient) {
         if (service.existsByEmail(patient.getEmail())) {
@@ -226,11 +232,35 @@ public class PatientController {
     }
 
         @PostMapping("/messageP/send/{id}")
-    public String sendMessage(@PathVariable(name = "id") Integer id, MessagePatient messagePatient, Model model, RedirectAttributes redirectAttributes){
+    public String sendMessage(@PathVariable(name = "id")Integer id, @RequestParam("file") MultipartFile file, MessagePatient messagePatient, Model model, RedirectAttributes redirectAttributes){
+
+        /*
+            if (!file.isEmpty()) {
+                try {
+
+                     String uploadDir = "C:\\Users\\soula\\spring-projet-medical-web-2\\src\\main\\resources\\uploads";
+                   // String uploadDir = "/uploads";
+
+
+                    String fileName = System.currentTimeMillis() + "_" + file.getOriginalFilename();
+
+
+                    Path filePath = Path.of(uploadDir, fileName);
+                    Files.copy(file.getInputStream(), filePath, StandardCopyOption.REPLACE_EXISTING);
+
+
+                    messagePatient.setDocument(fileName);
+                } catch (IOException e) {
+
+                    e.printStackTrace();
+                }
+            }
+
+         */
         messPservice.ajouterMessageP(messagePatient);
         Patient patient = service.getPatient(id);
         model.addAttribute("patient",patient);
-        return "/Vues/Patient/patient_index";
+            return "redirect:/mes_messagesP/" +patient.getId();
     }
 
     @GetMapping("/contacter_clinique")
